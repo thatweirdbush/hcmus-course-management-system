@@ -1,7 +1,0 @@
-﻿C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(531,5): warning MSB8028: The intermediate directory (x64\Debug\) contains files shared from another project (TestCLR.vcxproj).  This can lead to incorrect clean and rebuild behavior.
-  MainForm.cpp
-D:\Visual Studio Solutions\KTLT 2\TestCLR\TestCLR\MainForm.cpp(6,1): warning C4829: Possibly incorrect parameters to function main. Consider 'int main(Platform::Array<Platform::String^>^ argv)'
-  .NETFramework,Version=v4.8.1.AssemblyAttributes.cpp
-  Generating Code...
-  MainForm.obj : MSIL module encountered; incremental linking is disabled for MSIL; performing full link
-  TestCLR.vcxproj -> D:\Visual Studio Solutions\KTLT 2\TestCLR\x64\Debug\hcmus-course-manager-system.exe

@@ -1,3 +1,0 @@
-D:\Visual Studio Solutions\KTLT 2\TestCLR\TestCLR\x64\Debug\TestCLR.vcxproj.AssemblyReference.cache
-D:\Visual Studio Solutions\KTLT 2\TestCLR\TestCLR\x64\Debug\TestCLR.MainForm.resources
-D:\Visual Studio Solutions\KTLT 2\TestCLR\TestCLR\x64\Debug\TestCLR.vcxproj.GenerateResource.cache

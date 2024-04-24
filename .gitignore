@@ -1,6 +1,12 @@
 # Prerequisites
 *.d
 
+# Visual Studio files
+.vs/
+hcmus-course-manager-system/x64/
+*.pdb
+*.metagen
+
 # Compiled Object files
 *.slo
 *.lo
@@ -27,6 +33,6 @@
 *.lib
 
 # Executables
-*.exe
+!*.exe
 *.out
 *.app
