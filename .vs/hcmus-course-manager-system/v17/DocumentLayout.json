@@ -1,0 +1,82 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\Visual Studio Solutions\\KTLT 2\\TestCLR\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{C7B19C3F-16AA-4287-83BF-B378B2F73B25}|TestCLR\\TestCLR.vcxproj|D:\\Visual Studio Solutions\\KTLT 2\\TestCLR\\TestCLR\\MainForm.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}|Form",
+      "RelativeMoniker": "D:0:0:{C7B19C3F-16AA-4287-83BF-B378B2F73B25}|TestCLR\\TestCLR.vcxproj|solutionrelative:TestCLR\\MainForm.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C7B19C3F-16AA-4287-83BF-B378B2F73B25}|TestCLR\\TestCLR.vcxproj|D:\\Visual Studio Solutions\\KTLT 2\\TestCLR\\TestCLR\\MainForm.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{C7B19C3F-16AA-4287-83BF-B378B2F73B25}|TestCLR\\TestCLR.vcxproj|solutionrelative:TestCLR\\MainForm.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C7B19C3F-16AA-4287-83BF-B378B2F73B25}|TestCLR\\TestCLR.vcxproj|D:\\Visual Studio Solutions\\KTLT 2\\TestCLR\\TestCLR\\MainForm.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{C7B19C3F-16AA-4287-83BF-B378B2F73B25}|TestCLR\\TestCLR.vcxproj|solutionrelative:TestCLR\\MainForm.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 5,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:1:0:{d212f56b-c48a-434c-a121-1c5d80b59b9f}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "MainForm.cpp",
+              "DocumentMoniker": "D:\\Visual Studio Solutions\\KTLT 2\\TestCLR\\TestCLR\\MainForm.cpp",
+              "RelativeDocumentMoniker": "TestCLR\\MainForm.cpp",
+              "ToolTip": "D:\\Visual Studio Solutions\\KTLT 2\\TestCLR\\TestCLR\\MainForm.cpp",
+              "RelativeToolTip": "TestCLR\\MainForm.cpp",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAAABAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-04-23T03:30:49.169Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "MainForm.h",
+              "DocumentMoniker": "D:\\Visual Studio Solutions\\KTLT 2\\TestCLR\\TestCLR\\MainForm.h",
+              "RelativeDocumentMoniker": "TestCLR\\MainForm.h",
+              "ToolTip": "D:\\Visual Studio Solutions\\KTLT 2\\TestCLR\\TestCLR\\MainForm.h",
+              "RelativeToolTip": "TestCLR\\MainForm.h",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAHUAAAACAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2024-04-23T03:30:42.449Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "MainForm.h [Design]",
+              "DocumentMoniker": "D:\\Visual Studio Solutions\\KTLT 2\\TestCLR\\TestCLR\\MainForm.h",
+              "RelativeDocumentMoniker": "TestCLR\\MainForm.h",
+              "ToolTip": "D:\\Visual Studio Solutions\\KTLT 2\\TestCLR\\TestCLR\\MainForm.h [Design]",
+              "RelativeToolTip": "TestCLR\\MainForm.h [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2024-04-23T03:29:43.358Z",
+              "EditorCaption": " [Design]"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
