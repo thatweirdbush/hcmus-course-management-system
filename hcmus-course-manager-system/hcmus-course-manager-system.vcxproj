@@ -124,9 +124,13 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="MainForm.cpp" />
+    <ClCompile Include="ProfileInfo.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MainForm.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="ProfileInfo.h">
       <FileType>CppForm</FileType>
     </ClInclude>
   </ItemGroup>
@@ -134,6 +138,16 @@
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.h</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ProfileInfo.resx">
+      <DependentUpon>ProfileInfo.h</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="assets\app-logo.ico" />
+    <Image Include="assets\app-logo.png" />
+    <Image Include="assets\blue-gradient-xswap.png" />
+    <Image Include="assets\blue-gradient-yswap.png" />
+    <Image Include="assets\hcmus-logo.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

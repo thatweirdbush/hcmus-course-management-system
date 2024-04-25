@@ -21,27 +21,33 @@
     <ClCompile Include="MainForm.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="ProfileInfo.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MainForm.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="ProfileInfo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
+    <Image Include="assets\app-logo.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
     <Image Include="assets\app-logo.png">
-      <Filter>assets</Filter>
+      <Filter>Resource Files</Filter>
     </Image>
     <Image Include="assets\blue-gradient-xswap.png">
-      <Filter>assets</Filter>
+      <Filter>Resource Files</Filter>
     </Image>
     <Image Include="assets\blue-gradient-yswap.png">
-      <Filter>assets</Filter>
+      <Filter>Resource Files</Filter>
     </Image>
     <Image Include="assets\hcmus-logo.png">
-      <Filter>assets</Filter>
-    </Image>
-    <Image Include="assets\app-logo.ico">
-      <Filter>assets</Filter>
+      <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>
 </Project>

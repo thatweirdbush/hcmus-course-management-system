@@ -1,4 +1,5 @@
-#pragma once
+﻿#pragma once
+#include "ProfileInfo.h"
 
 namespace CourseManagerSystem {
 
@@ -18,6 +19,7 @@ namespace CourseManagerSystem {
 		MainForm(void)
 		{
 			InitializeComponent();
+
 			//
 			//TODO: Add the constructor code here
 			//
@@ -54,15 +56,7 @@ namespace CourseManagerSystem {
 	private: System::Windows::Forms::Button^ btnSignIn;
 	private: System::Windows::Forms::Label^ labelForgotPassword;
 
-
-
-
-
-
-	protected:
-
-
-	protected:
+	private: ProfileInfo^ profileForm;
 
 	private:
 		/// <summary>
@@ -138,13 +132,14 @@ namespace CourseManagerSystem {
 			// 
 			// btnSignIn
 			// 
-			this->btnSignIn->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(255)), static_cast<System::Int32>(static_cast<System::Byte>(196)),
-				static_cast<System::Int32>(static_cast<System::Byte>(54)));
+			this->btnSignIn->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(12)), static_cast<System::Int32>(static_cast<System::Byte>(53)),
+				static_cast<System::Int32>(static_cast<System::Byte>(106)));
 			this->btnSignIn->Cursor = System::Windows::Forms::Cursors::Hand;
 			this->btnSignIn->FlatAppearance->BorderSize = 0;
 			this->btnSignIn->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
 			this->btnSignIn->Font = (gcnew System::Drawing::Font(L"Segoe UI Semibold", 10, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
+			this->btnSignIn->ForeColor = System::Drawing::Color::WhiteSmoke;
 			this->btnSignIn->Location = System::Drawing::Point(415, 370);
 			this->btnSignIn->Name = L"btnSignIn";
 			this->btnSignIn->Size = System::Drawing::Size(350, 50);
@@ -270,7 +265,7 @@ namespace CourseManagerSystem {
 			this->label2->BackColor = System::Drawing::Color::Transparent;
 			this->label2->Font = (gcnew System::Drawing::Font(L"Segoe UI", 10, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->label2->ForeColor = System::Drawing::Color::Gainsboro;
+			this->label2->ForeColor = System::Drawing::Color::DarkGray;
 			this->label2->Location = System::Drawing::Point(15, 260);
 			this->label2->Name = L"label2";
 			this->label2->Size = System::Drawing::Size(273, 25);
@@ -363,6 +358,7 @@ namespace CourseManagerSystem {
 			this->ResumeLayout(false);
 
 		}
+
 #pragma endregion
 
 private: System::Void txtBoxUsername_Click(System::Object^ sender, System::EventArgs^ e) {
@@ -394,19 +390,43 @@ private: System::Void other_click(System::Object^ sender, System::EventArgs^ e) 
 	}
 }
 private: System::Void forgotPassword_click(System::Object^ sender, System::EventArgs^ e) {
-	MessageBox::Show("Please contact the administrator to reset your password.", "Message", MessageBoxButtons::OKCancel);
+	MessageBox::Show("Please contact the administrator to reset your password.", "Message", MessageBoxButtons::OKCancel, MessageBoxIcon::Information);
 }
 private: System::Void btnRegister_Click(System::Object^ sender, System::EventArgs^ e) {
-	//MessageBox::Show("Please contact the administrator to register an account.", "Message", MessageBoxButtons::OKCancel);
 	System::Diagnostics::Process::Start("https://hcmus.edu.vn/");
 }
 private: System::Void btnSignIn_Click(System::Object^ sender, System::EventArgs^ e) {
-	if (txtBoxUsername->Text == "Username" || txtBoxPassword->Text == "Password") {
-		MessageBox::Show("Please enter your username and password.", "Message", MessageBoxButtons::OKCancel);
-	}
-	else {
-		MessageBox::Show("Sign in successfully.", "Message", MessageBoxButtons::OKCancel);
-	}
+	//if (txtBoxUsername->Text == "Username" || txtBoxPassword->Text == "Password") {
+	//	MessageBox::Show("Please enter your username and password.", "Message", MessageBoxButtons::OKCancel, MessageBoxIcon::Exclamation);
+	//}
+	//else {
+	//	MessageBox::Show("Sign in successfully.", "Message", MessageBoxButtons::OKCancel, MessageBoxIcon::Information);
+	//	this->Controls->Clear();
+	//	profileForm = gcnew ProfileInfo();
+	//	profileForm->BackToForm1 += gcnew ProfileInfo::BackToForm1EventHandler(this, &MainForm::Form2_BackToForm1);
+	//	profileForm->TopLevel = false;
+	//	profileForm->Dock = DockStyle::Fill;
+	//	this->Controls->Add(profileForm);
+	//	profileForm->Show();
+	//}
+
+	this->Controls->Clear();
+	profileForm = gcnew ProfileInfo();
+	profileForm->BackToForm1 += gcnew ProfileInfo::BackToForm1EventHandler(this, &MainForm::Form2_BackToForm1);
+	profileForm->TopLevel = false;
+	profileForm->Dock = DockStyle::Fill;
+	this->Controls->Add(profileForm);
+	profileForm->Show();
+}
+
+System::Void Form2_BackToForm1()
+{
+	// Xóa các controls của Form2
+	this->Controls->Remove(profileForm);
+
+	// Thêm lại các controls của Form1
+	this->InitializeComponent();
 }
 };
-}
+};
+
