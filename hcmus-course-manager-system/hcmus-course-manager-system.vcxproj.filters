@@ -13,6 +13,9 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="assets">
+      <UniqueIdentifier>{ca68fda2-4bc4-4cdc-86f9-0fae7f12e9f9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="MainForm.cpp">
@@ -23,5 +26,22 @@
     <ClInclude Include="MainForm.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="assets\app-logo.png">
+      <Filter>assets</Filter>
+    </Image>
+    <Image Include="assets\blue-gradient-xswap.png">
+      <Filter>assets</Filter>
+    </Image>
+    <Image Include="assets\blue-gradient-yswap.png">
+      <Filter>assets</Filter>
+    </Image>
+    <Image Include="assets\hcmus-logo.png">
+      <Filter>assets</Filter>
+    </Image>
+    <Image Include="assets\app-logo.ico">
+      <Filter>assets</Filter>
+    </Image>
   </ItemGroup>
 </Project>

@@ -6,6 +6,6 @@ void main(array<String^>^ args)
 {
 	Application::EnableVisualStyles();
 	Application::SetCompatibleTextRenderingDefault(false);
-	TestCLR::MainForm form;
+	CourseManagerSystem::MainForm form;
 	Application::Run(% form);
 }

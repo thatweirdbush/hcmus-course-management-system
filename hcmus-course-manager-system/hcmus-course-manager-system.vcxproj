@@ -23,7 +23,7 @@
     <ProjectGuid>{C7B19C3F-16AA-4287-83BF-B378B2F73B25}</ProjectGuid>
     <TargetFrameworkVersion>v4.8.1</TargetFrameworkVersion>
     <Keyword>ManagedCProj</Keyword>
-    <RootNamespace>TestCLR</RootNamespace>
+    <RootNamespace>CourseManagerSystem</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
     <ProjectName>hcmus-course-manager-system</ProjectName>
   </PropertyGroup>
