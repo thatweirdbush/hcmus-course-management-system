@@ -100,7 +100,7 @@ T& Set<T>::operator[](int index)
 {
 	if (index < 0 || index > length) {
 		std::cerr << "Index out of range" << endl;
-		throw out_of_range("Index out of range");
+		throw std::out_of_range("Index out of range");
 	}
 	return data[index];
 }
@@ -111,7 +111,7 @@ const T& Set<T>::operator[](int index) const
 {
 	if (index < 0 || index > length) {
 		std::cerr << "Index out of range" << endl;
-		throw out_of_range("Index out of range");
+		throw std::out_of_range("Index out of range");
 	}
 	return data[index];
 }
@@ -160,7 +160,7 @@ void Set<T>::erase(int index)
 {
 	if (index < 0 || index >= length) {
 		std::cerr << "Index out of range" << endl;
-		throw out_of_range("Index out of range");
+		throw std::out_of_range("Index out of range");
 	}
 	for (int i = index; i < length - 1; i++) {
 		data[i] = data[i + 1];
