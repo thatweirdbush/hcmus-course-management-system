@@ -1,14 +1,11 @@
 /**************************************************************
 * Implement vector class template using dynamic array
-* Define vector class template - vector.h
+* Define vector class template - Vector.h
 ***************************************************************/
 #ifndef _VECTOR_H_
 #define _VECTOR_H_
 
-#include <string.h>
-#include <iostream>
 #include <exception>
-using namespace std;
 
 /*****************************************
 // Define Class: Vector
@@ -70,7 +67,7 @@ Vector<T>::Vector(const Vector<T>& other)
 	data = new T[capacity];
 
 	if (!data) {
-		cerr << "Memory allocation error" << endl;
+		std::cerr << "Memory allocation error" << endl;
 		throw bad_alloc();
 	}
 	for (int i = 0; i < length; i++)
@@ -106,7 +103,7 @@ template <class T>
 T& Vector<T>::operator[](int index)
 {
 	if (index < 0 || index > length) {
-		cerr << "Index out of range" << endl;
+		std::cerr << "Index out of range" << endl;
 		throw out_of_range("Index out of range");
 	}
 	return data[index];
@@ -117,7 +114,7 @@ template <class T>
 const T& Vector<T>::operator[](int index) const
 {
 	if (index < 0 || index > length) {
-		cerr << "Index out of range" << endl;
+		std::cerr << "Index out of range" << endl;
 		throw out_of_range("Index out of range");
 	}
 	return data[index];
@@ -159,7 +156,7 @@ template <class T>
 void Vector<T>::insert(int index, const T& value)
 {
 	if (index < 0 || index > length) {
-		cerr << "Index out of range" << endl;
+		std::cerr << "Index out of range" << endl;
 		throw out_of_range("Index out of range");
 	}
 	if (length == capacity)
@@ -177,7 +174,7 @@ template <class T>
 void Vector<T>::erase(int index)
 {
 	if (index < 0 || index >= length) {
-		cerr << "Index out of range" << endl;
+		std::cerr << "Index out of range" << endl;
 		throw out_of_range("Index out of range");
 	}
 	for (int i = index; i < length - 1; i++)
