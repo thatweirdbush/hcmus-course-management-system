@@ -8,8 +8,9 @@
 #include <string>
 #include <iomanip>
 #include <fstream>
+#include <sstream>
 
-#define CSV_DELIMITER ","
+#define CSV_DELIMITER ','
 
 /*****************************************
 // Define Class: Date
@@ -120,7 +121,9 @@ public:
 
 	// Input/Output Operator Methods
 	friend std::istream& operator>>(std::istream& is, Date& date) {
-		is >> date.day >> date.month >> date.year;
+		std::string str;
+		is >> str;
+		date = Date(str);
 		return is;
 	}
 

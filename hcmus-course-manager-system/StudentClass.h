@@ -69,9 +69,32 @@ public:
 
 	// Input/Output Operator Methods
 	friend std::istream& operator>>(std::istream& is, Student& student) {
-		is >> student.classID >> student.no >> student.studentID
-			>> student.firstName >> student.lastName >> student.gender
-			>> student.dateOfBirth >> student.socialID;
+		std::string line;
+		std::getline(is, line);
+		std::stringstream ss(line);
+
+		int no = 0;
+		std::string classID, studentID, firstName, lastName, gender, dateOfBirth, socialID;
+
+		std::getline(ss, classID, CSV_DELIMITER);
+		ss >> no;
+		std::getline(ss, studentID, CSV_DELIMITER);
+		std::getline(ss, firstName, CSV_DELIMITER);
+		std::getline(ss, lastName, CSV_DELIMITER);
+		std::getline(ss, gender, CSV_DELIMITER);
+		std::getline(ss, dateOfBirth, CSV_DELIMITER);
+		std::getline(ss, socialID, CSV_DELIMITER);
+
+		student.setClassID(classID);
+		student.setNo(no);
+		student.setStudentID(studentID);
+		student.setFirstName(firstName);
+		student.setLastName(lastName);
+		student.setGender(gender);
+		student.setDateOfBirth(Date(dateOfBirth));
+		student.setSocialID(socialID);
+
+		return is;
 	}
 
 	friend std::ostream& operator<<(std::ostream& os, const Student& student) {

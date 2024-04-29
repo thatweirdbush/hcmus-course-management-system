@@ -130,6 +130,7 @@
     <ClInclude Include="CourseClass.h" />
     <ClInclude Include="DateClass.h" />
     <ClInclude Include="Map.h" />
+    <ClInclude Include="SemesterClass.h" />
     <ClInclude Include="Set.h" />
     <ClInclude Include="StudentClass.h" />
     <ClInclude Include="Vector.h" />

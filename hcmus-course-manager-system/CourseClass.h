@@ -203,15 +203,21 @@ std::ostream& operator<<(std::ostream& os, Course& course) {
 }
 
 std::istream& operator>>(std::istream& is, Course& course) {
-	int courseID, numOfCredits, maxStudents;
-	std::string courseName, className, teacherName;
+	std::string line;
+	std::getline(is, line);
+	std::stringstream ss(line);
+
+	std::string courseID, courseName, className, teacherName, numOfCredits, maxStudents, dayOfWeekStr, sessionStr;
 	DayOfWeek dayOfWeek;
 	Session session;
-
-	is >> courseID >> courseName >> className >> teacherName
-		>> numOfCredits >> maxStudents;
-	std::string dayOfWeekStr, sessionStr;
-	is >> dayOfWeekStr >> sessionStr;
+	std::getline(ss, courseID, CSV_DELIMITER);
+	std::getline(ss, courseName, CSV_DELIMITER);
+	std::getline(ss, className, CSV_DELIMITER);
+	std::getline(ss, teacherName, CSV_DELIMITER);
+	std::getline(ss, numOfCredits, CSV_DELIMITER);
+	std::getline(ss, maxStudents, CSV_DELIMITER);
+	std::getline(ss, dayOfWeekStr, CSV_DELIMITER);
+	std::getline(ss, sessionStr, CSV_DELIMITER);
 
 	if (dayOfWeekStr == "MON") dayOfWeek = DayOfWeek::MON;
 	else if (dayOfWeekStr == "TUE") dayOfWeek = DayOfWeek::TUE;
@@ -225,12 +231,12 @@ std::istream& operator>>(std::istream& is, Course& course) {
 	else if (sessionStr == "S3") session = Session::S3;
 	else if (sessionStr == "S4") session = Session::S4;
 
-	course.setCourseID(courseID);
+	course.setCourseID(std::stoi(courseID));
 	course.setCourseName(courseName);
 	course.setClassName(className);
 	course.setTeacherName(teacherName);
-	course.setNumOfCredits(numOfCredits);
-	course.setMaxStudents(maxStudents);
+	course.setNumOfCredits(std::stoi(numOfCredits));
+	course.setMaxStudents(std::stoi(maxStudents));
 	course.setDayOfWeek(dayOfWeek);
 	course.setSession(session);
 
