@@ -1,6 +1,6 @@
 /**************************************************************
 * Implement Date class 
-* Define Date class - Date.h
+* Define Date class - DateClass.h
 ***************************************************************/
 #ifndef _DATE_CLASS_H_
 #define _DATE_CLASS_H_

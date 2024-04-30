@@ -1,3 +1,7 @@
+/**************************************************************
+* Implement Semester class
+* Define Semester class - SemesterClass.h
+***************************************************************/
 #ifndef _SEMESTER_CLASS_H_
 #define _SEMESTER_CLASS_H_
 

@@ -1,3 +1,7 @@
+/**************************************************************
+* Implement Course class
+* Define Course class - CourseClass.h
+***************************************************************/
 #ifndef _COURSE_CLASS_H_
 #define _COURSE_CLASS_H_
 

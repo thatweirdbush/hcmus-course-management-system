@@ -1,3 +1,7 @@
+/**************************************************************
+* Implement Student class
+* Define Student class - StudentClass.h
+***************************************************************/
 #ifndef _STUDENT_CLASS_H_
 #define _STUDENT_CLASS_H_
 
@@ -6,7 +10,6 @@
 class Student {
 private:
 	std::string classID;
-	int no;
 	std::string studentID;
 	std::string firstName;
 	std::string lastName;
@@ -16,11 +19,11 @@ private:
 
 public:
 	// Constructor
-	Student(std::string classID = "", int no = 0, std::string studentID = "",
+	Student(std::string classID = "", std::string studentID = "",
 		std::string firstName = "", std::string lastName = "", std::string gender = "",
 		Date dateOfBirth = Date(), std::string socialID = "")
 
-		: classID(classID), no(no), studentID(studentID),
+		: classID(classID), studentID(studentID),
 		firstName(firstName), lastName(lastName), gender(gender),
 		dateOfBirth(dateOfBirth), socialID(socialID) {}
 
@@ -30,7 +33,6 @@ public:
 	// Copy constructor
 	Student(const Student& student) {
 		classID = student.classID;
-		no = student.no;
 		studentID = student.studentID;
 		firstName = student.firstName;
 		lastName = student.lastName;
@@ -39,7 +41,6 @@ public:
 	// Assignment operator
 	Student& operator=(const Student& student) {
 		classID = student.classID;
-		no = student.no;
 		studentID = student.studentID;
 		firstName = student.firstName;
 		lastName = student.lastName;
@@ -49,7 +50,6 @@ public:
 public:
 	// Setters
 	void setClassID(std::string classID) { this->classID = classID; }
-	void setNo(int no) { this->no = no; }
 	void setStudentID(std::string studentID) { this->studentID = studentID; }
 	void setFirstName(std::string firstName) { this->firstName = firstName; }
 	void setLastName(std::string lastName) { this->lastName = lastName; }
@@ -59,7 +59,6 @@ public:
 
 	// Getters
 	std::string getClassID() { return classID; }
-	int getNo() { return no; }
 	std::string getStudentID() { return studentID; }
 	std::string getFirstName() { return firstName; }
 	std::string getLastName() { return lastName; }
@@ -73,11 +72,9 @@ public:
 		std::getline(is, line);
 		std::stringstream ss(line);
 
-		int no = 0;
 		std::string classID, studentID, firstName, lastName, gender, dateOfBirth, socialID;
 
 		std::getline(ss, classID, CSV_DELIMITER);
-		ss >> no;
 		std::getline(ss, studentID, CSV_DELIMITER);
 		std::getline(ss, firstName, CSV_DELIMITER);
 		std::getline(ss, lastName, CSV_DELIMITER);
@@ -86,7 +83,6 @@ public:
 		std::getline(ss, socialID, CSV_DELIMITER);
 
 		student.setClassID(classID);
-		student.setNo(no);
 		student.setStudentID(studentID);
 		student.setFirstName(firstName);
 		student.setLastName(lastName);
@@ -98,7 +94,7 @@ public:
 	}
 
 	friend std::ostream& operator<<(std::ostream& os, const Student& student) {
-		os << student.classID << CSV_DELIMITER << student.no << CSV_DELIMITER << student.studentID
+		os << student.classID << CSV_DELIMITER << student.studentID
 			<< CSV_DELIMITER << student.firstName << CSV_DELIMITER << student.lastName << CSV_DELIMITER
 			<< student.gender << CSV_DELIMITER << student.dateOfBirth << CSV_DELIMITER << student.socialID << "\n";
 	}
