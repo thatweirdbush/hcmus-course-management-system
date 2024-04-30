@@ -32,6 +32,30 @@
     <ClInclude Include="ProfileInfo.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="CourseClass.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DateClass.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Map.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SemesterClass.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Set.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="StudentClass.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Vector.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ScoreboardClass.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="assets\app-logo.ico">
@@ -49,5 +73,14 @@
     <Image Include="assets\hcmus-logo.png">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="assets\blue-gradient.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="data\coursse.csv" />
+    <None Include="data\scoreboard.csv" />
+    <None Include="data\semester.csv" />
+    <None Include="data\student.csv" />
   </ItemGroup>
 </Project>

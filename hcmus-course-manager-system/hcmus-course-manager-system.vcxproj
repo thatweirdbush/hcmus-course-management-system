@@ -130,6 +130,7 @@
     <ClInclude Include="CourseClass.h" />
     <ClInclude Include="DateClass.h" />
     <ClInclude Include="Map.h" />
+    <ClInclude Include="ScoreboardClass.h" />
     <ClInclude Include="SemesterClass.h" />
     <ClInclude Include="Set.h" />
     <ClInclude Include="StudentClass.h" />
@@ -154,7 +155,14 @@
     <Image Include="assets\app-logo.png" />
     <Image Include="assets\blue-gradient-xswap.png" />
     <Image Include="assets\blue-gradient-yswap.png" />
+    <Image Include="assets\blue-gradient.png" />
     <Image Include="assets\hcmus-logo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="data\coursse.csv" />
+    <None Include="data\scoreboard.csv" />
+    <None Include="data\semester.csv" />
+    <None Include="data\student.csv" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
