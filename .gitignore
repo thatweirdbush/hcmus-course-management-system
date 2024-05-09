@@ -3,7 +3,7 @@
 
 # Visual Studio files
 .vs/
-hcmus-course-manager-system/x64/
+hcmus-course-manager-system/build/
 *.pdb
 *.metagen
 
@@ -20,7 +20,7 @@ hcmus-course-manager-system/x64/
 # Compiled Dynamic libraries
 *.so
 *.dylib
-*.dll
+!*.dll
 
 # Fortran module files
 *.mod
