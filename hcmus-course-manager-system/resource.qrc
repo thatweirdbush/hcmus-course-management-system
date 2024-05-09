@@ -1,0 +1,9 @@
+<RCC>
+    <qresource prefix="/">
+        <file>assets/app-logo.ico</file>
+        <file>assets/blue-gradient.png</file>
+        <file>assets/hcmus-logo.png</file>
+        <file>assets/blue-gradient-xswap.png</file>
+        <file>assets/blue-gradient-yswap.png</file>
+    </qresource>
+</RCC>
