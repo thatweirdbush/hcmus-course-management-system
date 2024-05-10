@@ -38,7 +38,11 @@ DISTFILES += \
     assets/blue-gradient-xswap.png \
     assets/blue-gradient-yswap.png \
     assets/blue-gradient.png \
-    assets/hcmus-logo.png
+    assets/hcmus-logo.png \
+    data/coursse.csv \
+    data/scoreboard.csv \
+    data/semester.csv \
+    data/student.csv
 
 RESOURCES += \
     resource.qrc

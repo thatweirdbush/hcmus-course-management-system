@@ -45,6 +45,11 @@
       <height>600</height>
      </rect>
     </property>
+    <property name="styleSheet">
+     <string notr="true">QStackedWidget#stackedWidget {	
+	border-image: url(:/assets/blue-gradient.png);
+}</string>
+    </property>
     <property name="currentIndex">
      <number>1</number>
     </property>
@@ -1220,6 +1225,8 @@ border: none;
       </property>
      </widget>
     </widget>
+    <widget class="QWidget" name="page"/>
+    <widget class="QWidget" name="page_2"/>
    </widget>
   </widget>
  </widget>
