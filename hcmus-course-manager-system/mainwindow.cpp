@@ -11,7 +11,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
 
     // Go to default page 'Sign In' using stack widget
-    ui->stackedWidget->setCurrentIndex(0);
+    ui->stackedWidget->setCurrentIndex(int(Page::SignIn));
 }
 
 MainWindow::~MainWindow()
@@ -66,12 +66,12 @@ void MainWindow::on_btnSignIn_clicked()
     //     }
     // }
 
-
+    /// For easy debug
     // Go to Profile Info page using stack widget
-    ui->stackedWidget->setCurrentIndex(1);
+    ui->stackedWidget->setCurrentIndex(int(Page::ProfileInfo_Staff));
 }
 
-void MainWindow::on_btnSignOut_ProfileInfo_clicked()
+void MainWindow::on_btnSignOut_ProfileInfo_Student_clicked()
 {
     // Open 'Sign Out' message box
     QMessageBox::StandardButton reply;
@@ -81,7 +81,22 @@ void MainWindow::on_btnSignOut_ProfileInfo_clicked()
     if (reply == QMessageBox::Yes)
     {
         // Go to Sign In page using stack widget
-        ui->stackedWidget->setCurrentIndex(0);
+        ui->stackedWidget->setCurrentIndex(int(Page::SignIn));
+    }
+}
+
+
+void MainWindow::on_btnSignOut_ProfileInfo_Staff_clicked()
+{
+    // Open 'Sign Out' message box
+    QMessageBox::StandardButton reply;
+    reply = QMessageBox::question(this, "Sign Out", "Are you sure you want to sign out?", QMessageBox::Yes | QMessageBox::No);
+
+    // Check if user wants to sign out
+    if (reply == QMessageBox::Yes)
+    {
+        // Go to Sign In page using stack widget
+        ui->stackedWidget->setCurrentIndex(int(Page::SignIn));
     }
 }
 
