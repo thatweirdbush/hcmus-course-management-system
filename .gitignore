@@ -3,8 +3,8 @@
 
 # Visual Studio files
 .vs/
-hcmus-course-manager-system/build/
 *.pdb
+hcmus-course-manager-system/build/
 *.metagen
 
 # Compiled Object files

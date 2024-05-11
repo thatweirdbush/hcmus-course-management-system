@@ -41,6 +41,8 @@ private slots:
 
     void on_changePassword(const QString &newPassword);
 
+    void on_btnEdit_ProfileInfo_Student_clicked();
+
 private:
     Ui::MainWindow *ui;
 };
