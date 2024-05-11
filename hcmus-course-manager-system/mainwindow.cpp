@@ -1,4 +1,6 @@
 #include "mainwindow.h"
+#include "changePassword.h"
+#include "changePassword.h"
 #include "ui_mainwindow.h"
 
 #include <QDesktopServices>
@@ -99,4 +101,50 @@ void MainWindow::on_btnSignOut_ProfileInfo_Staff_clicked()
         ui->stackedWidget->setCurrentIndex(int(Page::SignIn));
     }
 }
+
+
+void MainWindow::on_btnEdit_ProfileInfo_Staff_clicked()
+{
+    // Open a new window to change password
+    ChangePassword *changePasswordForm = new ChangePassword(this);
+    connect(changePasswordForm, &ChangePassword::passwordChanged, this, &MainWindow::on_changePassword);
+    changePasswordForm->show();
+}
+
+void MainWindow::on_changePassword(const QString &newPassword)
+{
+    // Update password to label
+    ui->lableTestPassword->setText(newPassword);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

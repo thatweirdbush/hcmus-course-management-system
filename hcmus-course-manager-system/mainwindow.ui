@@ -35,6 +35,9 @@
    <iconset resource="resource.qrc">
     <normaloff>:/assets/app-logo.ico</normaloff>:/assets/app-logo.ico</iconset>
   </property>
+  <property name="styleSheet">
+   <string notr="true">QMainWindow#MainWindow{}</string>
+  </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QStackedWidget" name="stackedWidget">
     <property name="geometry">
@@ -1498,7 +1501,7 @@ background-color: rgb(46, 47, 48);</string>
         <string notr="true">color: Black;</string>
        </property>
        <property name="text">
-        <string>10000001</string>
+        <string>1001</string>
        </property>
        <property name="alignment">
         <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
@@ -1594,7 +1597,7 @@ background-color: rgb(46, 47, 48);</string>
         <string notr="true">color: Black;</string>
        </property>
        <property name="text">
-        <string>Ho Chi Minh</string>
+        <string>0987654321</string>
        </property>
        <property name="alignment">
         <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
@@ -1652,39 +1655,7 @@ background-color: rgb(46, 47, 48);</string>
         <string notr="true">color: DimGray;</string>
        </property>
        <property name="text">
-        <string>Home</string>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
-       </property>
-       <property name="wordWrap">
-        <bool>true</bool>
-       </property>
-      </widget>
-      <widget class="QLabel" name="lableAppScript_45">
-       <property name="geometry">
-        <rect>
-         <x>170</x>
-         <y>400</y>
-         <width>121</width>
-         <height>31</height>
-        </rect>
-       </property>
-       <property name="font">
-        <font>
-         <family>Segoe UI Semibold</family>
-         <pointsize>12</pointsize>
-         <bold>false</bold>
-        </font>
-       </property>
-       <property name="contextMenuPolicy">
-        <enum>Qt::NoContextMenu</enum>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">color: Black;</string>
-       </property>
-       <property name="text">
-        <string>Bachelor</string>
+        <string>Phone</string>
        </property>
        <property name="alignment">
         <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
@@ -1698,7 +1669,7 @@ background-color: rgb(46, 47, 48);</string>
         <rect>
          <x>20</x>
          <y>400</y>
-         <width>131</width>
+         <width>271</width>
          <height>31</height>
         </rect>
        </property>
@@ -1716,36 +1687,7 @@ background-color: rgb(46, 47, 48);</string>
         <string notr="true">color: Black;</string>
        </property>
        <property name="text">
-        <string>2021</string>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
-       </property>
-       <property name="wordWrap">
-        <bool>true</bool>
-       </property>
-      </widget>
-      <widget class="QLabel" name="lableAppScript_47">
-       <property name="geometry">
-        <rect>
-         <x>170</x>
-         <y>380</y>
-         <width>121</width>
-         <height>20</height>
-        </rect>
-       </property>
-       <property name="font">
-        <font>
-         <family>Segoe UI</family>
-         <pointsize>11</pointsize>
-         <bold>false</bold>
-        </font>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">color: DimGray;</string>
-       </property>
-       <property name="text">
-        <string>Education Level</string>
+        <string>username@gmail.com</string>
        </property>
        <property name="alignment">
         <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
@@ -1774,39 +1716,7 @@ background-color: rgb(46, 47, 48);</string>
         <string notr="true">color: DimGray;</string>
        </property>
        <property name="text">
-        <string>Recruited</string>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
-       </property>
-       <property name="wordWrap">
-        <bool>true</bool>
-       </property>
-      </widget>
-      <widget class="QLabel" name="lableAppScript_49">
-       <property name="geometry">
-        <rect>
-         <x>170</x>
-         <y>460</y>
-         <width>121</width>
-         <height>61</height>
-        </rect>
-       </property>
-       <property name="font">
-        <font>
-         <family>Segoe UI Semibold</family>
-         <pointsize>12</pointsize>
-         <bold>false</bold>
-        </font>
-       </property>
-       <property name="contextMenuPolicy">
-        <enum>Qt::NoContextMenu</enum>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">color: Black;</string>
-       </property>
-       <property name="text">
-        <string>Information Technology</string>
+        <string>Email</string>
        </property>
        <property name="alignment">
         <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
@@ -1820,7 +1730,7 @@ background-color: rgb(46, 47, 48);</string>
         <rect>
          <x>20</x>
          <y>460</y>
-         <width>131</width>
+         <width>271</width>
          <height>61</height>
         </rect>
        </property>
@@ -1838,36 +1748,7 @@ background-color: rgb(46, 47, 48);</string>
         <string notr="true">color: Black;</string>
        </property>
        <property name="text">
-        <string>System Information</string>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
-       </property>
-       <property name="wordWrap">
-        <bool>true</bool>
-       </property>
-      </widget>
-      <widget class="QLabel" name="lableAppScript_51">
-       <property name="geometry">
-        <rect>
-         <x>170</x>
-         <y>440</y>
-         <width>121</width>
-         <height>20</height>
-        </rect>
-       </property>
-       <property name="font">
-        <font>
-         <family>Segoe UI</family>
-         <pointsize>11</pointsize>
-         <bold>false</bold>
-        </font>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">color: DimGray;</string>
-       </property>
-       <property name="text">
-        <string>Program</string>
+        <string>CS2: KP 6, Linh Trung, Thu Duc, Ho Chi Minh City</string>
        </property>
        <property name="alignment">
         <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
@@ -1896,7 +1777,7 @@ background-color: rgb(46, 47, 48);</string>
         <string notr="true">color: DimGray;</string>
        </property>
        <property name="text">
-        <string>Major</string>
+        <string>Facility Address</string>
        </property>
        <property name="alignment">
         <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
@@ -1951,6 +1832,67 @@ border: none;
       </property>
       <property name="flat">
        <bool>false</bool>
+      </property>
+     </widget>
+     <widget class="QLabel" name="lableTestPassword">
+      <property name="geometry">
+       <rect>
+        <x>300</x>
+        <y>560</y>
+        <width>131</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Segoe UI Semibold</family>
+        <pointsize>12</pointsize>
+        <bold>false</bold>
+       </font>
+      </property>
+      <property name="contextMenuPolicy">
+       <enum>Qt::NoContextMenu</enum>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color: Black;</string>
+      </property>
+      <property name="text">
+       <string>password</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+      </property>
+      <property name="wordWrap">
+       <bool>true</bool>
+      </property>
+     </widget>
+     <widget class="QLabel" name="lableAppScript_45">
+      <property name="geometry">
+       <rect>
+        <x>300</x>
+        <y>540</y>
+        <width>121</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Segoe UI</family>
+        <pointsize>11</pointsize>
+        <bold>false</bold>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color: DimGray;</string>
+      </property>
+      <property name="text">
+       <string>Test password:</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+      </property>
+      <property name="wordWrap">
+       <bool>true</bool>
       </property>
      </widget>
     </widget>

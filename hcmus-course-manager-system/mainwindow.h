@@ -37,6 +37,10 @@ private slots:
 
     void on_btnSignOut_ProfileInfo_Staff_clicked();
 
+    void on_btnEdit_ProfileInfo_Staff_clicked();
+
+    void on_changePassword(const QString &newPassword);
+
 private:
     Ui::MainWindow *ui;
 };
