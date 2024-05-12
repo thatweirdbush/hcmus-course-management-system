@@ -10,6 +10,7 @@ Database::Database() {
     importCourseList(COURSE_FILE_PATH);
     // importSemesterList(SEMESTER_FILE_PATH);
     importStudentList(STUDENT_FILE_PATH);
+    importStaffList(STAFF_FILE_PATH);
     // importScoreboardList(SCOREBOARD_FILE_PATH);
 }
 
@@ -75,6 +76,15 @@ Student Database::getStudentByID(int studentID) {
         }
     }
     return Student();
+}
+
+Staff Database::getStaffByID(int staffID) {
+    for (int i = 0; i < studentList.size(); i++) {
+        if (staffList[i].getStaffID() == staffID) {
+            return staffList[i];
+        }
+    }
+    return Staff();
 }
 
 void Database::importAccountList(QString filename){
@@ -170,6 +180,31 @@ void Database::importStudentList(QString filename) {
         studentList.insert(student);
         // count++;
     }
+    ifs.close();
+    // return count;
+}
+
+void Database::importStaffList(QString filename) {
+    std::ifstream ifs(filename.toStdString());
+    // size_t count = 0;
+    if (!ifs.is_open()) {
+        // open message box
+        QMessageBox::information(nullptr, "Read Error", filename, QMessageBox::Ok | QMessageBox::Cancel);
+        return;
+    }
+
+    while (!ifs.eof()) {
+        Staff staff;
+        ifs >> staff;
+
+        // Check if the course read from is empty, then break, because default ID constructor is 0
+        if (staff.getStaffID() == 0)
+            break;
+
+        staffList.insert(staff);
+        // count++;
+    }
+
     ifs.close();
     // return count;
 }

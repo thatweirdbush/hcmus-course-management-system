@@ -73,7 +73,9 @@ void MainWindow::on_btnSignIn_clicked()
 
         // Check if user is student or staff by counting num of digits
         if (staffOrStudentID < 10000) {
-            QString welcomeScript = "Welcome, Staff!";
+            Staff staff = db->getStaffByID(staffOrStudentID);
+
+            QString welcomeScript = "Welcome, " + QString::fromStdString(staff.getFullName()) + "!";
             QMessageBox::information(this, "Login Successful", welcomeScript, QMessageBox::Ok);
 
             // Go to Profile Info page using stack widget

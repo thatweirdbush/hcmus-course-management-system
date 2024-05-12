@@ -11,6 +11,7 @@
 #include "SemesterClass.h"
 #include "StudentClass.h"
 #include "ScoreboardClass.h"
+#include "StaffClass.h"
 #include "Set.h"
 
 
@@ -29,6 +30,7 @@ public:
     Set<Course> courseList;
     Set<Semester> semesterList;
     Set<Student> studentList;
+    Set<Staff> staffList;
     Set<Scoreboard> scoreboardList;
 
 public:
@@ -50,10 +52,13 @@ public:
 
     void importStudentList(QString filename);
 
+    void importStaffList(QString filename);
+
     void importScoreboardList(QString filename);
 
 public:
     Student getStudentByID(int studentID);
+    Staff getStaffByID(int staffID);
 
 };
 #endif // DATABASE_H

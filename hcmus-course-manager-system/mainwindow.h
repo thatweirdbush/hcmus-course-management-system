@@ -56,5 +56,8 @@ private:
     Ui::MainWindow *ui;
     Database *db;
     Account *currentAccount;
+
+    Student *currentStudent;
+    Staff *currentStaff;
 };
 #endif // MAINWINDOW_H
