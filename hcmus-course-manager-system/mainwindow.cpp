@@ -10,6 +10,8 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
     , db(new Database)
     , currentAccount(nullptr)
+    , currentStudent(nullptr)
+    , currentStaff(nullptr)
 {
     ui->setupUi(this);
 
@@ -23,6 +25,10 @@ MainWindow::~MainWindow()
     delete db;
     if (currentAccount != nullptr)
         delete currentAccount;
+    if (currentStudent != nullptr)
+        delete currentStudent;
+    if (currentStaff != nullptr)
+        delete currentStaff;
 }
 
 void MainWindow::on_btnRegister_clicked()
@@ -32,7 +38,8 @@ void MainWindow::on_btnRegister_clicked()
 
     /// For easy debug
     // Go to Account List page using stack widget
-    loadAccountList();
+    // loadAccountList();
+    loadStudentList();
     ui->stackedWidget->setCurrentIndex(4);
 }
 
@@ -73,22 +80,24 @@ void MainWindow::on_btnSignIn_clicked()
 
         // Check if user is student or staff by counting num of digits
         if (staffOrStudentID < 10000) {
-            Staff staff = db->getStaffByID(staffOrStudentID);
+            Staff *staff = new Staff(db->getStaffByID(staffOrStudentID));
+            currentStaff = staff;
 
-            QString welcomeScript = "Welcome, " + QString::fromStdString(staff.getFullName()) + "!";
+            QString welcomeScript = "Welcome, " + QString::fromStdString(staff->getFullName()) + "!";
             QMessageBox::information(this, "Login Successful", welcomeScript, QMessageBox::Ok);
 
-            // Go to Profile Info page using stack widget
-            ui->stackedWidget->setCurrentIndex(int(Page::ProfileInfo_Staff));
+            // Go to Staff's Profile Info page
+            loadPageProfileInfo_Staff();
 
         } else {
-            Student student = db->getStudentByID(staffOrStudentID);
+            Student *student = new Student(db->getStudentByID(staffOrStudentID));
+            currentStudent = student;
 
-            QString welcomeScript = "Welcome, " + QString::fromStdString(student.getFullname()) + "!";
+            QString welcomeScript = "Welcome, " + QString::fromStdString(student->getFullname()) + "!";
             QMessageBox::information(this, "Login Successful", welcomeScript, QMessageBox::Ok);
 
-            // Go to Profile Info page using stack widget
-            ui->stackedWidget->setCurrentIndex(int(Page::ProfileInfo_Student));
+            // Go to Student's Profile Info page
+            loadPageProfileInfo_Student();
         }
 
         // Clear username and password fields
@@ -110,6 +119,18 @@ void MainWindow::on_btnSignOut_ProfileInfo_Student_clicked()
     // Check if user wants to sign out
     if (reply == QMessageBox::Yes)
     {
+        // Free memory of current account, student/staff
+        if (currentAccount != nullptr)
+            delete currentAccount;
+        if (currentStudent != nullptr)
+            delete currentStudent;
+        if (currentStaff != nullptr)
+            delete currentStaff;
+
+        currentAccount = nullptr;
+        currentStudent = nullptr;
+        currentStaff= nullptr;
+
         // Go to Sign In page using stack widget
         ui->stackedWidget->setCurrentIndex(int(Page::SignIn));
     }
@@ -222,7 +243,63 @@ void MainWindow::loadAccountList()
     }
 }
 
+void MainWindow::loadStudentList()
+{
+    db->studentList;
 
+    // Display courses in the table
+    ui->tableAccount->setRowCount(db->studentList.size());
+    ui->tableAccount->setColumnCount(7);
+
+    // Set table headers
+    ui->tableAccount->setHorizontalHeaderItem(0, new QTableWidgetItem("No"));
+    ui->tableAccount->setHorizontalHeaderItem(1, new QTableWidgetItem("Student ID"));
+    ui->tableAccount->setHorizontalHeaderItem(2, new QTableWidgetItem("First name"));
+    ui->tableAccount->setHorizontalHeaderItem(3, new QTableWidgetItem("Last Name"));
+    ui->tableAccount->setHorizontalHeaderItem(4, new QTableWidgetItem("Gender"));
+    ui->tableAccount->setHorizontalHeaderItem(5, new QTableWidgetItem("Birth"));
+    ui->tableAccount->setHorizontalHeaderItem(6, new QTableWidgetItem("Social ID"));
+
+
+    // Display courses in the table
+    for (int i = 0; i < db->studentList.size(); i++)
+    {
+        Student student = db->studentList[i];
+        ui->tableAccount->setItem(i, 0, new QTableWidgetItem(QString::number(student.getClassID())));
+        ui->tableAccount->setItem(i, 1, new QTableWidgetItem(QString::number(student.getStudentID())));
+        ui->tableAccount->setItem(i, 2, new QTableWidgetItem(QString::fromStdString(student.getFirstName())));
+        ui->tableAccount->setItem(i, 3, new QTableWidgetItem(QString::fromStdString(student.getLastName())));
+        ui->tableAccount->setItem(i, 4, new QTableWidgetItem(QString::fromStdString(student.getGender())));
+        ui->tableAccount->setItem(i, 5, new QTableWidgetItem(QString::fromStdString(student.getDateOfBirth().toString())));
+        ui->tableAccount->setItem(i, 6, new QTableWidgetItem(QString::fromStdString(student.getSocialID())));
+    }
+}
+
+void MainWindow::loadPageProfileInfo_Staff() {
+    // Load staff info
+    ui->lableUsernameHere_Staff->setText(QString::fromStdString(currentStaff->getFullName()));
+    ui->lableStaffID->setText(QString::number(currentStaff->getStaffID()));
+    ui->lableStaffBirth->setText(QString::fromStdString(currentStaff->getDateOfBirth().toString()));
+    ui->lableStaffGender->setText(QString::fromStdString(currentStaff->getGender()));
+    ui->lableStaffEmail->setText(QString::fromStdString(currentStaff->getEmail()));
+    ui->lableStaffPhone->setText(QString::fromStdString(currentStaff->getPhone()));
+    ui->lableStaffFacilityAddress->setText(QString::fromStdString(currentStaff->getFacilityAddress()));
+
+    // Go to Profile Info page using stack widget
+    ui->stackedWidget->setCurrentIndex(int(Page::ProfileInfo_Staff));
+}
+
+void MainWindow::loadPageProfileInfo_Student() {
+    // Load student info
+    ui->labelUsernameHere_Student->setText(QString::fromStdString(currentStudent->getFullname()));
+    ui->labelStudentID->setText(QString::number(currentStudent->getStudentID()));
+    ui->labelStudentBirth->setText(QString::fromStdString(currentStudent->getDateOfBirth().toString()));
+    ui->labelStudentGender->setText(QString::fromStdString(currentStudent->getGender()));
+    ui->labelStudentSocialID->setText(QString::fromStdString(currentStudent->getSocialID()));
+
+    // Go to Profile Info page using stack widget
+    ui->stackedWidget->setCurrentIndex(int(Page::ProfileInfo_Student));
+}
 
 
 

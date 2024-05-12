@@ -11,6 +11,7 @@
 #include <sstream>
 
 #define CSV_DELIMITER ','
+#define QUOTATION_MARK '"'
 
 /*****************************************
 // Define Class: Date

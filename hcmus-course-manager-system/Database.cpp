@@ -69,24 +69,9 @@ int Database::login(QString username, QString password) {
     return index;
 }
 
-Student Database::getStudentByID(int studentID) {
-    for (int i = 0; i < studentList.size(); i++) {
-        if (studentList[i].getStudentID() == studentID) {
-            return studentList[i];
-        }
-    }
-    return Student();
-}
-
-Staff Database::getStaffByID(int staffID) {
-    for (int i = 0; i < studentList.size(); i++) {
-        if (staffList[i].getStaffID() == staffID) {
-            return staffList[i];
-        }
-    }
-    return Staff();
-}
-
+/*****************************************
+// Implementation Functions Set: Import data from file
+******************************************/
 void Database::importAccountList(QString filename){
     std::ifstream ifs(filename.toStdString());
     // size_t count = 0;
@@ -106,9 +91,9 @@ void Database::importAccountList(QString filename){
         accountList.insert(account);
         // count++;
     }
+
     ifs.close();
     // return count;
-
 }
 
 void Database::importCourseList(QString filename) {
@@ -156,6 +141,7 @@ void Database::importSemesterList(QString filename) {
         semesterList.insert(semester);
         // count++;
     }
+
     ifs.close();
     // return count;
 }
@@ -180,6 +166,7 @@ void Database::importStudentList(QString filename) {
         studentList.insert(student);
         // count++;
     }
+
     ifs.close();
     // return count;
 }
@@ -233,3 +220,35 @@ void Database::importScoreboardList(QString filename) {
     ifs.close();
     // return count;
 }
+
+/*****************************************
+// Implementation Functions Set: Search functions
+******************************************/
+Student Database::getStudentByID(int studentID) {
+    for (int i = 0; i < studentList.size(); i++) {
+        if (studentList[i].getStudentID() == studentID) {
+            return studentList[i];
+        }
+    }
+    return Student();
+}
+
+Staff Database::getStaffByID(int staffID) {
+    for (int i = 0; i < staffList.size(); i++) {
+        if (staffList[i].getStaffID() == staffID) {
+            return staffList[i];
+        }
+    }
+    return Staff();
+}
+
+Set<Scoreboard> Database::getScoreboardListByCourseID(int courseID) {
+    Set<Scoreboard> result;
+    for (int i = 0; i < scoreboardList.size(); i++) {
+        if (scoreboardList[i].getCourseID() == courseID) {
+            result.insert(scoreboardList[i]);
+        }
+    }
+    return result;
+}
+

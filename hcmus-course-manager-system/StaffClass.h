@@ -88,7 +88,9 @@ public:
         std::getline(ss, dateOfBirth, CSV_DELIMITER);
         std::getline(ss, phone, CSV_DELIMITER);
         std::getline(ss, email, CSV_DELIMITER);
-        std::getline(ss, facilityAddress, CSV_DELIMITER);
+
+        ss.ignore(); // Ignore the first quotation mark
+        std::getline(ss, facilityAddress, QUOTATION_MARK);
 
         staff.setStaffID(std::stoi(staffID));
         staff.setFullName(fullName);
@@ -104,7 +106,9 @@ public:
         os << staff.staffID << CSV_DELIMITER << staff.fullName
            << CSV_DELIMITER << staff.gender << CSV_DELIMITER
            << staff.dateOfBirth << CSV_DELIMITER << staff.phone
-           << CSV_DELIMITER << staff.email << CSV_DELIMITER << staff.facilityAddress << std::endl;
+           << CSV_DELIMITER << staff.email << CSV_DELIMITER
+           << QUOTATION_MARK << staff.facilityAddress << QUOTATION_MARK << std::endl;
+        return os;
     }
 
 public:

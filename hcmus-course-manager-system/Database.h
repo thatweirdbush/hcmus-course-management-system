@@ -44,6 +44,8 @@ public:
     void registerAccount();
     int login(QString username, QString password);
 
+public:
+    // Import data from file
     void importAccountList(QString filename);
 
     void importCourseList(QString filename);
@@ -57,8 +59,17 @@ public:
     void importScoreboardList(QString filename);
 
 public:
+    // Search functions
     Student getStudentByID(int studentID);
+
     Staff getStaffByID(int staffID);
+
+    Course getCourseByID(int courseID);
+
+    Set<Scoreboard> getScoreboardListByCourseID(int courseID);
+
+public:
+
 
 };
 #endif // DATABASE_H

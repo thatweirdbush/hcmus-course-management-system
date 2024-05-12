@@ -36,6 +36,9 @@ public:
 		studentID = student.studentID;
 		firstName = student.firstName;
 		lastName = student.lastName;
+        gender = student.gender;
+        dateOfBirth = student.dateOfBirth;
+        socialID = student.socialID;
 	}
 
 	// Assignment operator
@@ -44,6 +47,9 @@ public:
 		studentID = student.studentID;
 		firstName = student.firstName;
 		lastName = student.lastName;
+        gender = student.gender;
+        dateOfBirth = student.dateOfBirth;
+        socialID = student.socialID;
 		return *this;
 	}
 
@@ -100,6 +106,7 @@ public:
         os << student.classID << CSV_DELIMITER << student.studentID
             << CSV_DELIMITER << student.firstName << CSV_DELIMITER << student.lastName << CSV_DELIMITER
             << student.gender << CSV_DELIMITER << student.dateOfBirth << CSV_DELIMITER << student.socialID << "\n";
+        return os;
     }
 
 public:

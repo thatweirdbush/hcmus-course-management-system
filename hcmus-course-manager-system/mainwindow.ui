@@ -52,7 +52,7 @@
      <string notr="true"/>
     </property>
     <property name="currentIndex">
-     <number>2</number>
+     <number>1</number>
     </property>
     <widget class="QWidget" name="pageSignIn">
      <widget class="QFrame" name="leftFrame">
@@ -634,7 +634,7 @@ background-color: rgb(46, 47, 48);</string>
         <string/>
        </property>
       </widget>
-      <widget class="QLabel" name="lableUsernameHere_Student">
+      <widget class="QLabel" name="labelUsernameHere_Student">
        <property name="geometry">
         <rect>
          <x>50</x>
@@ -747,7 +747,7 @@ background-color: rgb(46, 47, 48);</string>
         <bool>true</bool>
        </property>
       </widget>
-      <widget class="QLabel" name="lableAppScript_5">
+      <widget class="QLabel" name="labelStudentID">
        <property name="geometry">
         <rect>
          <x>20</x>
@@ -779,7 +779,7 @@ background-color: rgb(46, 47, 48);</string>
         <bool>true</bool>
        </property>
       </widget>
-      <widget class="QLabel" name="lableAppScript_6">
+      <widget class="QLabel" name="labelStudentBirth">
        <property name="geometry">
         <rect>
          <x>170</x>
@@ -811,7 +811,7 @@ background-color: rgb(46, 47, 48);</string>
         <bool>true</bool>
        </property>
       </widget>
-      <widget class="QLabel" name="lableAppScript_7">
+      <widget class="QLabel" name="labelStudentGender">
        <property name="geometry">
         <rect>
          <x>170</x>
@@ -866,7 +866,7 @@ background-color: rgb(46, 47, 48);</string>
         <string notr="true">color: Black;</string>
        </property>
        <property name="text">
-        <string>Ba Ria - Vung Tau</string>
+        <string>Ho Chi Minh City</string>
        </property>
        <property name="alignment">
         <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
@@ -965,7 +965,7 @@ background-color: rgb(46, 47, 48);</string>
         <bool>true</bool>
        </property>
       </widget>
-      <widget class="QLabel" name="lableAppScript_12">
+      <widget class="QLabel" name="labelStudentSocialID">
        <property name="geometry">
         <rect>
          <x>20</x>
@@ -988,7 +988,7 @@ background-color: rgb(46, 47, 48);</string>
         <string notr="true">color: Black;</string>
        </property>
        <property name="text">
-        <string>2021</string>
+        <string>0321654987</string>
        </property>
        <property name="alignment">
         <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
@@ -1026,7 +1026,7 @@ background-color: rgb(46, 47, 48);</string>
         <bool>true</bool>
        </property>
       </widget>
-      <widget class="QLabel" name="lableAppScript_14">
+      <widget class="QLabel" name="label_3">
        <property name="geometry">
         <rect>
          <x>20</x>
@@ -1046,7 +1046,7 @@ background-color: rgb(46, 47, 48);</string>
         <string notr="true">color: DimGray;</string>
        </property>
        <property name="text">
-        <string>Recruited</string>
+        <string>Social ID</string>
        </property>
        <property name="alignment">
         <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
@@ -1478,7 +1478,7 @@ background-color: rgb(46, 47, 48);</string>
         <bool>true</bool>
        </property>
       </widget>
-      <widget class="QLabel" name="lableAppScript_39">
+      <widget class="QLabel" name="lableStaffID">
        <property name="geometry">
         <rect>
          <x>20</x>
@@ -1510,7 +1510,7 @@ background-color: rgb(46, 47, 48);</string>
         <bool>true</bool>
        </property>
       </widget>
-      <widget class="QLabel" name="lableAppScript_40">
+      <widget class="QLabel" name="lableStaffBirth">
        <property name="geometry">
         <rect>
          <x>170</x>
@@ -1542,7 +1542,7 @@ background-color: rgb(46, 47, 48);</string>
         <bool>true</bool>
        </property>
       </widget>
-      <widget class="QLabel" name="lableAppScript_41">
+      <widget class="QLabel" name="lableStaffGender">
        <property name="geometry">
         <rect>
          <x>170</x>
@@ -1574,7 +1574,7 @@ background-color: rgb(46, 47, 48);</string>
         <bool>true</bool>
        </property>
       </widget>
-      <widget class="QLabel" name="lableAppScript_42">
+      <widget class="QLabel" name="lableStaffPhone">
        <property name="geometry">
         <rect>
          <x>20</x>
@@ -1664,7 +1664,7 @@ background-color: rgb(46, 47, 48);</string>
         <bool>true</bool>
        </property>
       </widget>
-      <widget class="QLabel" name="lableAppScript_46">
+      <widget class="QLabel" name="lableStaffEmail">
        <property name="geometry">
         <rect>
          <x>20</x>
@@ -1725,13 +1725,13 @@ background-color: rgb(46, 47, 48);</string>
         <bool>true</bool>
        </property>
       </widget>
-      <widget class="QLabel" name="lableAppScript_50">
+      <widget class="QLabel" name="lableStaffFacilityAddress">
        <property name="geometry">
         <rect>
          <x>20</x>
          <y>460</y>
          <width>271</width>
-         <height>61</height>
+         <height>71</height>
         </rect>
        </property>
        <property name="font">

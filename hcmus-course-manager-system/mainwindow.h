@@ -48,6 +48,13 @@ private slots:
 
     void on_btnCourses_ProfileInfo_Staff_clicked();
 
+private:
+    // Page Loaders
+    void loadPageProfileInfo_Staff();
+    void loadPageProfileInfo_Student();
+    void loadStudentList();
+
+
 public:
     void loadCourseList();
     void loadAccountList();
