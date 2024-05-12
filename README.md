@@ -5,7 +5,7 @@
 ## Describe functions:
 
 ## Welcome Page:
-#### 1. Sign Up/Sign In.
+#### 1. Sign In.
 #### 2. View profile info, change the password, or log out of the system.
 
 ## At the beginning of a school year (often in September), an academic staff member will:
