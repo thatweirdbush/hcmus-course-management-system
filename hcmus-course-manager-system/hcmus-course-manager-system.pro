@@ -41,10 +41,17 @@ DISTFILES += \
     assets/blue-gradient-xswap.png \
     assets/blue-gradient-yswap.png \
     assets/blue-gradient.png \
+    assets/calendar-icon.png \
+    assets/class-icon.png \
+    assets/course-icon.png \
     assets/hcmus-logo.png \
-    data/coursse.csv \
+    assets/scoreboard-icon.png \
+    course.txt \
+    data/account.csv \
+    data/course.csv \
     data/scoreboard.csv \
     data/semester.csv \
+    data/staff.csv \
     data/student.csv
 
 RESOURCES += \

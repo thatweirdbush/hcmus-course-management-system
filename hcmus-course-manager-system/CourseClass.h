@@ -6,6 +6,10 @@
 #define _COURSE_CLASS_H_
 
 #include "DateClass.h"
+#include "Vector.h"
+#include "qmessagebox.h"
+#include <iostream>
+#include <QFile>
 
 /*****************************************
 // Define Enum Class: Session - DayOfWeek
@@ -32,7 +36,7 @@ enum class DayOfWeek {
 std::string sessionToString(Session session) {
 	switch (session) {
 	case Session::S1: return "S1";
-	case Session::S2: return "S2)";
+    case Session::S2: return "S2";
 	case Session::S3: return "S3";
 	case Session::S4: return "S4";
 	default: return "ERR";
@@ -209,6 +213,9 @@ std::ostream& operator<<(std::ostream& os, Course& course) {
 std::istream& operator>>(std::istream& is, Course& course) {
 	std::string line;
 	std::getline(is, line);
+
+    if (line.empty()) return is;
+
 	std::stringstream ss(line);
 
 	std::string courseID, courseName, className, teacherName, numOfCredits, maxStudents, dayOfWeekStr, sessionStr;
@@ -243,7 +250,38 @@ std::istream& operator>>(std::istream& is, Course& course) {
 	course.setMaxStudents(std::stoi(maxStudents));
 	course.setDayOfWeek(dayOfWeek);
 	course.setSession(session);
-
 	return is;
 }
+
+/*****************************************
+// Define Function: Course Reader
+******************************************/
+size_t readCoursesFromFile(QString filename, Vector<Course>& courses) {
+    std::ifstream ifs(filename.toStdString());
+    size_t count = 0;
+    if (!ifs.is_open()) {
+        // open message box
+        QMessageBox::information(nullptr, "Read Error", filename, QMessageBox::Ok | QMessageBox::Cancel);
+        return count;
+    }
+
+    while (!ifs.eof()) {
+        Course course;
+        ifs >> course;
+
+        // Check if the course read from is empty, then break, because default ID constructor is 0
+        if (course.getCourseID() == 0)
+            break;
+
+        courses.push_back(course);
+        count++;
+    }
+
+    ifs.close();
+    return count;
+}
+
+
+
+
 #endif // !_COURSE_CLASS_H_

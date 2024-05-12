@@ -3,6 +3,8 @@
 #include "changePassword.h"
 #include "ui_mainwindow.h"
 
+#include "CourseClass.h"
+
 #include <QDesktopServices>
 #include <QMessageBox>
 
@@ -102,7 +104,6 @@ void MainWindow::on_btnSignOut_ProfileInfo_Staff_clicked()
     }
 }
 
-
 void MainWindow::on_btnEdit_ProfileInfo_Staff_clicked()
 {
     // Open a new window to change password
@@ -124,6 +125,97 @@ void MainWindow::on_changePassword(const QString &newPassword)
     // Update password to label
     ui->lableTestPassword->setText(newPassword);
 }
+
+
+void MainWindow::on_btnCourses_ProfileInfo_Staff_clicked()
+{
+    // Go to Course page using stack widget
+    loadCourseList();
+    ui->stackedWidget->setCurrentIndex(int(Page::Courses_Staff));
+}
+
+void MainWindow::loadCourseList()
+{
+    // Create a list of courses
+    Vector<Course> courseList;
+
+    // Add courses to the list
+    readCoursesFromFile(COURSE_FILE_PATH, courseList);
+
+    // Display courses in the table
+    ui->tableCourses->setRowCount(courseList.size());
+    ui->tableCourses->setColumnCount(8);
+
+    // Set table headers
+    ui->tableCourses->setHorizontalHeaderItem(0, new QTableWidgetItem("Course ID"));
+    ui->tableCourses->setHorizontalHeaderItem(1, new QTableWidgetItem("Course Name"));
+    ui->tableCourses->setHorizontalHeaderItem(2, new QTableWidgetItem("Class Name"));
+    ui->tableCourses->setHorizontalHeaderItem(3, new QTableWidgetItem("Teacher Name"));
+    ui->tableCourses->setHorizontalHeaderItem(4, new QTableWidgetItem("Credits"));
+    ui->tableCourses->setHorizontalHeaderItem(5, new QTableWidgetItem("Max Students"));
+    ui->tableCourses->setHorizontalHeaderItem(6, new QTableWidgetItem("Day of Week"));
+    ui->tableCourses->setHorizontalHeaderItem(7, new QTableWidgetItem("Session"));
+
+    // Display courses in the table
+    for (int i = 0; i < courseList.size(); i++)
+    {
+        Course course = courseList[i];
+        ui->tableCourses->setItem(i, 0, new QTableWidgetItem(QString::number(course.getCourseID())));
+        ui->tableCourses->setItem(i, 1, new QTableWidgetItem(QString::fromStdString(course.getCourseName())));
+        ui->tableCourses->setItem(i, 2, new QTableWidgetItem(QString::fromStdString(course.getClassName())));
+        ui->tableCourses->setItem(i, 3, new QTableWidgetItem(QString::fromStdString(course.getTeacherName())));
+        ui->tableCourses->setItem(i, 4, new QTableWidgetItem(QString::number(course.getNumOfCredits())));
+        ui->tableCourses->setItem(i, 5, new QTableWidgetItem(QString::number(course.getMaxStudents())));
+        ui->tableCourses->setItem(i, 6, new QTableWidgetItem(QString::fromStdString(dayOfWeekToString(course.getDayOfWeek()))));
+        ui->tableCourses->setItem(i, 7, new QTableWidgetItem(QString::fromStdString(sessionToString(course.getSession()))));
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
