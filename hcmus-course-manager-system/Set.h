@@ -6,6 +6,7 @@
 #define _SET_H_
 
 #include <exception>
+#include <stdexcept>
 
 /*****************************************
 // Define Class: Set
@@ -31,12 +32,12 @@ public:
 	Set<T>& operator=(const Set<T>& other);
 	T& operator[](int index);
 	const T& operator[](int index) const;
-	void insert(const T& value);
+    void insert(T& value);
 	int size() const;
 	bool isEmpty() const;
 	void erase(int index);
 	void clear();
-	bool contains(const T& value) const;
+    bool contains(T& value);
 
 private:
 	// Reserve memory for the set
@@ -99,7 +100,7 @@ template <class T>
 T& Set<T>::operator[](int index)
 {
 	if (index < 0 || index > length) {
-		std::cerr << "Index out of range" << endl;
+        // std::cerr << "Index out of range" << std::endl;
 		throw std::out_of_range("Index out of range");
 	}
 	return data[index];
@@ -110,7 +111,7 @@ template <class T>
 const T& Set<T>::operator[](int index) const
 {
 	if (index < 0 || index > length) {
-		std::cerr << "Index out of range" << endl;
+        // std::cerr << "Index out of range" << endl;
 		throw std::out_of_range("Index out of range");
 	}
 	return data[index];
@@ -118,10 +119,10 @@ const T& Set<T>::operator[](int index) const
 
 // Add an element to the end of the set, set stay unchanged if the value is not unique
 template <class T>
-void Set<T>::insert(const T& value)
+void Set<T>::insert(T& value)
 {
-	if (!contains(value))
-		return;
+    if (contains(value))
+        return;
 
 	if (length == capacity)
 		reserve(capacity + RESERVE_DEFAULT);
@@ -131,7 +132,7 @@ void Set<T>::insert(const T& value)
 
 // Check if the value is not unique in the set
 template <class T>
-bool Set<T>::contains(const T& value) const
+bool Set<T>::contains(T& value)
 {
 	for (int i = 0; i < length; i++) 
 		if (data[i] == value)
@@ -159,7 +160,7 @@ template <class T>
 void Set<T>::erase(int index)
 {
 	if (index < 0 || index >= length) {
-		std::cerr << "Index out of range" << endl;
+        // std::cerr << "Index out of range" << endl;
 		throw std::out_of_range("Index out of range");
 	}
 	for (int i = index; i < length - 1; i++) {

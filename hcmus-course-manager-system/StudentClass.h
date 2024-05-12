@@ -9,8 +9,8 @@
 
 class Student {
 private:
-	std::string classID;
-	std::string studentID;
+    int classID;
+    int studentID;
 	std::string firstName;
 	std::string lastName;
 	std::string gender;
@@ -19,7 +19,7 @@ private:
 
 public:
 	// Constructor
-	Student(std::string classID = "", std::string studentID = "",
+    Student(int classID = 0, int studentID = 0,
 		std::string firstName = "", std::string lastName = "", std::string gender = "",
 		Date dateOfBirth = Date(), std::string socialID = "")
 
@@ -49,8 +49,8 @@ public:
 
 public:
 	// Setters
-	void setClassID(std::string classID) { this->classID = classID; }
-	void setStudentID(std::string studentID) { this->studentID = studentID; }
+    void setClassID(int classID) { this->classID = classID; }
+    void setStudentID(int studentID) { this->studentID = studentID; }
 	void setFirstName(std::string firstName) { this->firstName = firstName; }
 	void setLastName(std::string lastName) { this->lastName = lastName; }
 	void setGender(std::string gender) { this->gender = gender; }
@@ -58,8 +58,8 @@ public:
 	void setSocialID(std::string socialID) { this->socialID = socialID; }
 
 	// Getters
-	std::string getClassID() { return classID; }
-	std::string getStudentID() { return studentID; }
+    int getClassID() { return classID; }
+    int getStudentID() { return studentID; }
 	std::string getFirstName() { return firstName; }
 	std::string getLastName() { return lastName; }
 	std::string getGender() { return gender; }
@@ -68,36 +68,43 @@ public:
 	std::string getFullname() { return firstName + " " + lastName; }
 
 	// Input/Output Operator Methods
-	friend std::istream& operator>>(std::istream& is, Student& student) {
-		std::string line;
-		std::getline(is, line);
-		std::stringstream ss(line);
+    friend std::istream& operator>>(std::istream& is, Student& student) {
+        std::string line;
+        std::getline(is, line);
 
-		std::string classID, studentID, firstName, lastName, gender, dateOfBirth, socialID;
+        if (line.empty()) return is;
 
-		std::getline(ss, classID, CSV_DELIMITER);
-		std::getline(ss, studentID, CSV_DELIMITER);
-		std::getline(ss, firstName, CSV_DELIMITER);
-		std::getline(ss, lastName, CSV_DELIMITER);
-		std::getline(ss, gender, CSV_DELIMITER);
-		std::getline(ss, dateOfBirth, CSV_DELIMITER);
-		std::getline(ss, socialID, CSV_DELIMITER);
+        std::stringstream ss(line);
+        std::string classID, studentID, firstName, lastName, gender, dateOfBirth, socialID;
 
-		student.setClassID(classID);
-		student.setStudentID(studentID);
-		student.setFirstName(firstName);
-		student.setLastName(lastName);
-		student.setGender(gender);
-		student.setDateOfBirth(Date(dateOfBirth));
-		student.setSocialID(socialID);
+        std::getline(ss, classID, CSV_DELIMITER);
+        std::getline(ss, studentID, CSV_DELIMITER);
+        std::getline(ss, firstName, CSV_DELIMITER);
+        std::getline(ss, lastName, CSV_DELIMITER);
+        std::getline(ss, gender, CSV_DELIMITER);
+        std::getline(ss, dateOfBirth, CSV_DELIMITER);
+        std::getline(ss, socialID, CSV_DELIMITER);
 
-		return is;
-	}
+        student.setClassID(std::stoi(classID));
+        student.setStudentID(std::stoi(studentID));
+        student.setFirstName(firstName);
+        student.setLastName(lastName);
+        student.setGender(gender);
+        student.setDateOfBirth(Date(dateOfBirth));
+        student.setSocialID(socialID);
 
-	friend std::ostream& operator<<(std::ostream& os, const Student& student) {
-		os << student.classID << CSV_DELIMITER << student.studentID
-			<< CSV_DELIMITER << student.firstName << CSV_DELIMITER << student.lastName << CSV_DELIMITER
-			<< student.gender << CSV_DELIMITER << student.dateOfBirth << CSV_DELIMITER << student.socialID << "\n";
-	}
+        return is;
+    }
+
+    friend std::ostream& operator<<(std::ostream& os, const Student& student) {
+        os << student.classID << CSV_DELIMITER << student.studentID
+            << CSV_DELIMITER << student.firstName << CSV_DELIMITER << student.lastName << CSV_DELIMITER
+            << student.gender << CSV_DELIMITER << student.dateOfBirth << CSV_DELIMITER << student.socialID << "\n";
+    }
+
+public:
+    bool operator==(const Student& student) {
+        return this->studentID == student.studentID;
+    }
 };
 #endif // !_STUDENT_CLASS_H_

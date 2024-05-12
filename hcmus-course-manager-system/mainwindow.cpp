@@ -1,9 +1,6 @@
 #include "mainwindow.h"
 #include "changePassword.h"
-#include "changePassword.h"
 #include "ui_mainwindow.h"
-
-#include "CourseClass.h"
 
 #include <QDesktopServices>
 #include <QMessageBox>
@@ -11,6 +8,8 @@
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
+    , db(new Database)
+    , currentAccount(nullptr)
 {
     ui->setupUi(this);
 
@@ -21,12 +20,20 @@ MainWindow::MainWindow(QWidget *parent)
 MainWindow::~MainWindow()
 {
     delete ui;
+    delete db;
+    if (currentAccount != nullptr)
+        delete currentAccount;
 }
 
 void MainWindow::on_btnRegister_clicked()
 {
-    // Open default website
-    QDesktopServices::openUrl(QUrl("https://hcmus.edu.vn"));
+    // // Open default website
+    // QDesktopServices::openUrl(QUrl("https://hcmus.edu.vn"));
+
+    /// For easy debug
+    // Go to Account List page using stack widget
+    loadAccountList();
+    ui->stackedWidget->setCurrentIndex(4);
 }
 
 void MainWindow::on_btnForgotPassword_clicked()
@@ -38,41 +45,58 @@ void MainWindow::on_btnForgotPassword_clicked()
 
 void MainWindow::on_btnSignIn_clicked()
 {
-    // // Get username and password
-    // QString username = ui->txtUsername->text();
-    // QString password = ui->txtPassword->text();
+    // Get username and password
+    QString username = ui->txtUsername->text();
+    QString password = ui->txtPassword->text();
 
-    // // Check if username and password are empty
-    // if (username.isEmpty() || password.isEmpty())
-    // {
-    //     // Open 'Empty Fields' message box
-    //     QMessageBox::warning(this, "Empty Fields", "Please enter your username and password to sign in.", QMessageBox::Ok);
-    // }
-    // else
-    // {
-    //     // Check if username and password are correct
-    //     if (username == "admin" && password == "admin")
-    //     {
-    //         // Open 'Login Successful' message box
-    //         QMessageBox::information(this, "Login Successful", "Welcome, Admin!", QMessageBox::Ok);
+    // Check if username and password are empty
+    if (username.isEmpty() || password.isEmpty())
+    {
+        // Open 'Empty Fields' message box
+        QMessageBox::warning(this, "Empty Fields", "Please enter your username and password to sign in.", QMessageBox::Ok);
+    }
+    else
+    {
+        int index = db->login(username, password);
 
-    //         // Clear username and password fields
-    //         ui->txtUsername->clear();
-    //         ui->txtPassword->clear();
+        // Check if username and password are incorrect
+        if(index == -1) {
+            QMessageBox::critical(this, "Login Failed", "Invalid username or password. Please try again.", QMessageBox::Ok);
+            return;
+        }
 
-    //         // Go to Profile Info page using stack widget
-    //         ui->stackedWidget->setCurrentIndex(1);
-    //     }
-    //     else
-    //     {
-    //         // Open 'Login Failed' message box
-    //         QMessageBox::critical(this, "Login Failed", "Invalid username or password. Please try again.", QMessageBox::Ok);
-    //     }
-    // }
+        // ELSE: Open 'Login Successful' message box
+        currentAccount = new Account(db->accountList[index]);
 
-    /// For easy debug
-    // Go to Profile Info page using stack widget
-    ui->stackedWidget->setCurrentIndex(int(Page::ProfileInfo_Staff));
+        // Get staff/student ID
+        int staffOrStudentID = currentAccount->getStaffOrStudentID();
+
+        // Check if user is student or staff by counting num of digits
+        if (staffOrStudentID < 10000) {
+            QString welcomeScript = "Welcome, Staff!";
+            QMessageBox::information(this, "Login Successful", welcomeScript, QMessageBox::Ok);
+
+            // Go to Profile Info page using stack widget
+            ui->stackedWidget->setCurrentIndex(int(Page::ProfileInfo_Staff));
+
+        } else {
+            Student student = db->getStudentByID(staffOrStudentID);
+
+            QString welcomeScript = "Welcome, " + QString::fromStdString(student.getFullname()) + "!";
+            QMessageBox::information(this, "Login Successful", welcomeScript, QMessageBox::Ok);
+
+            // Go to Profile Info page using stack widget
+            ui->stackedWidget->setCurrentIndex(int(Page::ProfileInfo_Student));
+        }
+
+        // Clear username and password fields
+        ui->txtUsername->clear();
+        ui->txtPassword->clear();
+    }
+
+    // /// For easy debug
+    // // Go to Profile Info page using stack widget
+    // ui->stackedWidget->setCurrentIndex(int(Page::ProfileInfo_Staff));
 }
 
 void MainWindow::on_btnSignOut_ProfileInfo_Student_clicked()
@@ -171,7 +195,30 @@ void MainWindow::loadCourseList()
     }
 }
 
+void MainWindow::loadAccountList()
+{
+    db->accountList;
 
+    // Display courses in the table
+    ui->tableAccount->setRowCount(db->accountList.size());
+    ui->tableAccount->setColumnCount(4);
+
+    // Set table headers
+    ui->tableAccount->setHorizontalHeaderItem(0, new QTableWidgetItem("Account ID"));
+    ui->tableAccount->setHorizontalHeaderItem(1, new QTableWidgetItem("Staff/Student ID"));
+    ui->tableAccount->setHorizontalHeaderItem(2, new QTableWidgetItem("Username"));
+    ui->tableAccount->setHorizontalHeaderItem(3, new QTableWidgetItem("Password"));
+
+    // Display courses in the table
+    for (int i = 0; i < db->accountList.size(); i++)
+    {
+        Account account = db->accountList[i];
+        ui->tableAccount->setItem(i, 0, new QTableWidgetItem(QString::number(account.getAccountID())));
+        ui->tableAccount->setItem(i, 1, new QTableWidgetItem(QString::number(account.getStaffOrStudentID())));
+        ui->tableAccount->setItem(i, 2, new QTableWidgetItem(QString::fromStdString(account.getUsername())));
+        ui->tableAccount->setItem(i, 3, new QTableWidgetItem(QString::fromStdString(account.getPassword())));
+    }
+}
 
 
 

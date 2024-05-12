@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include "Database.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -16,14 +17,6 @@ enum class Page
     ProfileInfo_Staff = 2,
     Courses_Staff = 3
 };
-
-// Define const file path
-const QString COURSE_FILE_PATH = "course.csv";
-const QString STUDENT_FILE_PATH = "student.csv";
-const QString SCOREBOARD_FILE_PATH = "scoreboard.csv";
-const QString SEMESTER_FILE_PATH = "semester.csv";
-const QString STAFF_FILE_PATH = "staff.csv";
-const QString ACCOUNT_FILE_PATH = "account.csv";
 
 
 QT_END_NAMESPACE
@@ -57,8 +50,11 @@ private slots:
 
 public:
     void loadCourseList();
+    void loadAccountList();
 
 private:
     Ui::MainWindow *ui;
+    Database *db;
+    Account *currentAccount;
 };
 #endif // MAINWINDOW_H

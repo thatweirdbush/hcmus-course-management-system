@@ -31,18 +31,18 @@ public:
 	void setAccountList(Set<Account> accountList) { this->accountList = accountList; }
 
 public:
-	void registerAccount() {
-		Account account;
-		std::string username, password, role, fullName, address, email, phone;
-		Date dateOfBirth;
+    // void registerAccount() {
+    // 	Account account;
+    // 	std::string username, password, role, fullName, address, email, phone;
+    // 	Date dateOfBirth;
 
-		///
-		/// TODO: finish this function
-		///
+    // 	///
+    // 	/// TODO: finish this function
+    // 	///
 		
-		accountList.insert(account);
-		std::cout << "Register successfully!\n";
-	}
+    // 	accountList.insert(account);
+    // 	std::cout << "Register successfully!\n";
+    // }
 
 	Account login() {
 		std::string username, password;
