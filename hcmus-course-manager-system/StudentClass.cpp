@@ -5,7 +5,7 @@
 ******************************************/
 // Default Constructor
 Student::Student() {
-    studentID = 0;
+    studentID = -1;
     firstName = "";
     lastName = "";
     gender = "";

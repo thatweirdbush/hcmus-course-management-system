@@ -1,5 +1,5 @@
-Account ID, Staff/Student ID, Username, Password
-1,1001,nguyenvanan,123456
+Account ID, Username, Password, Role
+1,1001,nguyenvanan,12
 2,1002,tranthibinh,abcdef
 3,1003,ledinhcuong,password1
 4,1004,phamthidung,securepass

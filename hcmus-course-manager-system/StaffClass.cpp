@@ -5,7 +5,7 @@
 ******************************************/
 // Default Constructor
 Staff::Staff() {
-    staffID = 0;
+    staffID = -1;
     fullName = "";
     gender = "";
     dateOfBirth = Date();

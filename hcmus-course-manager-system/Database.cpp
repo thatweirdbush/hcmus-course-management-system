@@ -18,77 +18,30 @@ Database::Database() {
 
 // Destructor - Save all data to file, with first line header
 Database::~Database() {
-    // Write account list to file
-    std::ofstream ofs(ACCOUNT_FILE_PATH.toStdString(), std::ios::trunc);
-    ofs << "Account ID, Staff/Student ID, Username, Password" << std::endl;
-    for (int i = 0; i < accountList.size(); i++) {
-        ofs << accountList[i];
-    }
-    ofs.close();
-
-    // Write course list to file
-    ofs.open(COURSE_FILE_PATH.toStdString(), std::ios::trunc);
-    ofs << "Course ID, Course Name, Class Name, Instructor Name, Credit, Max Students, Day, Session" << std::endl;
-    for (int i = 0; i < courseList.size(); i++) {
-        ofs << courseList[i];
-    }
-    ofs.close();
-
-    // Write semester list to file
-    ofs.open(SEMESTER_FILE_PATH.toStdString(), std::ios::trunc);
-    ofs << "Semester ID, Semester No, School Year, Start Date, End Date" << std::endl;
-    for (int i = 0; i < semesterList.size(); i++) {
-        ofs << semesterList[i];
-    }
-    ofs.close();
-
-    // Write student list to file
-    ofs.open(STUDENT_FILE_PATH.toStdString(), std::ios::trunc);
-    ofs << "Student ID, First Name, Last Name, Gender, Date of Birth, Phone Number" << std::endl;
-    for (int i = 0; i < studentList.size(); i++) {
-        ofs << studentList[i];
-    }
-    ofs.close();
-
-    // Write staff list to file
-    ofs.open(STAFF_FILE_PATH.toStdString(), std::ios::trunc);
-    ofs << "Staff ID, Full Name, Gender, Date of Birth, Phone, Email, Facility Address" << std::endl;
-    for (int i = 0; i < staffList.size(); i++) {
-        ofs << staffList[i];
-    }
-    ofs.close();
-
-    // Write scoreboard list to file
-    ofs.open(SCOREBOARD_FILE_PATH.toStdString(), std::ios::trunc);
-    ofs << "Course ID, Student ID, Student Full Name, Total Mark, Final Mark, Midterm Mark, Other Mark" << std::endl;
-    for (int i = 0; i < scoreboardList.size(); i++) {
-        ofs << scoreboardList[i];
-    }
-    ofs.close();
-
-    // Write class list to file
-    ofs.open(CLASS_FILE_PATH.toStdString(), std::ios::trunc);
-    ofs << "Class ID, Class Name, Room Number" << std::endl;
-    for (int i = 0; i < classList.size(); i++) {
-        ofs << classList[i];
-    }
-    ofs.close();
+    exportAccountList(ACCOUNT_FILE_PATH);
+    exportCourseList(COURSE_FILE_PATH);
+    exportSemesterList(SEMESTER_FILE_PATH);
+    exportStudentList(STUDENT_FILE_PATH);
+    exportStaffList(STAFF_FILE_PATH);
+    exportScoreboardList(SCOREBOARD_FILE_PATH);
+    exportClassList(CLASS_FILE_PATH);
 }
 
 void Database::registerAccount() {
     /// NOT IMPLEMENTED YET
 }
 
-// Get index of account in account list when login
-int Database::login(QString username, QString password) {
-    int index = -1;
+// Get account object in account list when login
+Account Database::login(QString username, QString password) {
+    Account account = Account();
     for (int i = 0; i < accountList.size(); i++) {
         if (accountList[i].getUsername().compare(username.toStdString()) == 0 &&
             accountList[i].getPassword().compare(password.toStdString()) == 0) {
-            index = i;
+            account = accountList[i];
+            return account;
         }
     }
-    return index;
+    return account;
 }
 
 /*****************************************
@@ -112,7 +65,7 @@ void Database::importAccountList(QString filename){
         Account account;
         ifs >> account;
         // Check if the course read from is empty, then break, because default ID constructor is 0
-        if (account.getAccountID() == 0)
+        if (account.getAccountID() == -1)
             break;
 
         accountList.insert(account);
@@ -142,7 +95,7 @@ void Database::importCourseList(QString filename) {
         ifs >> course;
 
         // Check if the course read from is empty, then break, because default ID constructor is 0
-        if (course.getCourseID() == 0)
+        if (course.getCourseID() == -1)
             break;
 
         courseList.insert(course);
@@ -172,7 +125,7 @@ void Database::importSemesterList(QString filename) {
         ifs >> semester;
 
         // Check if the course read from is empty, then break, because default No constructor is 0
-        if (semester.getNo() == 0)
+        if (semester.getNo() == -1)
             break;
 
         semesterList.insert(semester);
@@ -202,7 +155,7 @@ void Database::importStudentList(QString filename) {
         ifs >> student;
 
         // Check if the course read from is empty, then break, because default ID constructor is 0
-        if (student.getStudentID() == 0)
+        if (student.getStudentID() == -1)
             break;
 
         studentList.insert(student);
@@ -232,7 +185,7 @@ void Database::importStaffList(QString filename) {
         ifs >> staff;
 
         // Check if the course read from is empty, then break, because default ID constructor is 0
-        if (staff.getStaffID() == 0)
+        if (staff.getStaffID() == -1)
             break;
 
         staffList.insert(staff);
@@ -262,7 +215,7 @@ void Database::importScoreboardList(QString filename) {
         ifs >> scoreboard;
 
         // Check if the course read from is empty, then break, because default ID constructor is 0
-        if (scoreboard.getCourseID() == 0)
+        if (scoreboard.getCourseID() == -1)
             break;
 
         scoreboardList.insert(scoreboard);
@@ -292,7 +245,7 @@ void Database::importClassList(QString filename) {
         ifs >> classObj;
 
         // Check if the course read from is empty, then break, because default ID constructor is 0
-        if (classObj.getClassID() == 0)
+        if (classObj.getClassID() == -1)
             break;
 
         classList.insert(classObj);
@@ -302,6 +255,80 @@ void Database::importClassList(QString filename) {
     ifs.close();
     // return count;
 }
+
+/*****************************************
+// Implementation Functions Set: Export data to file
+******************************************/
+// Export Account list to file
+void Database::exportAccountList(QString filename) {
+    std::ofstream ofs(filename.toStdString());
+    ofs << "Account ID, Username, Password, Role" << std::endl;
+    for (int i = 0; i < accountList.size(); i++) {
+        ofs << accountList[i];
+    }
+    ofs.close();
+}
+
+// Export Course list to file
+void Database::exportCourseList(QString filename) {
+    std::ofstream ofs(filename.toStdString());
+    ofs << "Course ID, Course Name, Credit, Lecturer ID, Start Date, End Date" << std::endl;
+    for (int i = 0; i < courseList.size(); i++) {
+        ofs << courseList[i];
+    }
+    ofs.close();
+}
+
+// Export Semester list to file
+void Database::exportSemesterList(QString filename) {
+    std::ofstream ofs(filename.toStdString());
+    ofs << "Semester No, Start Date, End Date" << std::endl;
+    for (int i = 0; i < semesterList.size(); i++) {
+        ofs << semesterList[i];
+    }
+    ofs.close();
+}
+
+// Export Student list to file
+void Database::exportStudentList(QString filename) {
+    std::ofstream ofs(filename.toStdString());
+    ofs << "Student ID, First Name, Last Name, Gender, Date of Birth, Phone Number" << std::endl;
+    for (int i = 0; i < studentList.size(); i++) {
+        ofs << studentList[i];
+    }
+    ofs.close();
+}
+
+// Export Staff list to file
+void Database::exportStaffList(QString filename) {
+    std::ofstream ofs(filename.toStdString());
+    ofs << "Staff ID, Full Name, Gender, Date of Birth, Phone, Email, Facility Address" << std::endl;
+    for (int i = 0; i < staffList.size(); i++) {
+        ofs << staffList[i];
+    }
+    ofs.close();
+}
+
+// Export Scoreboard list to file
+void Database::exportScoreboardList(QString filename) {
+    std::ofstream ofs(filename.toStdString());
+    ofs << "Course ID, Student ID, Midterm, Final, Lab, Bonus, Total" << std::endl;
+    for (int i = 0; i < scoreboardList.size(); i++) {
+        ofs << scoreboardList[i];
+    }
+    ofs.close();
+}
+
+// Export Class list to file
+void Database::exportClassList(QString filename) {
+    std::ofstream ofs(filename.toStdString());
+    ofs << "Class ID, Class Name, Course ID, Lecturer ID, Start Date, End Date" << std::endl;
+    for (int i = 0; i < classList.size(); i++) {
+        ofs << classList[i];
+    }
+    ofs.close();
+}
+
 
 /*****************************************
 // Implementation Functions Set: Search functions
@@ -516,3 +543,110 @@ void Database::loadClassList(QTableWidget* table)
         table->setItem(i, 1, new QTableWidgetItem(QString::fromStdString(classObj.getRoomNo())));
     }
 }
+
+
+/*****************************************
+// Implementation Functions Set: Update data to the database's attributes
+******************************************/
+// Update Account List
+void Database::updateAccountList(Account account)
+{
+    // Find the account in the list then update it
+    for (int i = 0; i < accountList.size(); i++)
+    {
+        if (accountList[i].getStaffOrStudentID() == account.getStaffOrStudentID())
+        {
+            accountList[i] = account;
+            break;
+        }
+    }
+}
+
+// Update Course List
+void Database::updateCourseList(Course course)
+{
+    // Find the course in the list then update it
+    for (int i = 0; i < courseList.size(); i++)
+    {
+        if (courseList[i].getCourseID() == course.getCourseID())
+        {
+            courseList[i] = course;
+            break;
+        }
+    }
+}
+
+// Update Student List
+void Database::updateStudentList(Student student)
+{
+    // Find the student in the list then update it
+    for (int i = 0; i < studentList.size(); i++)
+    {
+        if (studentList[i].getStudentID() == student.getStudentID())
+        {
+            studentList[i] = student;
+            break;
+        }
+    }
+}
+
+// Update Semester List
+void Database::updateSemesterList(Semester semester)
+{
+    // Find the semester in the list then update it
+    for (int i = 0; i < semesterList.size(); i++)
+    {
+        if (semesterList[i].getNo() == semester.getNo())
+        {
+            semesterList[i] = semester;
+            break;
+        }
+    }
+}
+
+// Update Scoreboard List
+void Database::updateScoreboardList(Scoreboard scoreboard)
+{
+    // Find the scoreboard in the list then update it
+    for (int i = 0; i < scoreboardList.size(); i++)
+    {
+        if (scoreboardList[i].getCourseID() == scoreboard.getCourseID() &&
+            scoreboardList[i].getStudentID() == scoreboard.getStudentID() &&
+            scoreboardList[i].getClassName() == scoreboard.getClassName())
+        {
+            scoreboardList[i] = scoreboard;
+            break;
+        }
+    }
+}
+
+// Update Class List
+void Database::updateClassList(Class classObj)
+{
+    // Find the class in the list then update it
+    for (int i = 0; i < classList.size(); i++)
+    {
+        if (classList[i].getClassID() == classObj.getClassID())
+        {
+            classList[i] = classObj;
+            break;
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

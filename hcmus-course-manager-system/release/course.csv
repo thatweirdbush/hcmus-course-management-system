@@ -1,4 +1,4 @@
-Course ID, Course Name, Class Name, Instructor Name, Credit, Max Students, Day, Session
+Course ID, Course Name, Credit, Lecturer ID, Start Date, End Date
 1001,Programming,20APCS1,Mr. Smith,3,50,MON,S2
 1002,Mathematics,20APCS1,Mrs. Johnson,4,50,WED,S3
 1003,Physics,20APCS1,Mr. Brown,3,50,FRI,S4

@@ -4,6 +4,7 @@
 
 #include <QDesktopServices>
 #include <QMessageBox>
+#include <QShortcut>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -17,6 +18,13 @@ MainWindow::MainWindow(QWidget *parent)
 
     // Display default page 'Sign In' using stack widget
     ui->stackedWidget->setCurrentIndex(int(Page::SignIn));
+
+    // Create a shortcut for the Enter key to trigger the Sign In button
+    QShortcut *shortcut = new QShortcut(QKeySequence(Qt::Key_Return), this);
+    connect(shortcut, &QShortcut::activated, this, &MainWindow::on_btnSignIn_clicked);
+
+    // Set focus to username field by default
+    ui->txtUsername->setFocus();
 }
 
 MainWindow::~MainWindow()
@@ -55,7 +63,6 @@ void MainWindow::on_btnForgotPassword_clicked()
     QMessageBox::information(this, "Forgot Password", "Please contact the administrator to reset your password.", QMessageBox::Ok | QMessageBox::Cancel);
 }
 
-
 void MainWindow::on_btnSignIn_clicked()
 {
     // Get username and password
@@ -65,55 +72,48 @@ void MainWindow::on_btnSignIn_clicked()
     // Check if username and password are empty
     if (username.isEmpty() || password.isEmpty())
     {
-        // Open 'Empty Fields' message box
         QMessageBox::warning(this, "Empty Fields", "Please enter your username and password to sign in.", QMessageBox::Ok);
+        return;
     }
-    else
-    {
-        int index = db->login(username, password);
+    /// else...
+    // Initialize current account from account object loaded from datafile
+    currentAccount = new Account(db->login(username, password));
 
-        // Check if username and password are incorrect
-        if(index == -1) {
-            QMessageBox::critical(this, "Login Failed", "Invalid username or password. Please try again.", QMessageBox::Ok);
-            return;
-        }
-
-        // ELSE: Open 'Login Successful' message box
-        currentAccount = new Account(db->accountList[index]);
-
-        // Get staff/student ID
-        int staffOrStudentID = currentAccount->getStaffOrStudentID();
-
-        // Check if user is student or staff by counting num of digits
-        if (staffOrStudentID < 10000) {
-            Staff *staff = new Staff(db->getStaffByID(staffOrStudentID));
-            currentStaff = staff;
-
-            QString welcomeScript = "Welcome, " + QString::fromStdString(staff->getFullName()) + "!";
-            QMessageBox::information(this, "Login Successful", welcomeScript, QMessageBox::Ok);
-
-            // Go to Staff's Profile Info page
-            loadPageProfileInfo_Staff();
-
-        } else {
-            Student *student = new Student(db->getStudentByID(staffOrStudentID));
-            currentStudent = student;
-
-            QString welcomeScript = "Welcome, " + QString::fromStdString(student->getFullname()) + "!";
-            QMessageBox::information(this, "Login Successful", welcomeScript, QMessageBox::Ok);
-
-            // Go to Student's Profile Info page
-            loadPageProfileInfo_Student();
-        }
-
-        // Clear username and password fields
-        ui->txtUsername->clear();
-        ui->txtPassword->clear();
+    /// Check if username and password are incorrect
+    // Login is failed when account ID is -1 because login() return default object with ID = -1
+    if (currentAccount->getAccountID() == -1) {
+        QMessageBox::critical(this, "Login Failed", "Invalid username or password. Please try again.", QMessageBox::Ok);
+        return;
     }
 
-    // /// For easy debug
-    // // Go to Profile Info page using stack widget
-    // ui->stackedWidget->setCurrentIndex(int(Page::ProfileInfo_Staff));
+    // Get staff/student ID
+    int staffOrStudentID = currentAccount->getStaffOrStudentID();
+
+    // Check if user is student or staff by counting num of digits
+    if (staffOrStudentID < 10000) {
+        Staff *staff = new Staff(db->getStaffByID(staffOrStudentID));
+        currentStaff = staff;
+
+        QString welcomeScript = "Welcome, " + QString::fromStdString(staff->getFullName()) + "!";
+        QMessageBox::information(this, "Login Successful", welcomeScript, QMessageBox::Ok);
+
+        // Go to Staff's Profile Info page
+        loadPageProfileInfo_Staff();
+
+    } else {
+        Student *student = new Student(db->getStudentByID(staffOrStudentID));
+        currentStudent = student;
+
+        QString welcomeScript = "Welcome, " + QString::fromStdString(student->getFullname()) + "!";
+        QMessageBox::information(this, "Login Successful", welcomeScript, QMessageBox::Ok);
+
+        // Go to Student's Profile Info page
+        loadPageProfileInfo_Student();
+    }
+
+    // Clear username and password fields
+    ui->txtUsername->clear();
+    ui->txtPassword->clear();
 }
 
 
@@ -148,8 +148,8 @@ void MainWindow::clearPageProfileInfo_Staff(){
 
 void MainWindow::on_btnEdit_ProfileInfo_Staff_clicked()
 {
-    // Open a new window to change password
-    ChangePassword *changePasswordForm = new ChangePassword(this);
+    // Open a new window to change password, with current password pass to it
+    ChangePassword *changePasswordForm = new ChangePassword(this, currentAccount->getPassword());
     connect(changePasswordForm, &ChangePassword::passwordChanged, this, &MainWindow::on_changePassword);
     changePasswordForm->show();
 }
@@ -180,10 +180,15 @@ void MainWindow::on_btnSignOut_ProfileInfo_Staff_clicked()
     }
 }
 
+// Get new password from ChangePassword form and update to data file
 void MainWindow::on_changePassword(const QString &newPassword)
 {
-    // Update password to label
-    ui->lableTestPassword->setText(newPassword);
+    // Update password to current account and the one in the datafile
+    currentAccount->setPassword(newPassword.toStdString());
+    db->updateAccountList(*currentAccount);
+
+    // Immediately save to data file
+    db->exportAccountList(ACCOUNT_FILE_PATH);
 }
 
 void MainWindow::on_btnCourses_ProfileInfo_Staff_clicked()

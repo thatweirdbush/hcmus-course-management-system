@@ -43,7 +43,7 @@ public:
 
 public:
     void registerAccount();
-    int login(QString username, QString password);
+    Account login(QString username, QString password);
 
 public:
     // Import data from file
@@ -60,6 +60,22 @@ public:
     void importScoreboardList(QString filename);
 
     void importClassList(QString filename);
+
+public:
+    // Export data to file
+    void exportAccountList(QString filename);
+
+    void exportCourseList(QString filename);
+
+    void exportSemesterList(QString filename);
+
+    void exportStudentList(QString filename);
+
+    void exportStaffList(QString filename);
+
+    void exportScoreboardList(QString filename);
+
+    void exportClassList(QString filename);
 
 public:
     // Load Data Context To Table Widget
@@ -84,6 +100,22 @@ public:
     Staff getStaffByID(int staffID);
 
     Course getCourseByID(int courseID);
+
+public:
+    // Update data to the database's attributes
+    void updateCourseList(Course course);
+
+    void updateStudentList(Student student);
+
+    void updateStaffList(Staff staff);
+
+    void updateScoreboardList(Scoreboard scoreboard);
+
+    void updateSemesterList(Semester semester);
+
+    void updateAccountList(Account account);
+
+    void updateClassList(Class classObj);
 
 public:
     // Search functions - return all objects in list

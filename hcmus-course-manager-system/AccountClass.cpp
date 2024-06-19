@@ -5,8 +5,8 @@
 ******************************************/
 // Default Constructor
 Account::Account() {
-    accountID = 0;
-    staffOrStudentID = 0;
+    accountID = -1;
+    staffOrStudentID = -1;
     username = "";
     password = "";
 }

@@ -5,7 +5,7 @@
 ******************************************/
 // Default Constructor
 Class::Class() {
-    classID = 0;
+    classID = -1;
     className = "";
     roomNo = "";
 }

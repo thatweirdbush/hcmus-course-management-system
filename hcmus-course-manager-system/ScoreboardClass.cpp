@@ -5,14 +5,14 @@
 ******************************************/
 // Default Constructor
 Scoreboard::Scoreboard() {
-    courseID = 0;
+    courseID = -1;
     className = "";
-    studentID = 0;
+    studentID = -1;
     fullName = "";
-    totalMark = 0;
-    finalMark = 0;
-    midtermMark = 0;
-    otherMark = 0;
+    totalMark = -1;
+    finalMark = -1;
+    midtermMark = -1;
+    otherMark = -1;
 }
 
 // Constructor with arguments

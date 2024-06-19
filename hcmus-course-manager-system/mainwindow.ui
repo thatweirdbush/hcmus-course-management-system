@@ -52,7 +52,7 @@
      <string notr="true"/>
     </property>
     <property name="currentIndex">
-     <number>7</number>
+     <number>0</number>
     </property>
     <widget class="QWidget" name="pageSignIn">
      <widget class="QFrame" name="leftFrame">
@@ -3449,6 +3449,44 @@ border: none;
    </widget>
   </widget>
  </widget>
+ <tabstops>
+  <tabstop>btnRegister</tabstop>
+  <tabstop>txtUsername</tabstop>
+  <tabstop>txtPassword</tabstop>
+  <tabstop>checkBoxRemember</tabstop>
+  <tabstop>btnSignIn</tabstop>
+  <tabstop>btnForgotPassword</tabstop>
+  <tabstop>btnSignOut_ProfileInfo_Student</tabstop>
+  <tabstop>btnNext_ProfileInfo_Student</tabstop>
+  <tabstop>btnEdit_ProfileInfo_Staff</tabstop>
+  <tabstop>btnEdit_ProfileInfo_Student</tabstop>
+  <tabstop>btnSignOut_ProfileInfo_Staff</tabstop>
+  <tabstop>btnNext_ProfileInfo_Staff</tabstop>
+  <tabstop>btnCourses_ProfileInfo_Staff</tabstop>
+  <tabstop>btnClass_ProfileInfo_Staff</tabstop>
+  <tabstop>btnSemester_ProfileInfo_Staff</tabstop>
+  <tabstop>btnScoreboard_ProfileInfo_Staff</tabstop>
+  <tabstop>btnStartSchoolYear</tabstop>
+  <tabstop>btnStartSemester</tabstop>
+  <tabstop>btnEndSemester</tabstop>
+  <tabstop>btnOthers</tabstop>
+  <tabstop>tableCourses</tabstop>
+  <tabstop>btnBackToProfile</tabstop>
+  <tabstop>tableAccounts</tabstop>
+  <tabstop>btnBackToProfile_2</tabstop>
+  <tabstop>tableSemesters</tabstop>
+  <tabstop>btnBackToProfile_3</tabstop>
+  <tabstop>tableClasses</tabstop>
+  <tabstop>btnBackToProfile_4</tabstop>
+  <tabstop>btnBackToProfile_5</tabstop>
+  <tabstop>tableScoreboards</tabstop>
+  <tabstop>btnScoreboardOfClass</tabstop>
+  <tabstop>btnScoreboardOfCourse</tabstop>
+  <tabstop>tableScoreboardOfCourse</tabstop>
+  <tabstop>btnBackToScoreboard_Staff</tabstop>
+  <tabstop>tableScoreboardOfClass</tabstop>
+  <tabstop>btnBackToScoreboard_Staff_2</tabstop>
+ </tabstops>
  <resources>
   <include location="resource.qrc"/>
  </resources>

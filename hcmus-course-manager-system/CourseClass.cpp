@@ -30,12 +30,12 @@ std::string dayOfWeekToString(DayOfWeek dayOfWeek) {
 ******************************************/
 // Default Constructor
 Course::Course() {
-    courseID = 0;
+    courseID = -1;
     courseName = "";
     className = "";
     teacherName = "";
-    numOfCredits = 0;
-    maxStudents = 0;
+    numOfCredits = -1;
+    maxStudents = -1;
     dayOfWeek = DayOfWeek::MON;
     session = Session::S1;
 }

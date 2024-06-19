@@ -5,9 +5,9 @@
 ******************************************/
 // Constructor
 Semester::Semester() {
-    semesterID = 0;
-    no = 0;
-    schoolYear = 0;
+    semesterID = -1;
+    no = -1;
+    schoolYear = -1;
     startDate = Date();
     endDate = Date();
 }
