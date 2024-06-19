@@ -1,4 +1,4 @@
-Course ID, Student ID, Midterm, Final, Lab, Bonus, Total
+Course ID, Class Name, Student ID, Student Full Name, Total Mark, Final Mark, Midterm Mark, Other Mark
 1001,20APCS1,20230001,John Doe,8.5,9,8,7.5
 1001,20APCS1,20230002,Jane Smith,7.8,8.5,7.5,8
 1001,20APCS1,20230003,David Johnson,8.2,8.7,7.9,7.5

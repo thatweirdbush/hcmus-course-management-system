@@ -52,7 +52,7 @@
      <string notr="true"/>
     </property>
     <property name="currentIndex">
-     <number>0</number>
+     <number>2</number>
     </property>
     <widget class="QWidget" name="pageSignIn">
      <widget class="QFrame" name="leftFrame">
@@ -1787,53 +1787,6 @@ background-color: rgb(46, 47, 48);</string>
        </property>
       </widget>
      </widget>
-     <widget class="QPushButton" name="btnNext_ProfileInfo_Staff">
-      <property name="geometry">
-       <rect>
-        <x>760</x>
-        <y>540</y>
-        <width>125</width>
-        <height>45</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <family>Segoe UI Semibold</family>
-        <pointsize>11</pointsize>
-        <italic>false</italic>
-        <bold>false</bold>
-        <kerning>true</kerning>
-       </font>
-      </property>
-      <property name="cursor">
-       <cursorShape>PointingHandCursor</cursorShape>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">QPushButton#btnNext_ProfileInfo_Staff {
-background-color: rgb(255, 196, 54);
-color: rgb(0, 0, 0);
-border: none;
-}
-
-QPushButton#btnNext_ProfileInfo_Staff:hover {
-background-color: rgb(229, 176, 48);
-color: rgb(0, 0, 0);
-border: none;
-}</string>
-      </property>
-      <property name="text">
-       <string>Next</string>
-      </property>
-      <property name="autoDefault">
-       <bool>false</bool>
-      </property>
-      <property name="default">
-       <bool>false</bool>
-      </property>
-      <property name="flat">
-       <bool>false</bool>
-      </property>
-     </widget>
      <widget class="QPushButton" name="btnCourses_ProfileInfo_Staff">
       <property name="geometry">
        <rect>
@@ -1989,62 +1942,6 @@ border: none;
       <property name="flat">
        <bool>false</bool>
       </property>
-     </widget>
-     <widget class="QFrame" name="frame">
-      <property name="geometry">
-       <rect>
-        <x>370</x>
-        <y>540</y>
-        <width>381</width>
-        <height>45</height>
-       </rect>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">background-color: rgb(255, 196, 54);
-color: rgb(0, 0, 0);
-border: none;</string>
-      </property>
-      <property name="frameShape">
-       <enum>QFrame::StyledPanel</enum>
-      </property>
-      <property name="frameShadow">
-       <enum>QFrame::Raised</enum>
-      </property>
-      <widget class="QLabel" name="lableTestPassword">
-       <property name="geometry">
-        <rect>
-         <x>10</x>
-         <y>10</y>
-         <width>361</width>
-         <height>21</height>
-        </rect>
-       </property>
-       <property name="font">
-        <font>
-         <family>Segoe UI Semibold</family>
-         <pointsize>12</pointsize>
-         <bold>false</bold>
-        </font>
-       </property>
-       <property name="contextMenuPolicy">
-        <enum>Qt::NoContextMenu</enum>
-       </property>
-       <property name="layoutDirection">
-        <enum>Qt::RightToLeft</enum>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">color: Black;</string>
-       </property>
-       <property name="text">
-        <string>Password is shown here</string>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignHCenter|Qt::AlignTop</set>
-       </property>
-       <property name="wordWrap">
-        <bool>true</bool>
-       </property>
-      </widget>
      </widget>
      <widget class="QLabel" name="labelViewData">
       <property name="geometry">
@@ -2352,19 +2249,6 @@ border: none;
        <bool>false</bool>
       </property>
      </widget>
-     <zorder>frame</zorder>
-     <zorder>frameProfileInfo_Staff</zorder>
-     <zorder>btnNext_ProfileInfo_Staff</zorder>
-     <zorder>btnCourses_ProfileInfo_Staff</zorder>
-     <zorder>btnClass_ProfileInfo_Staff</zorder>
-     <zorder>btnSemester_ProfileInfo_Staff</zorder>
-     <zorder>labelViewData</zorder>
-     <zorder>labelViewData_2</zorder>
-     <zorder>btnScoreboard_ProfileInfo_Staff</zorder>
-     <zorder>btnStartSchoolYear</zorder>
-     <zorder>btnStartSemester</zorder>
-     <zorder>btnEndSemester</zorder>
-     <zorder>btnOthers</zorder>
     </widget>
     <widget class="QWidget" name="pageCourse_Staff">
      <property name="styleSheet">
@@ -3461,7 +3345,6 @@ border: none;
   <tabstop>btnEdit_ProfileInfo_Staff</tabstop>
   <tabstop>btnEdit_ProfileInfo_Student</tabstop>
   <tabstop>btnSignOut_ProfileInfo_Staff</tabstop>
-  <tabstop>btnNext_ProfileInfo_Staff</tabstop>
   <tabstop>btnCourses_ProfileInfo_Staff</tabstop>
   <tabstop>btnClass_ProfileInfo_Staff</tabstop>
   <tabstop>btnSemester_ProfileInfo_Staff</tabstop>

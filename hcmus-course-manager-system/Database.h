@@ -118,6 +118,22 @@ public:
     void updateClassList(Class classObj);
 
 public:
+    // Delete data from the database's attributes
+    void deleteFromCourseList(Course course);
+
+    void deleteFromStudentList(Student student);
+
+    void deleteFromStaffList(Staff staff);
+
+    void deleteFromScoreboardList(Scoreboard scoreboard);
+
+    void deleteFromSemesterList(Semester semester);
+
+    void deleteFromAccountList(Account account);
+
+    void deleteFromClassList(Class classObj);
+
+public:
     // Search functions - return all objects in list
     Set<Scoreboard> getScoreboardListByCourseID(int courseID);
 

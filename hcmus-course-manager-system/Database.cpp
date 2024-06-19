@@ -262,7 +262,7 @@ void Database::importClassList(QString filename) {
 // Export Account list to file
 void Database::exportAccountList(QString filename) {
     std::ofstream ofs(filename.toStdString());
-    ofs << "Account ID, Username, Password, Role" << std::endl;
+    ofs << "Account ID, Staff/Student ID, Username, Password" << std::endl;
     for (int i = 0; i < accountList.size(); i++) {
         ofs << accountList[i];
     }
@@ -272,7 +272,7 @@ void Database::exportAccountList(QString filename) {
 // Export Course list to file
 void Database::exportCourseList(QString filename) {
     std::ofstream ofs(filename.toStdString());
-    ofs << "Course ID, Course Name, Credit, Lecturer ID, Start Date, End Date" << std::endl;
+    ofs << "Course ID, Course Name, Class Name, Instructor Name, Credit, Max Students, Day, Session" << std::endl;
     for (int i = 0; i < courseList.size(); i++) {
         ofs << courseList[i];
     }
@@ -282,7 +282,7 @@ void Database::exportCourseList(QString filename) {
 // Export Semester list to file
 void Database::exportSemesterList(QString filename) {
     std::ofstream ofs(filename.toStdString());
-    ofs << "Semester No, Start Date, End Date" << std::endl;
+    ofs << "Semester ID, Semester No, School Year, Start Date, End Date" << std::endl;
     for (int i = 0; i < semesterList.size(); i++) {
         ofs << semesterList[i];
     }
@@ -312,7 +312,7 @@ void Database::exportStaffList(QString filename) {
 // Export Scoreboard list to file
 void Database::exportScoreboardList(QString filename) {
     std::ofstream ofs(filename.toStdString());
-    ofs << "Course ID, Student ID, Midterm, Final, Lab, Bonus, Total" << std::endl;
+    ofs << "Course ID, Class Name, Student ID, Student Full Name, Total Mark, Final Mark, Midterm Mark, Other Mark" << std::endl;
     for (int i = 0; i < scoreboardList.size(); i++) {
         ofs << scoreboardList[i];
     }
@@ -322,7 +322,7 @@ void Database::exportScoreboardList(QString filename) {
 // Export Class list to file
 void Database::exportClassList(QString filename) {
     std::ofstream ofs(filename.toStdString());
-    ofs << "Class ID, Class Name, Course ID, Lecturer ID, Start Date, End Date" << std::endl;
+    ofs << "Class ID, Class Name, Room Number" << std::endl;
     for (int i = 0; i < classList.size(); i++) {
         ofs << classList[i];
     }
@@ -635,7 +635,94 @@ void Database::updateClassList(Class classObj)
 }
 
 
+/*****************************************
+// Implementation Functions Set: Delete data from the database's attributes
+******************************************/
+// Delete Account from Account List
+void Database::deleteFromAccountList(Account account)
+{
+    // Find the account in the list then delete it
+    for (int i = 0; i < accountList.size(); i++)
+    {
+        if (accountList[i].getStaffOrStudentID() == account.getStaffOrStudentID())
+        {
+            accountList.erase(i);
+            break;
+        }
+    }
+}
 
+// Delete Course from Course List
+void Database::deleteFromCourseList(Course course)
+{
+    // Find the course in the list then delete it
+    for (int i = 0; i < courseList.size(); i++)
+    {
+        if (courseList[i].getCourseID() == course.getCourseID())
+        {
+            courseList.erase(i);
+            break;
+        }
+    }
+}
+
+// Delete Student from Student List
+void Database::deleteFromStudentList(Student student)
+{
+    // Find the student in the list then delete it
+    for (int i = 0; i < studentList.size(); i++)
+    {
+        if (studentList[i].getStudentID() == student.getStudentID())
+        {
+            studentList.erase(i);
+            break;
+        }
+    }
+}
+
+// Delete Semester from Semester List
+void Database::deleteFromSemesterList(Semester semester)
+{
+    // Find the semester in the list then delete it
+    for (int i = 0; i < semesterList.size(); i++)
+    {
+        if (semesterList[i].getSemesterID() == semester.getSemesterID())
+        {
+            semesterList.erase(i);
+            break;
+        }
+    }
+}
+
+// Delete Scoreboard from Scoreboard List
+void Database::deleteFromScoreboardList(Scoreboard scoreboard)
+{
+    // Find the scoreboard in the list then delete it
+    for (int i = 0; i < scoreboardList.size(); i++)
+    {
+        if (scoreboardList[i].getCourseID() == scoreboard.getCourseID() &&
+            scoreboardList[i].getStudentID() == scoreboard.getStudentID() &&
+            scoreboardList[i].getClassName() == scoreboard.getClassName())
+        {
+            scoreboardList.erase(i);
+            break;
+        }
+    }
+}
+
+// Delete Class from Class List
+void Database::deleteFromClassList(Class classObj)
+{
+    // Find the class in the list then delete it
+    for (int i = 0; i < classList.size(); i++)
+    {
+        if (classList[i].getClassID() == classObj.getClassID())
+        {
+            classList.erase(i);
+            break;
+        }
+    }
+}
 
 
 

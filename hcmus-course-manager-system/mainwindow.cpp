@@ -46,23 +46,26 @@ MainWindow::~MainWindow()
 * Implement Default Page - SignIn
 *
 ***************************************************************/
+// Register button
 void MainWindow::on_btnRegister_clicked()
 {
     // // Open default website
     // QDesktopServices::openUrl(QUrl("https://hcmus.edu.vn"));
 
-    // For easy debug
-    // Go to Account List page using stack widget
+    /// For easy debug
+    /// Go to Account List page using stack widget
     db->loadAccountList(ui->tableAccounts);
     ui->stackedWidget->setCurrentIndex(int(Page::Account_Staff));
 }
 
+// Forgot Password button
 void MainWindow::on_btnForgotPassword_clicked()
 {
     // Open 'Forgot Password' message box
     QMessageBox::information(this, "Forgot Password", "Please contact the administrator to reset your password.", QMessageBox::Ok | QMessageBox::Cancel);
 }
 
+// Sign In button
 void MainWindow::on_btnSignIn_clicked()
 {
     // Get username and password
@@ -121,6 +124,7 @@ void MainWindow::on_btnSignIn_clicked()
 * Implement Page - ProfileInfo_Staff
 *
 ***************************************************************/
+// Load all data in page's components
 void MainWindow::loadPageProfileInfo_Staff() {
     // Load staff info
     ui->lableUsernameHere_Staff->setText(QString::fromStdString(currentStaff->getFullName()));
@@ -135,6 +139,7 @@ void MainWindow::loadPageProfileInfo_Staff() {
     ui->stackedWidget->setCurrentIndex(int(Page::ProfileInfo_Staff));
 }
 
+// Clear all data in page's components
 void MainWindow::clearPageProfileInfo_Staff(){
     // Clear the data in Profile Info Staff page
     ui->lableUsernameHere_Staff->clear();
@@ -146,6 +151,7 @@ void MainWindow::clearPageProfileInfo_Staff(){
     ui->lableStaffFacilityAddress->clear();
 }
 
+// Change Password button
 void MainWindow::on_btnEdit_ProfileInfo_Staff_clicked()
 {
     // Open a new window to change password, with current password pass to it
@@ -154,6 +160,7 @@ void MainWindow::on_btnEdit_ProfileInfo_Staff_clicked()
     changePasswordForm->show();
 }
 
+// Sign Out button
 void MainWindow::on_btnSignOut_ProfileInfo_Staff_clicked()
 {
     // Open 'Sign Out' message box
@@ -191,63 +198,57 @@ void MainWindow::on_changePassword(const QString &newPassword)
     db->exportAccountList(ACCOUNT_FILE_PATH);
 }
 
+// Go to Course page using stack widget
 void MainWindow::on_btnCourses_ProfileInfo_Staff_clicked()
 {
-    // Go to Course page using stack widget
     db->loadCourseList(ui->tableCourses);
     ui->stackedWidget->setCurrentIndex(int(Page::Courses_Staff));
 }
 
+// Go to Semester page using stack widget
 void MainWindow::on_btnSemester_ProfileInfo_Staff_clicked()
 {
-    // Go to Semester page using stack widget
     db->loadSemesterList(ui->tableSemesters);
     ui->stackedWidget->setCurrentIndex(int(Page::Semester_Staff));
 }
 
+// Go to Class page using stack widget
 void MainWindow::on_btnClass_ProfileInfo_Staff_clicked()
 {
-    // Go to Class page using stack widget
     db->loadClassList(ui->tableClasses);
     ui->stackedWidget->setCurrentIndex(int(Page::Class_Staff));
 }
 
+// Go to Scoreboard page using stack widget
 void MainWindow::on_btnScoreboard_ProfileInfo_Staff_clicked()
 {
-    // Go to Scoreboard page using stack widget
     db->loadScoreboardList(ui->tableScoreboards, db->scoreboardList);
     ui->stackedWidget->setCurrentIndex(int(Page::Scoreboard_Staff));
 }
 
+// Go back to Profile Info page using stack widget - From Course page
 void MainWindow::on_btnBackToProfile_clicked()
 {
-    // Go back to Profile Info page using stack widget
     ui->stackedWidget->setCurrentIndex(int(Page::ProfileInfo_Staff));
 }
 
+// Go back to Sign In page using stack widget - From Account page
 void MainWindow::on_btnBackToProfile_2_clicked()
 {
-    // Go back to Sign In page using stack widget
     ui->stackedWidget->setCurrentIndex(int(Page::SignIn));
 }
 
 
+// Go back to Profile Info page using stack widget - From Semester page
 void MainWindow::on_btnBackToProfile_3_clicked()
 {
-    // Go back to Profile Info page using stack widget
     ui->stackedWidget->setCurrentIndex(int(Page::ProfileInfo_Staff));
 }
 
 
+// Go back to Profile Info page using stack widget - From Class page
 void MainWindow::on_btnBackToProfile_4_clicked()
 {
-    // Go back to Profile Info page using stack widget
-    ui->stackedWidget->setCurrentIndex(int(Page::ProfileInfo_Staff));
-}
-
-void MainWindow::on_btnBackToProfile_5_clicked()
-{
-    // Go back to Profile Info page using stack widget
     ui->stackedWidget->setCurrentIndex(int(Page::ProfileInfo_Staff));
 }
 
@@ -310,6 +311,13 @@ void MainWindow::on_btnSignOut_ProfileInfo_Student_clicked()
 * Implement Page - Scoreboard_Staff
 *
 ***************************************************************/
+// Go back to Profile Info page using stack widget - From Scoreboard page
+void MainWindow::on_btnBackToProfile_5_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(int(Page::ProfileInfo_Staff));
+}
+
+// Go to Course's Scoreboard page using stack widget
 void MainWindow::on_btnScoreboardOfCourse_clicked()
 {
     // Get the selected course in the table widget
@@ -362,6 +370,7 @@ void MainWindow::on_btnScoreboardOfCourse_clicked()
     ui->stackedWidget->setCurrentIndex(int(Page::ScoreboardOfCourse));
 }
 
+// Go to Class's Scoreboard page using stack widget
 void MainWindow::on_btnScoreboardOfClass_clicked()
 {
     // Get the selected class in the table widget
