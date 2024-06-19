@@ -58,9 +58,12 @@ Scoreboard& Scoreboard::operator=(const Scoreboard& scoreboard) {
 std::istream& operator>>(std::istream& is, Scoreboard& scoreboard) {
     std::string line;
     std::getline(is, line);
-    std::stringstream ss(line);
 
+    if (line.empty()) return is;
+
+    std::stringstream ss(line);
     std::string courseID, studentID, fullName, totalMark, finalMark, midtermMark, otherMark;
+
     std::getline(ss, courseID, CSV_DELIMITER);
     std::getline(ss, studentID, CSV_DELIMITER);
     std::getline(ss, fullName, CSV_DELIMITER);
@@ -76,7 +79,6 @@ std::istream& operator>>(std::istream& is, Scoreboard& scoreboard) {
     scoreboard.finalMark = std::stof(finalMark);
     scoreboard.midtermMark = std::stof(midtermMark);
     scoreboard.otherMark = std::stof(otherMark);
-
     return is;
 }
 

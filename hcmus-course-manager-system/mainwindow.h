@@ -18,6 +18,8 @@ enum class Page
     Courses_Staff = 3,
     Courses_Student = 4,
     Semester_Staff = 5,
+    Class_Staff = 6,
+    Scoreboard_Staff = 7
 };
 
 
@@ -51,6 +53,20 @@ private slots:
     void on_btnCourses_ProfileInfo_Staff_clicked();
 
     void on_btnSemester_ProfileInfo_Staff_clicked();
+
+    void on_btnClass_ProfileInfo_Staff_clicked();
+
+    void on_btnBackToProfile_clicked();
+
+    void on_btnBackToProfile_2_clicked();
+
+    void on_btnBackToProfile_3_clicked();
+
+    void on_btnBackToProfile_4_clicked();
+
+    void on_btnScoreboard_ProfileInfo_Staff_clicked();
+
+    void on_btnBackToProfile_5_clicked();
 
 private:
     // Page Loaders

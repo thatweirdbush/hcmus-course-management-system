@@ -39,6 +39,7 @@ Student& Student::operator=(const Student& student) {
     gender = student.gender;
     dateOfBirth = student.dateOfBirth;
     socialID = student.socialID;
+    return *this;
 }
 
 // Input operator

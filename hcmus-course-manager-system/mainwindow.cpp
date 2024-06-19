@@ -183,6 +183,52 @@ void MainWindow::on_btnSemester_ProfileInfo_Staff_clicked()
     ui->stackedWidget->setCurrentIndex(int(Page::Semester_Staff));
 }
 
+void MainWindow::on_btnClass_ProfileInfo_Staff_clicked()
+{
+    // Go to Class page using stack widget
+    db->loadClassList(ui->tableClasses);
+    ui->stackedWidget->setCurrentIndex(int(Page::Class_Staff));
+}
+
+void MainWindow::on_btnScoreboard_ProfileInfo_Staff_clicked()
+{
+    // Go to Scoreboard page using stack widget
+    db->loadScoreboardList(ui->tableScoreboards);
+    ui->stackedWidget->setCurrentIndex(int(Page::Scoreboard_Staff));
+}
+
+void MainWindow::on_btnBackToProfile_clicked()
+{
+    // Go back to Profile Info page using stack widget
+    ui->stackedWidget->setCurrentIndex(int(Page::ProfileInfo_Staff));
+}
+
+void MainWindow::on_btnBackToProfile_2_clicked()
+{
+    // Go back to Profile Info page using stack widget
+    ui->stackedWidget->setCurrentIndex(int(Page::ProfileInfo_Staff));
+}
+
+
+void MainWindow::on_btnBackToProfile_3_clicked()
+{
+    // Go back to Profile Info page using stack widget
+    ui->stackedWidget->setCurrentIndex(int(Page::ProfileInfo_Staff));
+}
+
+
+void MainWindow::on_btnBackToProfile_4_clicked()
+{
+    // Go back to Profile Info page using stack widget
+    ui->stackedWidget->setCurrentIndex(int(Page::ProfileInfo_Staff));
+}
+
+void MainWindow::on_btnBackToProfile_5_clicked()
+{
+    // Go back to Profile Info page using stack widget
+    ui->stackedWidget->setCurrentIndex(int(Page::ProfileInfo_Staff));
+}
+
 /**************************************************************
 * Implement Page - ProfileInfo_Student
 *
@@ -253,6 +299,19 @@ void MainWindow::on_btnSignOut_ProfileInfo_Student_clicked()
 * Implement Default Page - Courses_Student
 *
 ***************************************************************/
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

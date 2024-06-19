@@ -1,50 +1,51 @@
-1001,Programming,Class A,Mr. Smith,3,50,MON,S2
-1002,Mathematics,Class B,Mrs. Johnson,4,50,WED,S3
-1003,Physics,Class C,Mr. Brown,3,50,FRI,S4
-1004,English,Class D,Mrs. Williams,2,50,TUE,S1
-1005,History,Class E,Ms. Jones,3,50,THU,S2
-1006,Chemistry,Class F,Dr. Taylor,3,50,MON,S3
-1007,Art,Class G,Mr. Davis,2,50,WED,S4
-1008,Biology,Class H,Mrs. Wilson,3,50,FRI,S1
-1009,Geography,Class I,Ms. Martinez,3,50,TUE,S2
-1010,Physical Education,Class J,Coach Johnson,2,50,THU,S3
-1011,Music,Class K,Mr. Clark,2,50,MON,S4
-1012,Economics,Class L,Ms. Garcia,3,50,WED,S1
-1013,Foreign Language,Class M,Mrs. Lee,3,50,FRI,S2
-1014,Psychology,Class N,Dr. Adams,3,50,TUE,S3
-1015,Engineering,Class O,Dr. Brown,4,50,THU,S4
-1016,Statistics,Class P,Mr. Taylor,3,50,MON,S1
-1017,Political Science,Class Q,Ms. Robinson,3,50,WED,S2
-1018,Sociology,Class R,Ms. Hall,3,50,FRI,S3
-1019,Health Science,Class S,Ms. White,3,50,TUE,S4
-1020,Literature,Class T,Mr. Moore,3,50,THU,S1
-1021,Philosophy,Class U,Dr. King,3,50,MON,S2
-1022,Computer Science,Class V,Mr. Green,4,50,WED,S3
-1023,Anthropology,Class W,Ms. Adams,3,50,FRI,S4
-1024,Environmental Science,Class X,Ms. Johnson,3,50,TUE,S1
-1025,Theater,Class Y,Mr. Martinez,2,50,THU,S2
-1026,Criminal Justice,Class Z,Mr. Hill,3,50,MON,S3
-1027,Communication,Class AA,Ms. Turner,3,50,WED,S4
-1028,Marketing,Class BB,Mr. Scott,3,50,FRI,S1
-1029,Nutrition,Class CC,Ms. Bell,2,50,TUE,S2
-1030,Architecture,Class DD,Mr. Perez,3,50,THU,S3
-1031,Medical Science,Class EE,Dr. Adams,4,50,MON,S4
-1032,Philology,Class FF,Ms. Carter,3,50,WED,S1
-1033,Public Administration,Class GG,Mr. Foster,3,50,FRI,S2
-1034,Management,Class HH,Ms. Brooks,3,50,TUE,S3
-1035,Human Resources,Class II,Mr. Richardson,3,50,THU,S4
-1036,Linguistics,Class JJ,Ms. Cooper,3,50,MON,S1
-1037,Finance,Class KK,Mr. Bailey,3,50,WED,S2
-1038,Journalism,Class LL,Ms. Hill,2,50,FRI,S3
-1039,Entrepreneurship,Class MM,Mr. Nguyen,3,50,TUE,S4
-1040,Public Relations,Class NN,Ms. Roberts,3,50,THU,S1
-1041,Graphic Design,Class OO,Mr. Rodriguez,3,50,MON,S2
-1042,Physical Therapy,Class PP,Ms. Nguyen,4,50,WED,S3
-1043,Astronomy,Class QQ,Dr. Gonzalez,3,50,FRI,S4
-1044,International Relations,Class RR,Ms. Kim,3,50,TUE,S1
-1045,Engineering Ethics,Class SS,Mr. Patel,3,50,THU,S2
-1046,Forensic Science,Class TT,Dr. Ramirez,3,50,MON,S3
-1047,Entrepreneurial Finance,Class UU,Mr. Stewart,3,50,WED,S4
-1048,Social Work,Class VV,Ms. Nguyen,3,50,FRI,S1
-1049,World Literature,Class WW,Mr. Johnson,3,50,TUE,S2
-1050,Information Technology,Class XX,Ms. Smith,4,50,THU,S3
+Course ID, Course Name, Class Name, Instructor Name, Credit, Max Students, Day, Session
+1001,Programming,20APCS1,Mr. Smith,3,50,MON,S2
+1002,Mathematics,20APCS1,Mrs. Johnson,4,50,WED,S3
+1003,Physics,20APCS1,Mr. Brown,3,50,FRI,S4
+1004,English,20APCS1,Mrs. Williams,2,50,TUE,S1
+1005,History,20APCS2,Ms. Jones,3,50,THU,S2
+1006,Chemistry,20APCS2,Dr. Taylor,3,50,MON,S3
+1007,Art,20APCS2,Mr. Davis,2,50,WED,S4
+1008,Biology,20APCS2,Mrs. Wilson,3,50,FRI,S1
+1009,Geography,20APCS3,Ms. Martinez,3,50,TUE,S2
+1010,Physical Education,20APCS3,Coach Johnson,2,50,THU,S3
+1011,Music,20APCS4,Mr. Clark,2,50,MON,S4
+1012,Economics,20APCS4,Ms. Garcia,3,50,WED,S1
+1013,Foreign Language,21APCS1,Mrs. Lee,3,50,FRI,S2
+1014,Psychology,21APCS1,Dr. Adams,3,50,TUE,S3
+1015,Engineering,21APCS1,Dr. Brown,4,50,THU,S4
+1016,Statistics,21APCS2,Mr. Taylor,3,50,MON,S1
+1017,Political Science,21APCS2,Ms. Robinson,3,50,WED,S2
+1018,Sociology,21APCS3,Ms. Hall,3,50,FRI,S3
+1019,Health Science,21APCS3,Ms. White,3,50,TUE,S4
+1020,Literature,21APCS4,Mr. Moore,3,50,THU,S1
+1021,Philosophy,21APCS4,Dr. King,3,50,MON,S2
+1022,Computer Science,20CLC1,Mr. Green,4,50,WED,S3
+1023,Anthropology,20CLC1,Ms. Adams,3,50,FRI,S4
+1024,Environmental Science,20CLC2,Ms. Johnson,3,50,TUE,S1
+1025,Theater,20CLC2,Mr. Martinez,2,50,THU,S2
+1026,Criminal Justice,20CLC3,Mr. Hill,3,50,MON,S3
+1027,Communication,20CLC3,Ms. Turner,3,50,WED,S4
+1028,Marketing,20CLC4,Mr. Scott,3,50,FRI,S1
+1029,Nutrition,20CLC4,Ms. Bell,2,50,TUE,S2
+1030,Architecture,21CLC1,Mr. Perez,3,50,THU,S3
+1031,Medical Science,21CLC1,Dr. Adams,4,50,MON,S4
+1032,Philology,21CLC2,Ms. Carter,3,50,WED,S1
+1033,Public Administration,21CLC2,Mr. Foster,3,50,FRI,S2
+1034,Management,21CLC3,Ms. Brooks,3,50,TUE,S3
+1035,Human Resources,21CLC3,Mr. Richardson,3,50,THU,S4
+1036,Linguistics,21CLC4,Ms. Cooper,3,50,MON,S1
+1037,Finance,21CLC4,Mr. Bailey,3,50,WED,S2
+1038,Journalism,20VP,Ms. Hill,2,50,FRI,S3
+1039,Entrepreneurship,20VP,Mr. Nguyen,3,50,TUE,S4
+1040,Public Relations,21VP,Ms. Roberts,3,50,THU,S1
+1041,Graphic Design,21VP,Mr. Rodriguez,3,50,MON,S2
+1042,Physical Therapy,22VP,Ms. Nguyen,4,50,WED,S3
+1043,Astronomy,22VP,Dr. Gonzalez,3,50,FRI,S4
+1044,International Relations,23VP,Ms. Kim,3,50,TUE,S1
+1045,Engineering Ethics,23VP,Mr. Patel,3,50,THU,S2
+1046,Forensic Science,22APCS1,Dr. Ramirez,3,50,MON,S3
+1047,Entrepreneurial Finance,22APCS1,Mr. Stewart,3,50,WED,S4
+1048,Social Work,22APCS2,Ms. Nguyen,3,50,FRI,S1
+1049,World Literature,22APCS2,Mr. Johnson,3,50,TUE,S2
+1050,Information Technology,22APCS3,Ms. Smith,4,50,THU,S3

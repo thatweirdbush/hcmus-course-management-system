@@ -52,7 +52,7 @@
      <string notr="true"/>
     </property>
     <property name="currentIndex">
-     <number>2</number>
+     <number>7</number>
     </property>
     <widget class="QWidget" name="pageSignIn">
      <widget class="QFrame" name="leftFrame">
@@ -2113,7 +2113,7 @@ border: none;</string>
 }
 </string>
      </property>
-     <widget class="QLabel" name="label">
+     <widget class="QLabel" name="labelCourse">
       <property name="geometry">
        <rect>
         <x>30</x>
@@ -2146,10 +2146,57 @@ border: none;</string>
        </rect>
       </property>
      </widget>
+     <widget class="QPushButton" name="btnBackToProfile">
+      <property name="geometry">
+       <rect>
+        <x>30</x>
+        <y>540</y>
+        <width>125</width>
+        <height>45</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Segoe UI Semibold</family>
+        <pointsize>11</pointsize>
+        <italic>false</italic>
+        <bold>false</bold>
+        <kerning>true</kerning>
+       </font>
+      </property>
+      <property name="cursor">
+       <cursorShape>PointingHandCursor</cursorShape>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton#btnBackToProfile {
+background-color: rgb(12, 53, 106);
+color: rgb(223, 223, 223);
+border: none;
+}
+
+QPushButton#btnBackToProfile:hover {
+background-color: rgb(14, 63, 127);
+color: rgb(223, 223, 223);
+border: none;
+}</string>
+      </property>
+      <property name="text">
+       <string>Back</string>
+      </property>
+      <property name="autoDefault">
+       <bool>false</bool>
+      </property>
+      <property name="default">
+       <bool>false</bool>
+      </property>
+      <property name="flat">
+       <bool>false</bool>
+      </property>
+     </widget>
     </widget>
-    <widget class="QWidget" name="pageAccount">
+    <widget class="QWidget" name="pageAccount_Staff">
      <property name="styleSheet">
-      <string notr="true">QWidget#pageAccount{
+      <string notr="true">QWidget#pageAccount_Staff{
 	border-image: url(:/assets/blue-gradient.png) 0 0 0 0 stretch stretch;
 }
 </string>
@@ -2164,7 +2211,7 @@ border: none;</string>
        </rect>
       </property>
      </widget>
-     <widget class="QLabel" name="label_2">
+     <widget class="QLabel" name="labelAccount">
       <property name="geometry">
        <rect>
         <x>30</x>
@@ -2187,10 +2234,57 @@ border: none;</string>
        <string>Account</string>
       </property>
      </widget>
+     <widget class="QPushButton" name="btnBackToProfile_2">
+      <property name="geometry">
+       <rect>
+        <x>30</x>
+        <y>540</y>
+        <width>125</width>
+        <height>45</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Segoe UI Semibold</family>
+        <pointsize>11</pointsize>
+        <italic>false</italic>
+        <bold>false</bold>
+        <kerning>true</kerning>
+       </font>
+      </property>
+      <property name="cursor">
+       <cursorShape>PointingHandCursor</cursorShape>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton#btnBackToProfile_2 {
+background-color: rgb(12, 53, 106);
+color: rgb(223, 223, 223);
+border: none;
+}
+
+QPushButton#btnBackToProfile_2:hover {
+background-color: rgb(14, 63, 127);
+color: rgb(223, 223, 223);
+border: none;
+}</string>
+      </property>
+      <property name="text">
+       <string>Back</string>
+      </property>
+      <property name="autoDefault">
+       <bool>false</bool>
+      </property>
+      <property name="default">
+       <bool>false</bool>
+      </property>
+      <property name="flat">
+       <bool>false</bool>
+      </property>
+     </widget>
     </widget>
-    <widget class="QWidget" name="pageSemester">
+    <widget class="QWidget" name="pageSemester_Staff">
      <property name="styleSheet">
-      <string notr="true">QWidget#pageSemester{
+      <string notr="true">QWidget#pageSemester_Staff{
 	border-image: url(:/assets/blue-gradient.png) 0 0 0 0 stretch stretch;
 }
 </string>
@@ -2205,7 +2299,7 @@ border: none;</string>
        </rect>
       </property>
      </widget>
-     <widget class="QLabel" name="label_22">
+     <widget class="QLabel" name="labelSemester">
       <property name="geometry">
        <rect>
         <x>30</x>
@@ -2228,9 +2322,230 @@ border: none;</string>
        <string>Semester</string>
       </property>
      </widget>
+     <widget class="QPushButton" name="btnBackToProfile_3">
+      <property name="geometry">
+       <rect>
+        <x>30</x>
+        <y>540</y>
+        <width>125</width>
+        <height>45</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Segoe UI Semibold</family>
+        <pointsize>11</pointsize>
+        <italic>false</italic>
+        <bold>false</bold>
+        <kerning>true</kerning>
+       </font>
+      </property>
+      <property name="cursor">
+       <cursorShape>PointingHandCursor</cursorShape>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton#btnBackToProfile_3 {
+background-color: rgb(12, 53, 106);
+color: rgb(223, 223, 223);
+border: none;
+}
+
+QPushButton#btnBackToProfile_3:hover {
+background-color: rgb(14, 63, 127);
+color: rgb(223, 223, 223);
+border: none;
+}</string>
+      </property>
+      <property name="text">
+       <string>Back</string>
+      </property>
+      <property name="autoDefault">
+       <bool>false</bool>
+      </property>
+      <property name="default">
+       <bool>false</bool>
+      </property>
+      <property name="flat">
+       <bool>false</bool>
+      </property>
+     </widget>
     </widget>
-    <widget class="QWidget" name="page_2"/>
-    <widget class="QWidget" name="page_3"/>
+    <widget class="QWidget" name="pageClass_Staff">
+     <property name="styleSheet">
+      <string notr="true">QWidget#pageClass_Staff{
+	border-image: url(:/assets/blue-gradient.png) 0 0 0 0 stretch stretch;
+}
+</string>
+     </property>
+     <widget class="QLabel" name="labelClass">
+      <property name="geometry">
+       <rect>
+        <x>30</x>
+        <y>20</y>
+        <width>151</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Segoe UI Semibold</family>
+        <pointsize>24</pointsize>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color: rgb(0, 0, 0);</string>
+      </property>
+      <property name="text">
+       <string>Class</string>
+      </property>
+     </widget>
+     <widget class="QTableWidget" name="tableClasses">
+      <property name="geometry">
+       <rect>
+        <x>30</x>
+        <y>70</y>
+        <width>841</width>
+        <height>321</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="btnBackToProfile_4">
+      <property name="geometry">
+       <rect>
+        <x>30</x>
+        <y>540</y>
+        <width>125</width>
+        <height>45</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Segoe UI Semibold</family>
+        <pointsize>11</pointsize>
+        <italic>false</italic>
+        <bold>false</bold>
+        <kerning>true</kerning>
+       </font>
+      </property>
+      <property name="cursor">
+       <cursorShape>PointingHandCursor</cursorShape>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton#btnBackToProfile_4 {
+background-color: rgb(12, 53, 106);
+color: rgb(223, 223, 223);
+border: none;
+}
+
+QPushButton#btnBackToProfile_4:hover {
+background-color: rgb(14, 63, 127);
+color: rgb(223, 223, 223);
+border: none;
+}</string>
+      </property>
+      <property name="text">
+       <string>Back</string>
+      </property>
+      <property name="autoDefault">
+       <bool>false</bool>
+      </property>
+      <property name="default">
+       <bool>false</bool>
+      </property>
+      <property name="flat">
+       <bool>false</bool>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="pageScoreboard_Staff">
+     <property name="styleSheet">
+      <string notr="true">QWidget#pageScoreboard_Staff{
+	border-image: url(:/assets/blue-gradient.png) 0 0 0 0 stretch stretch;
+}
+</string>
+     </property>
+     <widget class="QPushButton" name="btnBackToProfile_5">
+      <property name="geometry">
+       <rect>
+        <x>30</x>
+        <y>540</y>
+        <width>125</width>
+        <height>45</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Segoe UI Semibold</family>
+        <pointsize>11</pointsize>
+        <italic>false</italic>
+        <bold>false</bold>
+        <kerning>true</kerning>
+       </font>
+      </property>
+      <property name="cursor">
+       <cursorShape>PointingHandCursor</cursorShape>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton#btnBackToProfile_5 {
+background-color: rgb(12, 53, 106);
+color: rgb(223, 223, 223);
+border: none;
+}
+
+QPushButton#btnBackToProfile_5:hover {
+background-color: rgb(14, 63, 127);
+color: rgb(223, 223, 223);
+border: none;
+}</string>
+      </property>
+      <property name="text">
+       <string>Back</string>
+      </property>
+      <property name="autoDefault">
+       <bool>false</bool>
+      </property>
+      <property name="default">
+       <bool>false</bool>
+      </property>
+      <property name="flat">
+       <bool>false</bool>
+      </property>
+     </widget>
+     <widget class="QLabel" name="labelScoreboard">
+      <property name="geometry">
+       <rect>
+        <x>30</x>
+        <y>20</y>
+        <width>331</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Segoe UI Semibold</family>
+        <pointsize>24</pointsize>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color: rgb(0, 0, 0);</string>
+      </property>
+      <property name="text">
+       <string>Scoreboard</string>
+      </property>
+     </widget>
+     <widget class="QTableWidget" name="tableScoreboards">
+      <property name="geometry">
+       <rect>
+        <x>30</x>
+        <y>70</y>
+        <width>841</width>
+        <height>321</height>
+       </rect>
+      </property>
+     </widget>
+    </widget>
     <widget class="QWidget" name="page_4"/>
     <widget class="QWidget" name="page_5"/>
    </widget>
