@@ -466,31 +466,33 @@ void Database::loadScoreboardList(QTableWidget* table)
 {
     // Setup table row & column
     table->setRowCount(scoreboardList.size());
-    table->setColumnCount(7);
+    table->setColumnCount(8);
 
     // Adjust columns to fill the table width
     table->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 
     // Set table headers
     table->setHorizontalHeaderItem(0, new QTableWidgetItem("Course ID"));
-    table->setHorizontalHeaderItem(1, new QTableWidgetItem("Student ID"));
-    table->setHorizontalHeaderItem(2, new QTableWidgetItem("Student Name"));
-    table->setHorizontalHeaderItem(3, new QTableWidgetItem("Total Mark"));
-    table->setHorizontalHeaderItem(4, new QTableWidgetItem("Final Mark"));
-    table->setHorizontalHeaderItem(5, new QTableWidgetItem("Midterm Mark"));
-    table->setHorizontalHeaderItem(6, new QTableWidgetItem("Other Mark"));
+    table->setHorizontalHeaderItem(1, new QTableWidgetItem("Class Name"));
+    table->setHorizontalHeaderItem(2, new QTableWidgetItem("Student ID"));
+    table->setHorizontalHeaderItem(3, new QTableWidgetItem("Student Name"));
+    table->setHorizontalHeaderItem(4, new QTableWidgetItem("Total Mark"));
+    table->setHorizontalHeaderItem(5, new QTableWidgetItem("Final Mark"));
+    table->setHorizontalHeaderItem(6, new QTableWidgetItem("Midterm Mark"));
+    table->setHorizontalHeaderItem(7, new QTableWidgetItem("Other Mark"));
 
     // Display scoreboards in the table
     for (int i = 0; i < scoreboardList.size(); i++)
     {
         Scoreboard scoreboard = scoreboardList[i];
         table->setItem(i, 0, new QTableWidgetItem(QString::number(scoreboard.getCourseID())));
-        table->setItem(i, 1, new QTableWidgetItem(QString::number(scoreboard.getStudentID())));
-        table->setItem(i, 2, new QTableWidgetItem(QString::fromStdString(scoreboard.getFullName())));
-        table->setItem(i, 3, new QTableWidgetItem(QString::number(scoreboard.getTotalMark())));
-        table->setItem(i, 4, new QTableWidgetItem(QString::number(scoreboard.getFinalMark())));
-        table->setItem(i, 5, new QTableWidgetItem(QString::number(scoreboard.getMidtermMark())));
-        table->setItem(i, 6, new QTableWidgetItem(QString::number(scoreboard.getOtherMark())));
+        table->setItem(i, 1, new QTableWidgetItem(QString::fromStdString(scoreboard.getClassName())));
+        table->setItem(i, 2, new QTableWidgetItem(QString::number(scoreboard.getStudentID())));
+        table->setItem(i, 3, new QTableWidgetItem(QString::fromStdString(scoreboard.getFullName())));
+        table->setItem(i, 4, new QTableWidgetItem(QString::number(scoreboard.getTotalMark())));
+        table->setItem(i, 5, new QTableWidgetItem(QString::number(scoreboard.getFinalMark())));
+        table->setItem(i, 6, new QTableWidgetItem(QString::number(scoreboard.getMidtermMark())));
+        table->setItem(i, 7, new QTableWidgetItem(QString::number(scoreboard.getOtherMark())));
     }
 }
 

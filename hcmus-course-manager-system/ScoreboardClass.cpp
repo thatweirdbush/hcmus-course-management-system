@@ -6,6 +6,7 @@
 // Default Constructor
 Scoreboard::Scoreboard() {
     courseID = 0;
+    className = "";
     studentID = 0;
     fullName = "";
     totalMark = 0;
@@ -15,11 +16,12 @@ Scoreboard::Scoreboard() {
 }
 
 // Constructor with arguments
-Scoreboard::Scoreboard(int courseID, int studentID,
+Scoreboard::Scoreboard(int courseID, std::string className, int studentID,
                        std::string fullName, float totalMark, float finalMark,
                        float midtermMark, float otherMark)
 {
     this->courseID = courseID;
+    this->className = className;
     this->studentID = studentID;
     this->fullName = fullName;
     this->totalMark = totalMark;
@@ -34,6 +36,7 @@ Scoreboard::~Scoreboard() {}
 // Copy constructor
 Scoreboard::Scoreboard(const Scoreboard& scoreboard) {
     courseID = scoreboard.courseID;
+    className = scoreboard.className;
     studentID = scoreboard.studentID;
     fullName = scoreboard.fullName;
     totalMark = scoreboard.totalMark;
@@ -45,6 +48,7 @@ Scoreboard::Scoreboard(const Scoreboard& scoreboard) {
 // Assignment operator
 Scoreboard& Scoreboard::operator=(const Scoreboard& scoreboard) {
     courseID = scoreboard.courseID;
+    className = scoreboard.className;
     studentID = scoreboard.studentID;
     fullName = scoreboard.fullName;
     totalMark = scoreboard.totalMark;
@@ -62,9 +66,10 @@ std::istream& operator>>(std::istream& is, Scoreboard& scoreboard) {
     if (line.empty()) return is;
 
     std::stringstream ss(line);
-    std::string courseID, studentID, fullName, totalMark, finalMark, midtermMark, otherMark;
+    std::string courseID, className, studentID, fullName, totalMark, finalMark, midtermMark, otherMark;
 
     std::getline(ss, courseID, CSV_DELIMITER);
+    std::getline(ss, className, CSV_DELIMITER);
     std::getline(ss, studentID, CSV_DELIMITER);
     std::getline(ss, fullName, CSV_DELIMITER);
     std::getline(ss, totalMark, CSV_DELIMITER);
@@ -73,6 +78,7 @@ std::istream& operator>>(std::istream& is, Scoreboard& scoreboard) {
     std::getline(ss, otherMark, CSV_DELIMITER);
 
     scoreboard.courseID = std::stoi(courseID);
+    scoreboard.className = className;
     scoreboard.studentID = std::stoi(studentID);
     scoreboard.fullName = fullName;
     scoreboard.totalMark = std::stof(totalMark);
@@ -84,9 +90,9 @@ std::istream& operator>>(std::istream& is, Scoreboard& scoreboard) {
 
 // Output operator
 std::ostream& operator<<(std::ostream& os, Scoreboard& scoreboard) {
-    os << scoreboard.courseID << CSV_DELIMITER << scoreboard.studentID << CSV_DELIMITER
-       << scoreboard.fullName << CSV_DELIMITER << scoreboard.totalMark << CSV_DELIMITER
-       << scoreboard.finalMark << CSV_DELIMITER << scoreboard.midtermMark << CSV_DELIMITER
-       << scoreboard.otherMark << "\n";
+    os << scoreboard.courseID << CSV_DELIMITER << scoreboard.className << CSV_DELIMITER
+       << scoreboard.studentID << CSV_DELIMITER << scoreboard.fullName << CSV_DELIMITER
+       << scoreboard.totalMark << CSV_DELIMITER << scoreboard.finalMark << CSV_DELIMITER
+       << scoreboard.midtermMark << CSV_DELIMITER << scoreboard.otherMark << "\n";
     return os;
 }
