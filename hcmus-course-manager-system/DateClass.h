@@ -24,7 +24,7 @@ private:
 
 public:
 	// Constructor
-	Date(int d = 1, int m = 1, int y = 2000) : day(d), month(m), year(y) {}
+    Date(int d = 5, int m = 9, int y = 1999) : day(d), month(m), year(y) {}
 
 	// Destructor, nothing from now on
 	~Date() {}

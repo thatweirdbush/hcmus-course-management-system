@@ -33,6 +33,7 @@ MainWindow::~MainWindow()
         delete currentStaff;
 }
 
+
 /**************************************************************
 * Implement Default Page - SignIn
 *
@@ -45,6 +46,7 @@ void MainWindow::on_btnRegister_clicked()
     // For easy debug
     // Go to Account List page using stack widget
     db->loadAccountList(ui->tableAccounts);
+    ui->stackedWidget->setCurrentIndex(int(Page::Account_Staff));
 }
 
 void MainWindow::on_btnForgotPassword_clicked()
@@ -114,6 +116,7 @@ void MainWindow::on_btnSignIn_clicked()
     // ui->stackedWidget->setCurrentIndex(int(Page::ProfileInfo_Staff));
 }
 
+
 /**************************************************************
 * Implement Page - ProfileInfo_Staff
 *
@@ -130,6 +133,17 @@ void MainWindow::loadPageProfileInfo_Staff() {
 
     // Go to Profile Info page using stack widget
     ui->stackedWidget->setCurrentIndex(int(Page::ProfileInfo_Staff));
+}
+
+void MainWindow::clearPageProfileInfo_Staff(){
+    // Clear the data in Profile Info Staff page
+    ui->lableUsernameHere_Staff->clear();
+    ui->lableStaffID->clear();
+    ui->lableStaffBirth->clear();
+    ui->lableStaffGender->clear();
+    ui->lableStaffEmail->clear();
+    ui->lableStaffPhone->clear();
+    ui->lableStaffFacilityAddress->clear();
 }
 
 void MainWindow::on_btnEdit_ProfileInfo_Staff_clicked()
@@ -157,6 +171,9 @@ void MainWindow::on_btnSignOut_ProfileInfo_Staff_clicked()
 
         currentAccount = nullptr;
         currentStaff = nullptr;
+
+        // Free up components of the stack widget
+        clearPageProfileInfo_Staff();
 
         // Go to Sign In page using stack widget
         ui->stackedWidget->setCurrentIndex(int(Page::SignIn));
@@ -193,7 +210,7 @@ void MainWindow::on_btnClass_ProfileInfo_Staff_clicked()
 void MainWindow::on_btnScoreboard_ProfileInfo_Staff_clicked()
 {
     // Go to Scoreboard page using stack widget
-    db->loadScoreboardList(ui->tableScoreboards);
+    db->loadScoreboardList(ui->tableScoreboards, db->scoreboardList);
     ui->stackedWidget->setCurrentIndex(int(Page::Scoreboard_Staff));
 }
 
@@ -205,8 +222,8 @@ void MainWindow::on_btnBackToProfile_clicked()
 
 void MainWindow::on_btnBackToProfile_2_clicked()
 {
-    // Go back to Profile Info page using stack widget
-    ui->stackedWidget->setCurrentIndex(int(Page::ProfileInfo_Staff));
+    // Go back to Sign In page using stack widget
+    ui->stackedWidget->setCurrentIndex(int(Page::SignIn));
 }
 
 
@@ -228,6 +245,7 @@ void MainWindow::on_btnBackToProfile_5_clicked()
     // Go back to Profile Info page using stack widget
     ui->stackedWidget->setCurrentIndex(int(Page::ProfileInfo_Staff));
 }
+
 
 /**************************************************************
 * Implement Page - ProfileInfo_Student
@@ -284,21 +302,147 @@ void MainWindow::on_btnSignOut_ProfileInfo_Student_clicked()
 
 
 /**************************************************************
-* Implement Default Page - Courses_Staff
+* Implement Page - Scoreboard_Staff
 *
 ***************************************************************/
+void MainWindow::on_btnScoreboardOfCourse_clicked()
+{
+    // Get the selected course in the table widget
+    int selectedRow = ui->tableScoreboards->currentRow();
+    if (selectedRow < 0) {
+        QMessageBox::warning(this, "No Data Selected", "Please select a course to view scoreboard!", QMessageBox::Ok);
+        return;
+    }
 
+    // Get course ID
+    QTableWidgetItem *item = ui->tableScoreboards->item(selectedRow, 0);
+    int selectCourseID = item->text().toInt();
 
+    // Create new Set of Scoreboard filter by course ID
+    Set<Scoreboard> scoreboardOfCourse;
 
+    // Filter the scoreboard by course ID
+    for (int i = 0; i < db->scoreboardList.size(); i++) {
+        Scoreboard sb = db->scoreboardList[i];
+        if (sb.getCourseID() == selectCourseID)
+            scoreboardOfCourse.insert(sb);
+    }
 
+    // Load the scoreboard of the course
+    db->loadScoreboardList(ui->tableScoreboardOfCourse, scoreboardOfCourse);
 
+    // Get statistics of the course
+    float avgGPA = 0.0f;
+    float highestGPA = 0.0f;
+    std::string achievedByStudent = "";
 
+    for (int i = 0; i < scoreboardOfCourse.size(); i++) {
+        Scoreboard sb = scoreboardOfCourse[i];
+        avgGPA += sb.getFinalMark();
+        if (sb.getFinalMark() > highestGPA) {
+            highestGPA = sb.getFinalMark();
+            achievedByStudent = sb.getFullName();
+        }
+    }
+
+    // Calculate average GPA
+    avgGPA /= scoreboardOfCourse.size();
+
+    // Display statistics
+    ui->labelAvgGPA_Binding->setText(QString::number(avgGPA));
+    ui->labelHighestScore_Binding->setText(QString::number(highestGPA));
+    ui->labelAchievedBy_Binding->setText(QString::fromStdString(achievedByStudent));
+
+    // Go to Scoreboard Of Course page using stack widget
+    ui->stackedWidget->setCurrentIndex(int(Page::ScoreboardOfCourse));
+}
+
+void MainWindow::on_btnScoreboardOfClass_clicked()
+{
+    // Get the selected class in the table widget
+    int selectedRow = ui->tableScoreboards->currentRow();
+    if (selectedRow < 0) {
+        QMessageBox::warning(this, "No Data Selected", "Please select a class to view scoreboard!", QMessageBox::Ok);
+        return;
+    }
+
+    // Get class name
+    QTableWidgetItem *item = ui->tableScoreboards->item(selectedRow, 1);
+    std::string selectClassName = item->text().toStdString();
+
+    // Create new Set of Scoreboard filter by class ID
+    Set<Scoreboard> scoreboardOfClass;
+
+    // Filter the scoreboard by class ID
+    for (int i = 0; i < db->scoreboardList.size(); i++) {
+        Scoreboard sb = db->scoreboardList[i];
+        if (sb.getClassName() == selectClassName)
+            scoreboardOfClass.insert(sb);
+    }
+
+    // Load the scoreboard of the class
+    db->loadScoreboardList(ui->tableScoreboardOfClass, scoreboardOfClass);
+
+    // Get statistics of the class
+    float avgGPA = 0.0f;
+    float highestGPA = 0.0f;
+    std::string achievedByStudent = "";
+
+    for (int i = 0; i < scoreboardOfClass.size(); i++) {
+        Scoreboard sb = scoreboardOfClass[i];
+        avgGPA += sb.getFinalMark();
+        if (sb.getFinalMark() > highestGPA) {
+            highestGPA = sb.getFinalMark();
+            achievedByStudent = sb.getFullName();
+        }
+    }
+
+    // Calculate average GPA
+    avgGPA /= scoreboardOfClass.size();
+
+    // Display statistics
+    ui->labelAvgGPA_Binding_2->setText(QString::number(avgGPA));
+    ui->labelHighestScore_Binding_2->setText(QString::number(highestGPA));
+    ui->labelAchievedBy_Binding_2->setText(QString::fromStdString(achievedByStudent));
+
+    // Go to Scoreboard Of Class page using stack widget
+    ui->stackedWidget->setCurrentIndex(int(Page::ScoreboardOfClass));
+}
 
 
 /**************************************************************
-* Implement Default Page - Courses_Student
+* Implement Page - Scoreboard_Staff - Scoreboard_Of_Course
 *
 ***************************************************************/
+void MainWindow::on_btnBackToScoreboard_Staff_clicked()
+{
+    // Go back to Scoreboard page using stack widget
+    ui->stackedWidget->setCurrentIndex(int(Page::Scoreboard_Staff));
+}
+
+
+/**************************************************************
+* Implement Page - Scoreboard_Staff - Scoreboard_Of_Class
+*
+***************************************************************/
+void MainWindow::on_btnBackToScoreboard_Staff_2_clicked()
+{
+    // Go back to Scoreboard page using stack widget
+    ui->stackedWidget->setCurrentIndex(int(Page::Scoreboard_Staff));
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

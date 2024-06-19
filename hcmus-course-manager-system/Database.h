@@ -69,7 +69,7 @@ public:
 
     void loadStaffList(QTableWidget* table);
 
-    void loadScoreboardList(QTableWidget* table);
+    void loadScoreboardList(QTableWidget* table, Set<Scoreboard>& scoreboardList);
 
     void loadSemesterList(QTableWidget* table);
 

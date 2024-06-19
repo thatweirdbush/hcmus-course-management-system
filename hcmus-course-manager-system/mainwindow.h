@@ -16,10 +16,12 @@ enum class Page
     ProfileInfo_Student = 1,
     ProfileInfo_Staff = 2,
     Courses_Staff = 3,
-    Courses_Student = 4,
+    Account_Staff = 4,
     Semester_Staff = 5,
     Class_Staff = 6,
-    Scoreboard_Staff = 7
+    Scoreboard_Staff = 7,
+    ScoreboardOfCourse = 8,
+    ScoreboardOfClass = 9
 };
 
 
@@ -68,9 +70,19 @@ private slots:
 
     void on_btnBackToProfile_5_clicked();
 
+    void on_btnScoreboardOfCourse_clicked();
+
+    void on_btnBackToScoreboard_Staff_clicked();
+
+    void on_btnBackToScoreboard_Staff_2_clicked();
+
+    void on_btnScoreboardOfClass_clicked();
+
 private:
     // Page Loaders
     void loadPageProfileInfo_Staff();
+
+    void clearPageProfileInfo_Staff();
 
     void loadPageProfileInfo_Student();
 

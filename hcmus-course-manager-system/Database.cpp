@@ -381,25 +381,23 @@ void Database::loadAccountList(QTableWidget* table)
 {
     // Setup table row & column
     table->setRowCount(accountList.size());
-    table->setColumnCount(4);
+    table->setColumnCount(3);
 
     // Adjust columns to fill the table width
     table->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 
     // Set table headers
-    table->setHorizontalHeaderItem(0, new QTableWidgetItem("Account ID"));
-    table->setHorizontalHeaderItem(1, new QTableWidgetItem("Staff/Student ID"));
-    table->setHorizontalHeaderItem(2, new QTableWidgetItem("Username"));
-    table->setHorizontalHeaderItem(3, new QTableWidgetItem("Password"));
+    table->setHorizontalHeaderItem(0, new QTableWidgetItem("Staff/Student ID"));
+    table->setHorizontalHeaderItem(1, new QTableWidgetItem("Username"));
+    table->setHorizontalHeaderItem(2, new QTableWidgetItem("Password"));
 
     // Display accounts in the table
     for (int i = 0; i < accountList.size(); i++)
     {
         Account account = accountList[i];
-        table->setItem(i, 0, new QTableWidgetItem(QString::number(account.getAccountID())));
-        table->setItem(i, 1, new QTableWidgetItem(QString::number(account.getStaffOrStudentID())));
-        table->setItem(i, 2, new QTableWidgetItem(QString::fromStdString(account.getUsername())));
-        table->setItem(i, 3, new QTableWidgetItem(QString::fromStdString(account.getPassword())));
+        table->setItem(i, 0, new QTableWidgetItem(QString::number(account.getStaffOrStudentID())));
+        table->setItem(i, 1, new QTableWidgetItem(QString::fromStdString(account.getUsername())));
+        table->setItem(i, 2, new QTableWidgetItem(QString::fromStdString(account.getPassword())));
     }
 }
 
@@ -462,7 +460,7 @@ void Database::loadSemesterList(QTableWidget* table)
 }
 
 // Load Scoreboard List
-void Database::loadScoreboardList(QTableWidget* table)
+void Database::loadScoreboardList(QTableWidget* table, Set<Scoreboard>& scoreboardList)
 {
     // Setup table row & column
     table->setRowCount(scoreboardList.size());
@@ -501,22 +499,20 @@ void Database::loadClassList(QTableWidget* table)
 {
     // Setup table row & column
     table->setRowCount(classList.size());
-    table->setColumnCount(3);
+    table->setColumnCount(2);
 
     // Adjust columns to fill the table width
     table->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 
     // Set table headers
-    table->setHorizontalHeaderItem(0, new QTableWidgetItem("Class ID"));
-    table->setHorizontalHeaderItem(1, new QTableWidgetItem("Class Name"));
-    table->setHorizontalHeaderItem(2, new QTableWidgetItem("Room Number"));
+    table->setHorizontalHeaderItem(0, new QTableWidgetItem("Class Name"));
+    table->setHorizontalHeaderItem(1, new QTableWidgetItem("Room Number"));
 
     // Display classes in the table
     for (int i = 0; i < classList.size(); i++)
     {
         Class classObj = classList[i];
-        table->setItem(i, 0, new QTableWidgetItem(QString::number(classObj.getClassID())));
-        table->setItem(i, 1, new QTableWidgetItem(QString::fromStdString(classObj.getClassName())));
-        table->setItem(i, 2, new QTableWidgetItem(QString::fromStdString(classObj.getRoomNo())));
+        table->setItem(i, 0, new QTableWidgetItem(QString::fromStdString(classObj.getClassName())));
+        table->setItem(i, 1, new QTableWidgetItem(QString::fromStdString(classObj.getRoomNo())));
     }
 }
