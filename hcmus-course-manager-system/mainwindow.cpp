@@ -4,33 +4,27 @@
 
 #include <QDesktopServices>
 #include <QMessageBox>
-#include <QShortcut>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
     , db(new Database)
+    , shortcut(new QShortcut(QKeySequence(Qt::Key_Return), this))
     , currentAccount(nullptr)
     , currentStudent(nullptr)
     , currentStaff(nullptr)
+
 {
     ui->setupUi(this);
 
-    // Display default page 'Sign In' using stack widget
-    ui->stackedWidget->setCurrentIndex(int(Page::SignIn));
-
-    // Create a shortcut for the Enter key to trigger the Sign In button
-    QShortcut *shortcut = new QShortcut(QKeySequence(Qt::Key_Return), this);
-    connect(shortcut, &QShortcut::activated, this, &MainWindow::on_btnSignIn_clicked);
-
-    // Set focus to username field by default
-    ui->txtUsername->setFocus();
+    loadPageSignIn();
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
     delete db;
+    delete shortcut;
 
     // Free memory of current account, student/staff
     if (currentAccount != nullptr)
@@ -46,6 +40,18 @@ MainWindow::~MainWindow()
 * Implement Default Page - SignIn
 *
 ***************************************************************/
+// Load all data in page's components
+void MainWindow::loadPageSignIn() {
+    // Display default page 'Sign In' using stack widget
+    ui->stackedWidget->setCurrentIndex(int(Page::SignIn));
+
+    // Create a shortcut for the Enter key to trigger the Sign In button
+    connect(shortcut, &QShortcut::activated, this, &MainWindow::on_btnSignIn_clicked);
+
+    // Set focus to username field by default
+    ui->txtUsername->setFocus();
+}
+
 // Register button
 void MainWindow::on_btnRegister_clicked()
 {
@@ -117,6 +123,9 @@ void MainWindow::on_btnSignIn_clicked()
     // Clear username and password fields
     ui->txtUsername->clear();
     ui->txtPassword->clear();
+
+    // Disconnect the Enter key from triggering the Sign In button again
+    disconnect(shortcut, &QShortcut::activated, this, &MainWindow::on_btnSignIn_clicked);
 }
 
 
@@ -183,7 +192,7 @@ void MainWindow::on_btnSignOut_ProfileInfo_Staff_clicked()
         clearPageProfileInfo_Staff();
 
         // Go to Sign In page using stack widget
-        ui->stackedWidget->setCurrentIndex(int(Page::SignIn));
+        loadPageSignIn();
     }
 }
 
@@ -201,7 +210,16 @@ void MainWindow::on_changePassword(const QString &newPassword)
 // Go to Course page using stack widget
 void MainWindow::on_btnCourses_ProfileInfo_Staff_clicked()
 {
+    // Temporarily disconnect the itemChanged signal
+    disconnect(ui->tableCourses, SIGNAL(itemChanged(QTableWidgetItem*)), this, SLOT(on_tableCourses_itemChanged(QTableWidgetItem*)));
+
+    // Load course list
     db->loadCourseList(ui->tableCourses);
+
+    // Reconnect the itemChanged signal after loading the data
+    connect(ui->tableCourses, SIGNAL(itemChanged(QTableWidgetItem*)), this, SLOT(on_tableCourses_itemChanged(QTableWidgetItem*)));
+
+    // Go to Course page using stack widget
     ui->stackedWidget->setCurrentIndex(int(Page::Courses_Staff));
 }
 
@@ -235,7 +253,7 @@ void MainWindow::on_btnBackToProfile_clicked()
 // Go back to Sign In page using stack widget - From Account page
 void MainWindow::on_btnBackToProfile_2_clicked()
 {
-    ui->stackedWidget->setCurrentIndex(int(Page::SignIn));
+    loadPageSignIn();
 }
 
 
@@ -257,6 +275,7 @@ void MainWindow::on_btnBackToProfile_4_clicked()
 * Implement Page - ProfileInfo_Student
 *
 ***************************************************************/
+// Load all data in page's components
 void MainWindow::loadPageProfileInfo_Student() {
     // Load student info
     ui->labelUsernameHere_Student->setText(QString::fromStdString(currentStudent->getFullname()));
@@ -269,6 +288,7 @@ void MainWindow::loadPageProfileInfo_Student() {
     ui->stackedWidget->setCurrentIndex(int(Page::ProfileInfo_Student));
 }
 
+// Change Password button
 void MainWindow::on_btnEdit_ProfileInfo_Student_clicked()
 {
     // Open a new window to change password
@@ -277,6 +297,7 @@ void MainWindow::on_btnEdit_ProfileInfo_Student_clicked()
     changePasswordForm->show();
 }
 
+// Sign Out button
 void MainWindow::on_btnSignOut_ProfileInfo_Student_clicked()
 {
     // Open 'Sign Out' message box
@@ -296,15 +317,9 @@ void MainWindow::on_btnSignOut_ProfileInfo_Student_clicked()
         currentStudent = nullptr;
 
         // Go to Sign In page using stack widget
-        ui->stackedWidget->setCurrentIndex(int(Page::SignIn));
+        loadPageSignIn();
     }
 }
-
-
-
-
-
-
 
 
 /**************************************************************
@@ -428,6 +443,7 @@ void MainWindow::on_btnScoreboardOfClass_clicked()
 * Implement Page - Scoreboard_Staff - Scoreboard_Of_Course
 *
 ***************************************************************/
+// Go back to Scoreboard page using stack widget - From Scoreboard Of Course page
 void MainWindow::on_btnBackToScoreboard_Staff_clicked()
 {
     // Go back to Scoreboard page using stack widget
@@ -439,6 +455,7 @@ void MainWindow::on_btnBackToScoreboard_Staff_clicked()
 * Implement Page - Scoreboard_Staff - Scoreboard_Of_Class
 *
 ***************************************************************/
+// Go back to Scoreboard page using stack widget - From Scoreboard Of Class page
 void MainWindow::on_btnBackToScoreboard_Staff_2_clicked()
 {
     // Go back to Scoreboard page using stack widget
@@ -446,25 +463,83 @@ void MainWindow::on_btnBackToScoreboard_Staff_2_clicked()
 }
 
 
+/**************************************************************
+* Implement Page - Course_Staff
+*
+***************************************************************/
+// Get updates from table & update to datafile
+void MainWindow::on_tableCourses_itemChanged(QTableWidgetItem *item)
+{
+    // Restrict the user from changing the course ID
+    if (item->column() == 0) {
+        QMessageBox::warning(this, "Invalid Change", "You cannot change the course ID!", QMessageBox::Ok);
+        item->setText(QString::number(db->courseList[item->row()].getCourseID()));
+        return;
+    }
 
+    // Get changed course information
+    if (item->column() == 1) {
+        db->courseList[item->row()].setCourseName(item->text().toStdString());
+    }
+    else if (item->column() == 2) {
+        db->courseList[item->row()].setClassName(item->text().toStdString());
+    }
+    else if (item->column() == 3) {
+        db->courseList[item->row()].setTeacherName(item->text().toStdString());
+    }
+    else if (item->column() == 4) {
+        db->courseList[item->row()].setNumOfCredits(item->text().toInt());
+    }
+    else if (item->column() == 5) {
+        db->courseList[item->row()].setMaxStudents(item->text().toInt());
+    }
+    else if (item->column() == 6) {
+        db->courseList[item->row()].setDayOfWeek(stringToDayOfWeek(item->text().toStdString()));
+    }
+    else if (item->column() == 7) {
+        db->courseList[item->row()].setSession(stringToSession(item->text().toStdString()));
+    }
 
+    // Immediately save to datafile
+    db->exportCourseList(COURSE_FILE_PATH);
 
+    // Pop up a message to inform the user
+    QMessageBox::information(this, "Update Course", "Course information has been updated!", QMessageBox::Ok);
+}
 
+// Select a course in the table & delete from datafile
+void MainWindow::on_btnDeleteCourse_clicked()
+{
+    // Get the selected course in the table widget
+    int selectedRow = ui->tableCourses->currentRow();
+    if (selectedRow < 0) {
+        QMessageBox::warning(this, "No Data Selected", "Please select a course to delete!", QMessageBox::Ok);
+        return;
+    }
 
+    // Get course object
+    Course selectedCourse = db->courseList[selectedRow];
 
+    // Open 'Delete Course Confirmation' message box
+    QMessageBox::StandardButton reply;
+    reply = QMessageBox::question(this, "Delete Confirmation", "Are you sure you want to delete this course?", QMessageBox::Yes | QMessageBox::No);
 
+    // Check if user wants to delete
+    if (reply == QMessageBox::Yes)
+    {
+        // Delete the course from the database
+        db->deleteFromCourseList(selectedCourse);
 
+        // Immediately save to datafile
+        db->exportCourseList(COURSE_FILE_PATH);
 
+        // Remove from table widget
+        ui->tableCourses->removeRow(selectedRow);
 
-
-
-
-
-
-
-
-
-
+        // Pop up a message to inform the user
+        QMessageBox::information(this, "Delete Course", "Course has been deleted!", QMessageBox::Ok);
+    }
+}
 
 
 

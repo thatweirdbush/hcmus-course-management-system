@@ -52,7 +52,7 @@
      <string notr="true"/>
     </property>
     <property name="currentIndex">
-     <number>2</number>
+     <number>3</number>
     </property>
     <widget class="QWidget" name="pageSignIn">
      <widget class="QFrame" name="leftFrame">
@@ -2326,6 +2326,53 @@ border: none;
       </property>
       <property name="text">
        <string>Back</string>
+      </property>
+      <property name="autoDefault">
+       <bool>false</bool>
+      </property>
+      <property name="default">
+       <bool>false</bool>
+      </property>
+      <property name="flat">
+       <bool>false</bool>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="btnDeleteCourse">
+      <property name="geometry">
+       <rect>
+        <x>750</x>
+        <y>540</y>
+        <width>125</width>
+        <height>45</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Segoe UI Semibold</family>
+        <pointsize>11</pointsize>
+        <italic>false</italic>
+        <bold>false</bold>
+        <kerning>true</kerning>
+       </font>
+      </property>
+      <property name="cursor">
+       <cursorShape>PointingHandCursor</cursorShape>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton#btnDeleteCourse {
+background-color: rgb(255, 196, 54);
+color: rgb(0, 0, 0);
+border: none;
+}
+
+QPushButton#btnDeleteCourse:hover {
+background-color: rgb(229, 176, 48);
+color: rgb(0, 0, 0);
+border: none;
+}</string>
+      </property>
+      <property name="text">
+       <string>Delete</string>
       </property>
       <property name="autoDefault">
        <bool>false</bool>

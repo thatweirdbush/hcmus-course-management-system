@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include "Database.h"
+#include "qshortcut.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -36,6 +37,8 @@ public:
     ~MainWindow();
 
 private slots:
+    void loadPageSignIn();
+
     void on_btnRegister_clicked();
 
     void on_btnForgotPassword_clicked();
@@ -78,6 +81,10 @@ private slots:
 
     void on_btnScoreboardOfClass_clicked();
 
+    void on_tableCourses_itemChanged(QTableWidgetItem *item);
+
+    void on_btnDeleteCourse_clicked();
+
 private:
     // Page Loaders
     void loadPageProfileInfo_Staff();
@@ -89,6 +96,7 @@ private:
 private:
     Ui::MainWindow *ui;
     Database *db;
+    QShortcut *shortcut;
 
     Account *currentAccount;
     Student *currentStudent;

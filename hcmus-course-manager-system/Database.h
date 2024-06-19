@@ -16,7 +16,6 @@
 #include "Set.h"
 #include "qtablewidget.h"
 
-
 // Define const file path
 const QString COURSE_FILE_PATH = "course.csv";
 const QString STUDENT_FILE_PATH = "student.csv";

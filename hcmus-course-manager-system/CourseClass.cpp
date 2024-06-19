@@ -25,6 +25,25 @@ std::string dayOfWeekToString(DayOfWeek dayOfWeek) {
     }
 }
 
+// Convert string to Session
+Session stringToSession(std::string session) {
+    if (session == "S1") return Session::S1;
+    if (session == "S2") return Session::S2;
+    if (session == "S3") return Session::S3;
+    else return Session::S4;
+}
+
+// Convert string to DayOfWeek
+DayOfWeek stringToDayOfWeek(std::string dayOfWeek) {
+    if (dayOfWeek == "MON") return DayOfWeek::MON;
+    if (dayOfWeek == "TUE") return DayOfWeek::TUE;
+    if (dayOfWeek == "WED") return DayOfWeek::WED;
+    if (dayOfWeek == "THU") return DayOfWeek::THU;
+    if (dayOfWeek == "FRI") return DayOfWeek::FRI;
+    else return DayOfWeek::SAT;
+}
+
+
 /*****************************************
 // Implementation Class: Course
 ******************************************/
@@ -86,17 +105,8 @@ std::istream& operator>>(std::istream& is, Course& course) {
     std::getline(ss, dayOfWeekStr, CSV_DELIMITER);
     std::getline(ss, sessionStr, CSV_DELIMITER);
 
-    if (dayOfWeekStr == "MON") dayOfWeek = DayOfWeek::MON;
-    else if (dayOfWeekStr == "TUE") dayOfWeek = DayOfWeek::TUE;
-    else if (dayOfWeekStr == "WED") dayOfWeek = DayOfWeek::WED;
-    else if (dayOfWeekStr == "THU") dayOfWeek = DayOfWeek::THU;
-    else if (dayOfWeekStr == "FRI") dayOfWeek = DayOfWeek::FRI;
-    else if (dayOfWeekStr == "SAT") dayOfWeek = DayOfWeek::SAT;
-
-    if (sessionStr == "S1") session = Session::S1;
-    else if (sessionStr == "S2") session = Session::S2;
-    else if (sessionStr == "S3") session = Session::S3;
-    else if (sessionStr == "S4") session = Session::S4;
+    dayOfWeek = stringToDayOfWeek(dayOfWeekStr);
+    session = stringToSession(sessionStr);
 
     course.setCourseID(std::stoi(courseID));
     course.setCourseName(courseName);

@@ -37,6 +37,13 @@ std::string sessionToString(Session session);
 // Convert DayOfWeek to string
 std::string dayOfWeekToString(DayOfWeek dayOfWeek);
 
+// Convert string to Session
+Session stringToSession(std::string session);
+
+// Convert string to DayOfWeek
+DayOfWeek stringToDayOfWeek(std::string dayOfWeek);
+
+
 /*****************************************
 // Define Class: Course
 ******************************************/
