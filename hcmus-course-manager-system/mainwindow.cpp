@@ -4,6 +4,8 @@
 
 #include <QDesktopServices>
 #include <QMessageBox>
+#include <QListWidgetItem>
+#include <QDialog>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -220,7 +222,7 @@ void MainWindow::on_btnCourses_ProfileInfo_Staff_clicked()
     connect(ui->tableCourses, SIGNAL(itemChanged(QTableWidgetItem*)), this, SLOT(on_tableCourses_itemChanged(QTableWidgetItem*)));
 
     // Go to Course page using stack widget
-    ui->stackedWidget->setCurrentIndex(int(Page::Courses_Staff));
+    ui->stackedWidget->setCurrentIndex(int(Page::Course_Staff));
 }
 
 // Go to Semester page using stack widget
@@ -446,7 +448,6 @@ void MainWindow::on_btnScoreboardOfClass_clicked()
 // Go back to Scoreboard page using stack widget - From Scoreboard Of Course page
 void MainWindow::on_btnBackToScoreboard_Staff_clicked()
 {
-    // Go back to Scoreboard page using stack widget
     ui->stackedWidget->setCurrentIndex(int(Page::Scoreboard_Staff));
 }
 
@@ -458,7 +459,6 @@ void MainWindow::on_btnBackToScoreboard_Staff_clicked()
 // Go back to Scoreboard page using stack widget - From Scoreboard Of Class page
 void MainWindow::on_btnBackToScoreboard_Staff_2_clicked()
 {
-    // Go back to Scoreboard page using stack widget
     ui->stackedWidget->setCurrentIndex(int(Page::Scoreboard_Staff));
 }
 
@@ -542,6 +542,113 @@ void MainWindow::on_btnDeleteCourse_clicked()
 }
 
 
+/**************************************************************
+* Implement Page - Course_Staff - Student_In_Course
+*
+***************************************************************/
+// Go back to Course page using stack widget
+void MainWindow::on_btnBackToCourse_Staff_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(int(Page::Course_Staff));
+}
+
+
+/**************************************************************
+* Implement Page - Class_Staff - Student_In_Class
+*
+***************************************************************/
+// Go back to Class page using stack widget
+void MainWindow::on_btnBackToClass_Staff_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(int(Page::Class_Staff));
+}
+
+
+
+
+
+
+
+
+
+/**************************************************************
+* Implement Page - Procedure - Start_School_Year
+*
+***************************************************************/
+// Procedure - Start School Year
+void MainWindow::on_btnStartSchoolYear_clicked()
+{
+    // Open 'Start School Year Confirmation' message box
+    QMessageBox::StandardButton reply;
+    reply = QMessageBox::question(this, "Start School Year Confirmation", "Are you sure you want to start a new school year?", QMessageBox::Yes | QMessageBox::No);
+
+    // Check if user wants to start a new school year
+    if (reply == QMessageBox::Yes)
+    {
+        // // Update the school year
+        // db->schoolYear++;
+
+        // // Immediately save to datafile
+        // db->exportSchoolYear(SCHOOL_YEAR_FILE_PATH);
+
+        // Pop up a message to inform the user
+        // QMessageBox::information(this, "Start School Year", "A new school year has started!", QMessageBox::Ok);
+
+        // Go to Start_School_Year page using stack widget
+        ui->stackedWidget->setCurrentIndex(int(Page::StartSchoolYear));
+    }
+}
+
+// Go back to Profile page using stack widget
+void MainWindow::on_btnBackToProfile_6_clicked()
+{
+    loadPageProfileInfo_Staff();
+}
+
+// Add new class to the list
+void MainWindow::on_btnAddNewClass_clicked()
+{
+    // Remove leading/trailing spaces
+    QString className = ui->txtClassName->text().trimmed();
+    if (className.isEmpty()) {
+        QMessageBox::warning(this, "Invalid Input", "Please enter a class name!", QMessageBox::Ok);
+        return;
+    }
+
+    // Check for duplicate entry
+    for (int i = 0; i < ui->listNewClasses->count(); ++i) {
+        QListWidgetItem* item = ui->listNewClasses->item(i);
+        if (item && item->text() == className) {
+            QMessageBox::warning(this, "Duplicate Entry", "Class name already exists in the list!", QMessageBox::Ok);
+            return;
+        }
+    }
+
+    // Add to list widget
+    QListWidgetItem* item = new QListWidgetItem(className, ui->listNewClasses);
+    item->setFlags(item->flags() | Qt::ItemIsEditable);
+    ui->listNewClasses->addItem(item);
+
+    ui->txtClassName->clear();
+    ui->txtClassName->setFocus();
+}
+
+// Remove selected school year from the list
+void MainWindow::on_btnRemoveSchoolYear_clicked()
+{
+    int currentRow = ui->listNewClasses->currentRow();
+    if (currentRow < 0 || currentRow >= ui->listNewClasses->count())
+        return;
+
+    QListWidgetItem* item = ui->listNewClasses->takeItem(currentRow);
+    delete item;
+}
+
+// Remove all school years from the list
+void MainWindow::on_btnRemoveAllSchoolYear_clicked()
+{
+    ui->listNewClasses->clear();
+}
 
 
 

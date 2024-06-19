@@ -16,13 +16,19 @@ enum class Page
     SignIn = 0,
     ProfileInfo_Student = 1,
     ProfileInfo_Staff = 2,
-    Courses_Staff = 3,
+    Course_Staff = 3,
     Account_Staff = 4,
     Semester_Staff = 5,
     Class_Staff = 6,
     Scoreboard_Staff = 7,
     ScoreboardOfCourse = 8,
-    ScoreboardOfClass = 9
+    ScoreboardOfClass = 9,
+    StudentInClass = 10,
+    StudentInCourse = 11,
+    StartSchoolYear = 12,
+    StartSemester = 13,
+    EndSemester = 14,
+    Others = 15
 };
 
 
@@ -84,6 +90,20 @@ private slots:
     void on_tableCourses_itemChanged(QTableWidgetItem *item);
 
     void on_btnDeleteCourse_clicked();
+
+    void on_btnBackToCourse_Staff_clicked();
+
+    void on_btnBackToClass_Staff_clicked();
+
+    void on_btnStartSchoolYear_clicked();
+
+    void on_btnBackToProfile_6_clicked();
+
+    void on_btnAddNewClass_clicked();
+
+    void on_btnRemoveSchoolYear_clicked();
+
+    void on_btnRemoveAllSchoolYear_clicked();
 
 private:
     // Page Loaders
