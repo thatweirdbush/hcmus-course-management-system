@@ -5,6 +5,7 @@
 ******************************************/
 // Constructor
 Semester::Semester() {
+    semesterID = 0;
     no = 0;
     schoolYear = 0;
     startDate = Date();
@@ -15,7 +16,8 @@ Semester::Semester() {
 Semester::~Semester() {}
 
 // Constructor with parameters
-Semester::Semester(int no, int schoolYear, Date startDate, Date endDate) {
+Semester::Semester(int semesterID, int no, int schoolYear, Date startDate, Date endDate) {
+    this->semesterID = semesterID;
     this->no = no;
     this->schoolYear = schoolYear;
     this->startDate = startDate;
@@ -24,6 +26,7 @@ Semester::Semester(int no, int schoolYear, Date startDate, Date endDate) {
 
 // Copy constructor
 Semester::Semester(const Semester& semester) {
+    this->semesterID = semester.semesterID;
     this->no = semester.no;
     this->schoolYear = semester.schoolYear;
     this->startDate = semester.startDate;
@@ -32,6 +35,7 @@ Semester::Semester(const Semester& semester) {
 
 // Assignment operator
 Semester& Semester::operator=(const Semester& semester) {
+    this->semesterID = semester.semesterID;
     this->no = semester.no;
     this->schoolYear = semester.schoolYear;
     this->startDate = semester.startDate;
@@ -39,62 +43,34 @@ Semester& Semester::operator=(const Semester& semester) {
     return *this;
 }
 
-// Getters
-int Semester::getNo() const {
-    return no;
-}
-
-int Semester::getSchoolYear() const {
-    return schoolYear;
-}
-
-Date Semester::getStartDate() const {
-    return startDate;
-}
-
-Date Semester::getEndDate() const {
-    return endDate;
-}
-
-// Setters
-void Semester::setNo(int no) {
-    this->no = no;
-}
-
-void Semester::setSchoolYear(int schoolYear) {
-    this->schoolYear = schoolYear;
-}
-
-void Semester::setStartDate(Date startDate) {
-    this->startDate = startDate;
-}
-
-void Semester::setEndDate(Date endDate) {
-    this->endDate = endDate;
-}
-
-// Input/Output Operator Methods
+// Input Operator Methods
 std::ostream& operator<<(std::ostream& os, const Semester& semester) {
-    os << semester.no << CSV_DELIMITER << semester.schoolYear << CSV_DELIMITER;
-    os << semester.startDate << CSV_DELIMITER << semester.endDate << CSV_DELIMITER << "\n";
+    os << semester.semesterID << CSV_DELIMITER << semester.no << CSV_DELIMITER << semester.schoolYear << CSV_DELIMITER;
+    os << semester.startDate << CSV_DELIMITER << semester.endDate << "\n";
     return os;
 }
 
+// Output Operator Methods
 std::istream& operator>>(std::istream& is, Semester& semester) {
     std::string line;
     std::getline(is, line);
-    std::stringstream ss(line);
 
-    std::string no, schoolYear, startDate, endDate;
+    if (line.empty()) return is;
+
+    std::stringstream ss(line);
+    std::string id, no, schoolYear, startDate, endDate;
+
+    std::getline(ss, id, CSV_DELIMITER);
     std::getline(ss, no, CSV_DELIMITER);
     std::getline(ss, schoolYear, CSV_DELIMITER);
     std::getline(ss, startDate, CSV_DELIMITER);
     std::getline(ss, endDate, CSV_DELIMITER);
 
-    semester.no = std::stoi(no);
-    semester.schoolYear = std::stoi(schoolYear);
-    semester.startDate = Date(startDate);
-    semester.endDate = Date(endDate);
+    semester.setSemesterID(std::stoi(id));
+    semester.setNo(std::stoi(no));
+    semester.setSchoolYear(std::stoi(schoolYear));
+    semester.setStartDate(Date(startDate));
+    semester.setEndDate(Date(endDate));
 
     return is;
 }

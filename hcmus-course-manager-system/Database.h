@@ -12,7 +12,9 @@
 #include "StudentClass.h"
 #include "ScoreboardClass.h"
 #include "StaffClass.h"
+#include "ClassClass.h"
 #include "Set.h"
+#include "qtablewidget.h"
 
 
 // Define const file path
@@ -22,6 +24,7 @@ const QString SCOREBOARD_FILE_PATH = "scoreboard.csv";
 const QString SEMESTER_FILE_PATH = "semester.csv";
 const QString STAFF_FILE_PATH = "staff.csv";
 const QString ACCOUNT_FILE_PATH = "account.csv";
+const QString CLASS_FILE_PATH = "class.csv";
 
 
 class Database {
@@ -32,12 +35,10 @@ public:
     Set<Student> studentList;
     Set<Staff> staffList;
     Set<Scoreboard> scoreboardList;
+    Set<Class> classList;
 
 public:
-    // Constructors
     Database();
-
-    // Destructor
     ~Database();
 
 public:
@@ -58,18 +59,35 @@ public:
 
     void importScoreboardList(QString filename);
 
+    void importClassList(QString filename);
+
 public:
-    // Search functions
+    // Load Data Context To Table Widget
+    void loadCourseList(QTableWidget* table);
+
+    void loadStudentList(QTableWidget* table);
+
+    void loadStaffList(QTableWidget* table);
+
+    void loadScoreboardList(QTableWidget* table);
+
+    void loadSemesterList(QTableWidget* table);
+
+    void loadAccountList(QTableWidget* table);
+
+    void loadClassList(QTableWidget* table);
+
+public:
+    // Search functions - return index of object in list
     Student getStudentByID(int studentID);
 
     Staff getStaffByID(int staffID);
 
     Course getCourseByID(int courseID);
 
-    Set<Scoreboard> getScoreboardListByCourseID(int courseID);
-
 public:
-
+    // Search functions - return all objects in list
+    Set<Scoreboard> getScoreboardListByCourseID(int courseID);
 
 };
 #endif // DATABASE_H

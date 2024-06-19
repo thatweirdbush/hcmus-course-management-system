@@ -15,7 +15,7 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
-    // Go to default page 'Sign In' using stack widget
+    // Display default page 'Sign In' using stack widget
     ui->stackedWidget->setCurrentIndex(int(Page::SignIn));
 }
 
@@ -23,6 +23,8 @@ MainWindow::~MainWindow()
 {
     delete ui;
     delete db;
+
+    // Free memory of current account, student/staff
     if (currentAccount != nullptr)
         delete currentAccount;
     if (currentStudent != nullptr)
@@ -31,16 +33,18 @@ MainWindow::~MainWindow()
         delete currentStaff;
 }
 
+/**************************************************************
+* Implement Default Page - SignIn
+*
+***************************************************************/
 void MainWindow::on_btnRegister_clicked()
 {
     // // Open default website
     // QDesktopServices::openUrl(QUrl("https://hcmus.edu.vn"));
 
-    /// For easy debug
+    // For easy debug
     // Go to Account List page using stack widget
-    // loadAccountList();
-    loadStudentList();
-    ui->stackedWidget->setCurrentIndex(4);
+    db->loadAccountList(ui->tableAccounts);
 }
 
 void MainWindow::on_btnForgotPassword_clicked()
@@ -110,171 +114,10 @@ void MainWindow::on_btnSignIn_clicked()
     // ui->stackedWidget->setCurrentIndex(int(Page::ProfileInfo_Staff));
 }
 
-void MainWindow::on_btnSignOut_ProfileInfo_Student_clicked()
-{
-    // Open 'Sign Out' message box
-    QMessageBox::StandardButton reply;
-    reply = QMessageBox::question(this, "Sign Out", "Are you sure you want to sign out?", QMessageBox::Yes | QMessageBox::No);
-
-    // Check if user wants to sign out
-    if (reply == QMessageBox::Yes)
-    {
-        // Free memory of current account, student/staff
-        if (currentAccount != nullptr)
-            delete currentAccount;
-        if (currentStudent != nullptr)
-            delete currentStudent;
-        if (currentStaff != nullptr)
-            delete currentStaff;
-
-        currentAccount = nullptr;
-        currentStudent = nullptr;
-        currentStaff= nullptr;
-
-        // Go to Sign In page using stack widget
-        ui->stackedWidget->setCurrentIndex(int(Page::SignIn));
-    }
-}
-
-
-void MainWindow::on_btnSignOut_ProfileInfo_Staff_clicked()
-{
-    // Open 'Sign Out' message box
-    QMessageBox::StandardButton reply;
-    reply = QMessageBox::question(this, "Sign Out", "Are you sure you want to sign out?", QMessageBox::Yes | QMessageBox::No);
-
-    // Check if user wants to sign out
-    if (reply == QMessageBox::Yes)
-    {
-        // Go to Sign In page using stack widget
-        ui->stackedWidget->setCurrentIndex(int(Page::SignIn));
-    }
-}
-
-void MainWindow::on_btnEdit_ProfileInfo_Staff_clicked()
-{
-    // Open a new window to change password
-    ChangePassword *changePasswordForm = new ChangePassword(this);
-    connect(changePasswordForm, &ChangePassword::passwordChanged, this, &MainWindow::on_changePassword);
-    changePasswordForm->show();
-}
-
-void MainWindow::on_btnEdit_ProfileInfo_Student_clicked()
-{
-    // Open a new window to change password
-    ChangePassword *changePasswordForm = new ChangePassword(this);
-    connect(changePasswordForm, &ChangePassword::passwordChanged, this, &MainWindow::on_changePassword);
-    changePasswordForm->show();
-}
-
-void MainWindow::on_changePassword(const QString &newPassword)
-{
-    // Update password to label
-    ui->lableTestPassword->setText(newPassword);
-}
-
-
-void MainWindow::on_btnCourses_ProfileInfo_Staff_clicked()
-{
-    // Go to Course page using stack widget
-    loadCourseList();
-    ui->stackedWidget->setCurrentIndex(int(Page::Courses_Staff));
-}
-
-void MainWindow::loadCourseList()
-{
-    // Create a list of courses
-    Vector<Course> courseList;
-
-    // Add courses to the list
-    readCoursesFromFile(COURSE_FILE_PATH, courseList);
-
-    // Display courses in the table
-    ui->tableCourses->setRowCount(courseList.size());
-    ui->tableCourses->setColumnCount(8);
-
-    // Set table headers
-    ui->tableCourses->setHorizontalHeaderItem(0, new QTableWidgetItem("Course ID"));
-    ui->tableCourses->setHorizontalHeaderItem(1, new QTableWidgetItem("Course Name"));
-    ui->tableCourses->setHorizontalHeaderItem(2, new QTableWidgetItem("Class Name"));
-    ui->tableCourses->setHorizontalHeaderItem(3, new QTableWidgetItem("Teacher Name"));
-    ui->tableCourses->setHorizontalHeaderItem(4, new QTableWidgetItem("Credits"));
-    ui->tableCourses->setHorizontalHeaderItem(5, new QTableWidgetItem("Max Students"));
-    ui->tableCourses->setHorizontalHeaderItem(6, new QTableWidgetItem("Day of Week"));
-    ui->tableCourses->setHorizontalHeaderItem(7, new QTableWidgetItem("Session"));
-
-    // Display courses in the table
-    for (int i = 0; i < courseList.size(); i++)
-    {
-        Course course = courseList[i];
-        ui->tableCourses->setItem(i, 0, new QTableWidgetItem(QString::number(course.getCourseID())));
-        ui->tableCourses->setItem(i, 1, new QTableWidgetItem(QString::fromStdString(course.getCourseName())));
-        ui->tableCourses->setItem(i, 2, new QTableWidgetItem(QString::fromStdString(course.getClassName())));
-        ui->tableCourses->setItem(i, 3, new QTableWidgetItem(QString::fromStdString(course.getTeacherName())));
-        ui->tableCourses->setItem(i, 4, new QTableWidgetItem(QString::number(course.getNumOfCredits())));
-        ui->tableCourses->setItem(i, 5, new QTableWidgetItem(QString::number(course.getMaxStudents())));
-        ui->tableCourses->setItem(i, 6, new QTableWidgetItem(QString::fromStdString(dayOfWeekToString(course.getDayOfWeek()))));
-        ui->tableCourses->setItem(i, 7, new QTableWidgetItem(QString::fromStdString(sessionToString(course.getSession()))));
-    }
-}
-
-void MainWindow::loadAccountList()
-{
-    db->accountList;
-
-    // Display courses in the table
-    ui->tableAccount->setRowCount(db->accountList.size());
-    ui->tableAccount->setColumnCount(4);
-
-    // Set table headers
-    ui->tableAccount->setHorizontalHeaderItem(0, new QTableWidgetItem("Account ID"));
-    ui->tableAccount->setHorizontalHeaderItem(1, new QTableWidgetItem("Staff/Student ID"));
-    ui->tableAccount->setHorizontalHeaderItem(2, new QTableWidgetItem("Username"));
-    ui->tableAccount->setHorizontalHeaderItem(3, new QTableWidgetItem("Password"));
-
-    // Display courses in the table
-    for (int i = 0; i < db->accountList.size(); i++)
-    {
-        Account account = db->accountList[i];
-        ui->tableAccount->setItem(i, 0, new QTableWidgetItem(QString::number(account.getAccountID())));
-        ui->tableAccount->setItem(i, 1, new QTableWidgetItem(QString::number(account.getStaffOrStudentID())));
-        ui->tableAccount->setItem(i, 2, new QTableWidgetItem(QString::fromStdString(account.getUsername())));
-        ui->tableAccount->setItem(i, 3, new QTableWidgetItem(QString::fromStdString(account.getPassword())));
-    }
-}
-
-void MainWindow::loadStudentList()
-{
-    db->studentList;
-
-    // Display courses in the table
-    ui->tableAccount->setRowCount(db->studentList.size());
-    ui->tableAccount->setColumnCount(7);
-
-    // Set table headers
-    ui->tableAccount->setHorizontalHeaderItem(0, new QTableWidgetItem("No"));
-    ui->tableAccount->setHorizontalHeaderItem(1, new QTableWidgetItem("Student ID"));
-    ui->tableAccount->setHorizontalHeaderItem(2, new QTableWidgetItem("First name"));
-    ui->tableAccount->setHorizontalHeaderItem(3, new QTableWidgetItem("Last Name"));
-    ui->tableAccount->setHorizontalHeaderItem(4, new QTableWidgetItem("Gender"));
-    ui->tableAccount->setHorizontalHeaderItem(5, new QTableWidgetItem("Birth"));
-    ui->tableAccount->setHorizontalHeaderItem(6, new QTableWidgetItem("Social ID"));
-
-
-    // Display courses in the table
-    for (int i = 0; i < db->studentList.size(); i++)
-    {
-        Student student = db->studentList[i];
-        ui->tableAccount->setItem(i, 0, new QTableWidgetItem(QString::number(student.getClassID())));
-        ui->tableAccount->setItem(i, 1, new QTableWidgetItem(QString::number(student.getStudentID())));
-        ui->tableAccount->setItem(i, 2, new QTableWidgetItem(QString::fromStdString(student.getFirstName())));
-        ui->tableAccount->setItem(i, 3, new QTableWidgetItem(QString::fromStdString(student.getLastName())));
-        ui->tableAccount->setItem(i, 4, new QTableWidgetItem(QString::fromStdString(student.getGender())));
-        ui->tableAccount->setItem(i, 5, new QTableWidgetItem(QString::fromStdString(student.getDateOfBirth().toString())));
-        ui->tableAccount->setItem(i, 6, new QTableWidgetItem(QString::fromStdString(student.getSocialID())));
-    }
-}
-
+/**************************************************************
+* Implement Page - ProfileInfo_Staff
+*
+***************************************************************/
 void MainWindow::loadPageProfileInfo_Staff() {
     // Load staff info
     ui->lableUsernameHere_Staff->setText(QString::fromStdString(currentStaff->getFullName()));
@@ -289,6 +132,61 @@ void MainWindow::loadPageProfileInfo_Staff() {
     ui->stackedWidget->setCurrentIndex(int(Page::ProfileInfo_Staff));
 }
 
+void MainWindow::on_btnEdit_ProfileInfo_Staff_clicked()
+{
+    // Open a new window to change password
+    ChangePassword *changePasswordForm = new ChangePassword(this);
+    connect(changePasswordForm, &ChangePassword::passwordChanged, this, &MainWindow::on_changePassword);
+    changePasswordForm->show();
+}
+
+void MainWindow::on_btnSignOut_ProfileInfo_Staff_clicked()
+{
+    // Open 'Sign Out' message box
+    QMessageBox::StandardButton reply;
+    reply = QMessageBox::question(this, "Sign Out", "Are you sure you want to sign out?", QMessageBox::Yes | QMessageBox::No);
+
+    // Check if user wants to sign out
+    if (reply == QMessageBox::Yes)
+    {
+        // Free memory of current account, student/staff
+        if (currentAccount != nullptr)
+            delete currentAccount;
+        if (currentStaff != nullptr)
+            delete currentStaff;
+
+        currentAccount = nullptr;
+        currentStaff = nullptr;
+
+        // Go to Sign In page using stack widget
+        ui->stackedWidget->setCurrentIndex(int(Page::SignIn));
+    }
+}
+
+void MainWindow::on_changePassword(const QString &newPassword)
+{
+    // Update password to label
+    ui->lableTestPassword->setText(newPassword);
+}
+
+void MainWindow::on_btnCourses_ProfileInfo_Staff_clicked()
+{
+    // Go to Course page using stack widget
+    db->loadCourseList(ui->tableCourses);
+    ui->stackedWidget->setCurrentIndex(int(Page::Courses_Staff));
+}
+
+void MainWindow::on_btnSemester_ProfileInfo_Staff_clicked()
+{
+    // Go to Semester page using stack widget
+    db->loadSemesterList(ui->tableSemesters);
+    ui->stackedWidget->setCurrentIndex(int(Page::Semester_Staff));
+}
+
+/**************************************************************
+* Implement Page - ProfileInfo_Student
+*
+***************************************************************/
 void MainWindow::loadPageProfileInfo_Student() {
     // Load student info
     ui->labelUsernameHere_Student->setText(QString::fromStdString(currentStudent->getFullname()));
@@ -301,6 +199,36 @@ void MainWindow::loadPageProfileInfo_Student() {
     ui->stackedWidget->setCurrentIndex(int(Page::ProfileInfo_Student));
 }
 
+void MainWindow::on_btnEdit_ProfileInfo_Student_clicked()
+{
+    // Open a new window to change password
+    ChangePassword *changePasswordForm = new ChangePassword(this);
+    connect(changePasswordForm, &ChangePassword::passwordChanged, this, &MainWindow::on_changePassword);
+    changePasswordForm->show();
+}
+
+void MainWindow::on_btnSignOut_ProfileInfo_Student_clicked()
+{
+    // Open 'Sign Out' message box
+    QMessageBox::StandardButton reply;
+    reply = QMessageBox::question(this, "Sign Out", "Are you sure you want to sign out?", QMessageBox::Yes | QMessageBox::No);
+
+    // Check if user wants to sign out
+    if (reply == QMessageBox::Yes)
+    {
+        // Free memory of current account, student/staff
+        if (currentAccount != nullptr)
+            delete currentAccount;
+        if (currentStudent != nullptr)
+            delete currentStudent;
+
+        currentAccount = nullptr;
+        currentStudent = nullptr;
+
+        // Go to Sign In page using stack widget
+        ui->stackedWidget->setCurrentIndex(int(Page::SignIn));
+    }
+}
 
 
 
@@ -309,6 +237,10 @@ void MainWindow::loadPageProfileInfo_Student() {
 
 
 
+/**************************************************************
+* Implement Default Page - Courses_Staff
+*
+***************************************************************/
 
 
 
@@ -317,6 +249,10 @@ void MainWindow::loadPageProfileInfo_Student() {
 
 
 
+/**************************************************************
+* Implement Default Page - Courses_Student
+*
+***************************************************************/
 
 
 

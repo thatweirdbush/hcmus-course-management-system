@@ -61,28 +61,15 @@ public:
 	}
 
 public:
-	// Setters
-	void setDay(int day) {
-		this->day = day;
-	}
-	void setMonth(int month) {
-		this->month = month;
-	}
-	void setYear(int year) {
-		this->year = year;
-	}
+    // Getters
+    int getDay() const { return day; }
+    int getMonth() const { return month; }
+    int getYear() const { return year; }
 
-	// Getters
-	int 
-		getDay() const {
-		return day;
-	}
-	int getMonth() const {
-		return month;
-	}
-	int getYear() const {
-		return year;
-	}
+	// Setters
+    void setDay(int day) { this->day = day;	}
+    void setMonth(int month) { this->month = month;	}
+    void setYear(int year) { this->year = year;	}
 
 	// Compare Methods
 	bool operator==(const Date& date) const {
@@ -129,7 +116,7 @@ public:
 	}
 
 	friend std::ostream& operator<<(std::ostream& os, const Date& date) {
-		os << date.day << '/' << date.month << '/' << date.year << "\n";
+		os << date.day << '/' << date.month << '/' << date.year;
 		return os;
 	}
 };

@@ -15,7 +15,9 @@ enum class Page
     SignIn = 0,
     ProfileInfo_Student = 1,
     ProfileInfo_Staff = 2,
-    Courses_Staff = 3
+    Courses_Staff = 3,
+    Courses_Student = 4,
+    Semester_Staff = 5,
 };
 
 
@@ -48,22 +50,19 @@ private slots:
 
     void on_btnCourses_ProfileInfo_Staff_clicked();
 
+    void on_btnSemester_ProfileInfo_Staff_clicked();
+
 private:
     // Page Loaders
     void loadPageProfileInfo_Staff();
+
     void loadPageProfileInfo_Student();
-    void loadStudentList();
-
-
-public:
-    void loadCourseList();
-    void loadAccountList();
 
 private:
     Ui::MainWindow *ui;
     Database *db;
-    Account *currentAccount;
 
+    Account *currentAccount;
     Student *currentStudent;
     Staff *currentStaff;
 };
