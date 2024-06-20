@@ -15,6 +15,7 @@ MainWindow::MainWindow(QWidget *parent)
     , currentAccount(nullptr)
     , currentStudent(nullptr)
     , currentStaff(nullptr)
+    , newStudentList()
 
 {
     ui->setupUi(this);
@@ -35,6 +36,8 @@ MainWindow::~MainWindow()
         delete currentStudent;
     if (currentStaff != nullptr)
         delete currentStaff;
+
+    newStudentList.clear();
 }
 
 
@@ -62,7 +65,7 @@ void MainWindow::on_btnRegister_clicked()
 
     /// For easy debug
     /// Go to Account List page using stack widget
-    db->loadAccountList(ui->tableAccounts);
+    db->loadAccountList(ui->tableAccounts, db->accountList);
     ui->stackedWidget->setCurrentIndex(int(Page::Account_Staff));
 }
 
@@ -203,10 +206,10 @@ void MainWindow::on_changePassword(const QString &newPassword)
 {
     // Update password to current account and the one in the datafile
     currentAccount->setPassword(newPassword.toStdString());
-    db->updateAccountList(*currentAccount);
+    db->updateAccountList(*currentAccount, db->accountList);
 
     // Immediately save to data file
-    db->exportAccountList(ACCOUNT_FILE_PATH);
+    db->exportAccountList(ACCOUNT_FILE_PATH, db->accountList);
 }
 
 // Go to Course page using stack widget
@@ -216,7 +219,7 @@ void MainWindow::on_btnCourses_ProfileInfo_Staff_clicked()
     disconnect(ui->tableCourses, SIGNAL(itemChanged(QTableWidgetItem*)), this, SLOT(on_tableCourses_itemChanged(QTableWidgetItem*)));
 
     // Load course list
-    db->loadCourseList(ui->tableCourses);
+    db->loadCourseList(ui->tableCourses, db->courseList);
 
     // Reconnect the itemChanged signal after loading the data
     connect(ui->tableCourses, SIGNAL(itemChanged(QTableWidgetItem*)), this, SLOT(on_tableCourses_itemChanged(QTableWidgetItem*)));
@@ -228,14 +231,14 @@ void MainWindow::on_btnCourses_ProfileInfo_Staff_clicked()
 // Go to Semester page using stack widget
 void MainWindow::on_btnSemester_ProfileInfo_Staff_clicked()
 {
-    db->loadSemesterList(ui->tableSemesters);
+    db->loadSemesterList(ui->tableSemesters, db->semesterList);
     ui->stackedWidget->setCurrentIndex(int(Page::Semester_Staff));
 }
 
 // Go to Class page using stack widget
 void MainWindow::on_btnClass_ProfileInfo_Staff_clicked()
 {
-    db->loadClassList(ui->tableClasses);
+    db->loadClassList(ui->tableClasses, db->classList);
     ui->stackedWidget->setCurrentIndex(int(Page::Class_Staff));
 }
 
@@ -501,7 +504,7 @@ void MainWindow::on_tableCourses_itemChanged(QTableWidgetItem *item)
     }
 
     // Immediately save to datafile
-    db->exportCourseList(COURSE_FILE_PATH);
+    db->exportCourseList(COURSE_FILE_PATH, db->courseList);
 
     // Pop up a message to inform the user
     QMessageBox::information(this, "Update Course", "Course information has been updated!", QMessageBox::Ok);
@@ -528,10 +531,10 @@ void MainWindow::on_btnDeleteCourse_clicked()
     if (reply == QMessageBox::Yes)
     {
         // Delete the course from the database
-        db->deleteFromCourseList(selectedCourse);
+        db->deleteFromCourseList(selectedCourse, db->courseList);
 
         // Immediately save to datafile
-        db->exportCourseList(COURSE_FILE_PATH);
+        db->exportCourseList(COURSE_FILE_PATH, db->courseList);
 
         // Remove from table widget
         ui->tableCourses->removeRow(selectedRow);
@@ -585,16 +588,6 @@ void MainWindow::on_btnStartSchoolYear_clicked()
     // Check if user wants to start a new school year
     if (reply == QMessageBox::Yes)
     {
-        // // Update the school year
-        // db->schoolYear++;
-
-        // // Immediately save to datafile
-        // db->exportSchoolYear(SCHOOL_YEAR_FILE_PATH);
-
-        // Pop up a message to inform the user
-        // QMessageBox::information(this, "Start School Year", "A new school year has started!", QMessageBox::Ok);
-
-        // Go to Start_School_Year page using stack widget
         ui->stackedWidget->setCurrentIndex(int(Page::StartSchoolYear));
     }
 }
@@ -633,8 +626,8 @@ void MainWindow::on_btnAddNewClass_clicked()
     ui->txtClassName->setFocus();
 }
 
-// Remove selected school year from the list
-void MainWindow::on_btnRemoveSchoolYear_clicked()
+// Remove selected class from the list
+void MainWindow::on_btnRemoveClass_clicked()
 {
     int currentRow = ui->listNewClasses->currentRow();
     if (currentRow < 0 || currentRow >= ui->listNewClasses->count())
@@ -644,27 +637,172 @@ void MainWindow::on_btnRemoveSchoolYear_clicked()
     delete item;
 }
 
-// Remove all school years from the list
-void MainWindow::on_btnRemoveAllSchoolYear_clicked()
+// Remove all classes from the list
+void MainWindow::on_btnRemoveAllClass_clicked()
 {
     ui->listNewClasses->clear();
 }
 
+// Save new classes with started school year & go to Page Add_Student_To_Class
+void MainWindow::on_btnNext_StartSchoolYear_clicked()
+{
+    // Get school year from Spin Box
+    int schoolYear = ui->spinBoxSchoolYear->value();
 
+    // Get newest classID in list
+    int newestID = db->classList.back().getClassID();
 
+    // Get new class object and insert to datafile's class list
+    for (int i = 0; i < ui->listNewClasses->count(); ++i) {
+        QListWidgetItem* item = ui->listNewClasses->item(i);
+        if (item) {
+            // Get class name
+            std::string className = item->text().toStdString();
 
+            // Create new class object, with increased classID
+            Class newClass(++newestID, className, schoolYear);
 
+            // Insert to datafile's class list
+            db->classList.insert(newClass);
+        }
+    }
+    // Immediately save to datafile
+    db->exportClassList(CLASS_FILE_PATH, db->classList);
 
+    // Pop up a message to inform the user
+    QString message = "New classes have been added! New school year is " + QString::number(schoolYear);
+    QMessageBox::information(this, "Start School Year", message, QMessageBox::Ok);
 
+    // Clear current page's components
+    ui->spinBoxSchoolYear->setValue(2021);
+    ui->listNewClasses->clear();
+    ui->txtClassName->clear();
 
+    // Load Page Start_School_Year_Next's components
+    loadPageStartSchoolYear_Next();
 
+    // Go to Add Student To Class page
+    ui->stackedWidget->setCurrentIndex(int(Page::StartSchoolYear_Next));
+}
 
+/**************************************************************
+* Implement Page - Procedure - Start_School_Year_Next
+*
+***************************************************************/
+// Go back to Start School Year page using stack widget
+void MainWindow::on_btnBackToStartSchoolYear_clicked()
+{
+    // Clear current page's components
+    ui->comboBoxStudentClass->clear();
+    ui->txtClassName_8->clear();
+    ui->tableNewStudentsInClass->clear();
 
+    // Go back to Start School Year page
+    ui->stackedWidget->setCurrentIndex(int(Page::StartSchoolYear));
+}
 
+// Load Page Start_School_Year_Next
+void MainWindow::loadPageStartSchoolYear_Next()
+{
+    // Load all classes to combobox
+    for (int i = 0; i < db->classList.size(); ++i) {
+        ui->comboBoxStudentClass->addItem(QString::fromStdString(db->classList[i].getClassName()));
+    }
 
+    // Set default class name for combo box - last class name
+    if (db->classList.size() > 0) {
+        ui->comboBoxStudentClass->setCurrentIndex(db->classList.size() - 1);
+    }
+}
 
+// Choose file to add students (from text box or file dialog)
+void MainWindow::on_btnAddFileStudent_clicked()
+{
+    // Get class name from combo box
+    QString className = ui->comboBoxStudentClass->currentText();
+    if (className.isEmpty()) {
+        QMessageBox::warning(this, "Invalid Input", "Please select a class!", QMessageBox::Ok);
+        return;
+    }
 
+    // Get file path from Dialog if filename text box is empty
+    QString filePath = ui->txtClassName_8->text();
 
+    // Check if filename text box is empty
+    if (filePath.isEmpty()) {
+        // Open file dialog to get file path
+        filePath = QFileDialog::getOpenFileName(this, "Open Student File", QDir::homePath(), "Text/CSV files (*.txt *.csv)");
+        if (filePath.isEmpty()) {
+            return;
+        }
+        // Update text box
+        ui->txtClassName_8->setText(filePath);
+    }
+    else {
+        // Check file path is valid from text box
+        if (!QFile::exists(filePath)) {
+            QMessageBox::warning(this, "Invalid Input", "File does not exist!", QMessageBox::Ok);
+            return;
+        }
+    }
+    try {
+        // Load student list from file
+        db->importStudentList(filePath, newStudentList);
+
+        // Add students to table widget
+        db->loadStudentList(ui->tableNewStudentsInClass, newStudentList);
+    } catch (...) {
+        QMessageBox::warning(this, "Error", "Invalid data file. Please try again!", QMessageBox::Ok);
+    }
+}
+
+// Remove selected student from the list
+void MainWindow::on_btnRemoveStudentInClass_clicked()
+{
+    // Get selected row
+    int selectedRow = ui->tableNewStudentsInClass->currentRow();
+    if (selectedRow < 0 || selectedRow >= ui->tableNewStudentsInClass->rowCount())
+        return;
+
+    // Remove selected row
+    ui->tableNewStudentsInClass->removeRow(selectedRow);
+
+    // Create temp student object
+    Student tempStudent = newStudentList[selectedRow];
+
+    // Remove from student list
+    db->deleteFromStudentList(tempStudent, newStudentList);
+}
+
+// Remove all students from the list
+void MainWindow::on_btnRemoveAllStudentInClass_clicked()
+{
+    // Clear table widget
+    ui->tableNewStudentsInClass->clearContents();
+
+    // Clear student list
+    newStudentList.clear();
+}
+
+void MainWindow::on_btnSave_StartSchoolYear_clicked()
+{
+    // Open message box to confirm
+    QMessageBox::StandardButton reply;
+    reply = QMessageBox::question(this, "Save Confirmation", "Are you sure you want to save these students to the class?", QMessageBox::Yes | QMessageBox::No);
+
+    if (reply == QMessageBox::Yes) {
+        // Open success message box
+        QMessageBox::information(this, "Save Success", "Students have been added to the class!", QMessageBox::Ok);
+
+        // Clear current page's components
+        ui->comboBoxStudentClass->clear();
+        ui->txtClassName_8->clear();
+        ui->tableNewStudentsInClass->clear();
+
+        // Go back to Profile page using stack widget
+        loadPageProfileInfo_Staff();
+    }
+}
 
 
 

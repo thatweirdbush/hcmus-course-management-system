@@ -15,11 +15,11 @@ class Class
 private:
     int classID;
     std::string className;
-    std::string roomNo;
+    int startedYear;
 
 public:
     Class();
-    Class(int classID, std::string className, std::string roomNo);
+    Class(int classID, std::string className, int startedYear);
     ~Class() {}
     Class(const Class& other);
     Class& operator=(const Class& other);
@@ -28,12 +28,12 @@ public:
     // Setters
     void setClassID(int classID) { this->classID = classID; }
     void setClassName(std::string className) { this->className = className; }
-    void setRoomNo(std::string roomNo) { this->roomNo = roomNo; }
+    void setStartedYear(int startedYear) { this->startedYear = startedYear; }
 
     // Getters
     int getClassID() { return classID; }
     std::string getClassName() { return className; }
-    std::string getRoomNo() { return roomNo; }
+    int getStartedYear() { return startedYear; }
 
 public:
     // Input/Output Operator Methods

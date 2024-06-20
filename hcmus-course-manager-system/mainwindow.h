@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QFileDialog>
 #include "Database.h"
 #include "qshortcut.h"
 
@@ -26,9 +27,10 @@ enum class Page
     StudentInClass = 10,
     StudentInCourse = 11,
     StartSchoolYear = 12,
-    StartSemester = 13,
-    EndSemester = 14,
-    Others = 15
+    StartSchoolYear_Next = 13,
+    StartSemester = 14,
+    EndSemester = 15,
+    Others = 16
 };
 
 
@@ -101,9 +103,21 @@ private slots:
 
     void on_btnAddNewClass_clicked();
 
-    void on_btnRemoveSchoolYear_clicked();
+    void on_btnRemoveClass_clicked();
 
-    void on_btnRemoveAllSchoolYear_clicked();
+    void on_btnRemoveAllClass_clicked();
+
+    void on_btnNext_StartSchoolYear_clicked();
+
+    void on_btnBackToStartSchoolYear_clicked();
+
+    void on_btnAddFileStudent_clicked();
+
+    void on_btnRemoveStudentInClass_clicked();
+
+    void on_btnRemoveAllStudentInClass_clicked();
+
+    void on_btnSave_StartSchoolYear_clicked();
 
 private:
     // Page Loaders
@@ -113,6 +127,8 @@ private:
 
     void loadPageProfileInfo_Student();
 
+    void loadPageStartSchoolYear_Next();
+
 private:
     Ui::MainWindow *ui;
     Database *db;
@@ -121,5 +137,8 @@ private:
     Account *currentAccount;
     Student *currentStudent;
     Staff *currentStaff;
+
+    // For Start School Year Procedure
+    Set<Student> newStudentList;
 };
 #endif // MAINWINDOW_H

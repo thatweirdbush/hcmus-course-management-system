@@ -46,51 +46,51 @@ public:
 
 public:
     // Import data from file
-    void importAccountList(QString filename);
+    void importAccountList(QString filename, Set<Account>& accountList);
 
-    void importCourseList(QString filename);
+    void importCourseList(QString filename, Set<Course>& courseList);
 
-    void importSemesterList(QString filename);
+    void importSemesterList(QString filename, Set<Semester>& semesterList);
 
-    void importStudentList(QString filename);
+    void importStudentList(QString filename, Set<Student>& studentList);
 
-    void importStaffList(QString filename);
+    void importStaffList(QString filename, Set<Staff>& staffList);
 
-    void importScoreboardList(QString filename);
+    void importScoreboardList(QString filename, Set<Scoreboard>& scoreboardList);
 
-    void importClassList(QString filename);
+    void importClassList(QString filename, Set<Class>& classList);
 
 public:
     // Export data to file
-    void exportAccountList(QString filename);
+    void exportAccountList(QString filename, Set<Account>& accountList);
 
-    void exportCourseList(QString filename);
+    void exportCourseList(QString filename, Set<Course>& courseList);
 
-    void exportSemesterList(QString filename);
+    void exportSemesterList(QString filename, Set<Semester>& semesterList);
 
-    void exportStudentList(QString filename);
+    void exportStudentList(QString filename, Set<Student>& studentList);
 
-    void exportStaffList(QString filename);
+    void exportStaffList(QString filename, Set<Staff>& staffList);
 
-    void exportScoreboardList(QString filename);
+    void exportScoreboardList(QString filename, Set<Scoreboard>& scoreboardList);
 
-    void exportClassList(QString filename);
+    void exportClassList(QString filename, Set<Class>& classList);
 
 public:
     // Load Data Context To Table Widget
-    void loadCourseList(QTableWidget* table);
+    void loadCourseList(QTableWidget* table, Set<Course>& courseList);
 
-    void loadStudentList(QTableWidget* table);
+    void loadStudentList(QTableWidget* table, Set<Student>& studentList);
 
-    void loadStaffList(QTableWidget* table);
+    void loadStaffList(QTableWidget* table, Set<Staff>& staffList);
 
     void loadScoreboardList(QTableWidget* table, Set<Scoreboard>& scoreboardList);
 
-    void loadSemesterList(QTableWidget* table);
+    void loadSemesterList(QTableWidget* table, Set<Semester>& semesterList);
 
-    void loadAccountList(QTableWidget* table);
+    void loadAccountList(QTableWidget* table, Set<Account>& accountList);
 
-    void loadClassList(QTableWidget* table);
+    void loadClassList(QTableWidget* table, Set<Class>& classList);
 
 public:
     // Search functions - return index of object in list
@@ -102,35 +102,35 @@ public:
 
 public:
     // Update data to the database's attributes
-    void updateCourseList(Course course);
+    void updateCourseList(Course course, Set<Course>& courseList);
 
-    void updateStudentList(Student student);
+    void updateStudentList(Student student, Set<Student>& studentList);
 
-    void updateStaffList(Staff staff);
+    void updateStaffList(Staff staff, Set<Staff>& staffList);
 
-    void updateScoreboardList(Scoreboard scoreboard);
+    void updateScoreboardList(Scoreboard scoreboard, Set<Scoreboard>& scoreboardList);
 
-    void updateSemesterList(Semester semester);
+    void updateSemesterList(Semester semester, Set<Semester>& semesterList);
 
-    void updateAccountList(Account account);
+    void updateAccountList(Account account, Set<Account>& accountList);
 
-    void updateClassList(Class classObj);
+    void updateClassList(Class classObj, Set<Class>& classList);
 
 public:
     // Delete data from the database's attributes
-    void deleteFromCourseList(Course course);
+    void deleteFromCourseList(Course course, Set<Course>& courseList);
 
-    void deleteFromStudentList(Student student);
+    void deleteFromStudentList(Student student, Set<Student>& studentList);
 
-    void deleteFromStaffList(Staff staff);
+    void deleteFromStaffList(Staff staff, Set<Staff>& staffList);
 
-    void deleteFromScoreboardList(Scoreboard scoreboard);
+    void deleteFromScoreboardList(Scoreboard scoreboard, Set<Scoreboard>& scoreboardList);
 
-    void deleteFromSemesterList(Semester semester);
+    void deleteFromSemesterList(Semester semester, Set<Semester>& semesterList);
 
-    void deleteFromAccountList(Account account);
+    void deleteFromAccountList(Account account, Set<Account>& accountList);
 
-    void deleteFromClassList(Class classObj);
+    void deleteFromClassList(Class classObj, Set<Class>& classList);
 
 public:
     // Search functions - return all objects in list

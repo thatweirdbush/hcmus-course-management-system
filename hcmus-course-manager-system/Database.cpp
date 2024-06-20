@@ -7,24 +7,24 @@
 ******************************************/
 // Constructor: Load all data files
 Database::Database() {
-    importAccountList(ACCOUNT_FILE_PATH);
-    importCourseList(COURSE_FILE_PATH);
-    importSemesterList(SEMESTER_FILE_PATH);
-    importStudentList(STUDENT_FILE_PATH);
-    importStaffList(STAFF_FILE_PATH);
-    importScoreboardList(SCOREBOARD_FILE_PATH);
-    importClassList(CLASS_FILE_PATH);
+    importAccountList(ACCOUNT_FILE_PATH, accountList);
+    importCourseList(COURSE_FILE_PATH, courseList);
+    importSemesterList(SEMESTER_FILE_PATH, semesterList);
+    importStudentList(STUDENT_FILE_PATH, studentList);
+    importStaffList(STAFF_FILE_PATH, staffList);
+    importScoreboardList(SCOREBOARD_FILE_PATH, scoreboardList);
+    importClassList(CLASS_FILE_PATH, classList);
 }
 
 // Destructor - Save all data to file, with first line header
 Database::~Database() {
-    exportAccountList(ACCOUNT_FILE_PATH);
-    exportCourseList(COURSE_FILE_PATH);
-    exportSemesterList(SEMESTER_FILE_PATH);
-    exportStudentList(STUDENT_FILE_PATH);
-    exportStaffList(STAFF_FILE_PATH);
-    exportScoreboardList(SCOREBOARD_FILE_PATH);
-    exportClassList(CLASS_FILE_PATH);
+    exportAccountList(ACCOUNT_FILE_PATH, accountList);
+    exportCourseList(COURSE_FILE_PATH, courseList);
+    exportSemesterList(SEMESTER_FILE_PATH, semesterList);
+    exportStudentList(STUDENT_FILE_PATH, studentList);
+    exportStaffList(STAFF_FILE_PATH, staffList);
+    exportScoreboardList(SCOREBOARD_FILE_PATH, scoreboardList);
+    exportClassList(CLASS_FILE_PATH, classList);
 }
 
 void Database::registerAccount() {
@@ -48,7 +48,7 @@ Account Database::login(QString username, QString password) {
 // Implementation Functions Set: Import data from file
 ******************************************/
 // Import Account list from file
-void Database::importAccountList(QString filename){
+void Database::importAccountList(QString filename, Set<Account>& accountList){
     std::ifstream ifs(filename.toStdString());
     // size_t count = 0;
     if (!ifs.is_open()) {
@@ -77,7 +77,7 @@ void Database::importAccountList(QString filename){
 }
 
 // Import Course list from file
-void Database::importCourseList(QString filename) {
+void Database::importCourseList(QString filename, Set<Course>& courseList) {
     std::ifstream ifs(filename.toStdString());
     // size_t count = 0;
     if (!ifs.is_open()) {
@@ -107,7 +107,7 @@ void Database::importCourseList(QString filename) {
 }
 
 // Import Semester list from file
-void Database::importSemesterList(QString filename) {
+void Database::importSemesterList(QString filename, Set<Semester>& semesterList) {
     std::ifstream ifs(filename.toStdString());
     // size_t count = 0;
     if (!ifs.is_open()) {
@@ -137,7 +137,7 @@ void Database::importSemesterList(QString filename) {
 }
 
 // Import Student list from file
-void Database::importStudentList(QString filename) {
+void Database::importStudentList(QString filename, Set<Student>& studentList) {
     std::ifstream ifs(filename.toStdString());
     // size_t count = 0;
     if (!ifs.is_open()) {
@@ -167,7 +167,7 @@ void Database::importStudentList(QString filename) {
 }
 
 // Import Staff list from file
-void Database::importStaffList(QString filename) {
+void Database::importStaffList(QString filename, Set<Staff>& staffList) {
     std::ifstream ifs(filename.toStdString());
     // size_t count = 0;
     if (!ifs.is_open()) {
@@ -197,7 +197,7 @@ void Database::importStaffList(QString filename) {
 }
 
 // Import Scoreboard list from file
-void Database::importScoreboardList(QString filename) {
+void Database::importScoreboardList(QString filename, Set<Scoreboard>& scoreboardList) {
     std::ifstream ifs(filename.toStdString());
     // size_t count = 0;
     if (!ifs.is_open()) {
@@ -227,7 +227,7 @@ void Database::importScoreboardList(QString filename) {
 }
 
 // Import Class list from file
-void Database::importClassList(QString filename) {
+void Database::importClassList(QString filename, Set<Class>& classList) {
     std::ifstream ifs(filename.toStdString());
     // size_t count = 0;
     if (!ifs.is_open()) {
@@ -260,7 +260,7 @@ void Database::importClassList(QString filename) {
 // Implementation Functions Set: Export data to file
 ******************************************/
 // Export Account list to file
-void Database::exportAccountList(QString filename) {
+void Database::exportAccountList(QString filename, Set<Account>& accountList) {
     std::ofstream ofs(filename.toStdString());
     ofs << "Account ID, Staff/Student ID, Username, Password" << std::endl;
     for (int i = 0; i < accountList.size(); i++) {
@@ -270,7 +270,7 @@ void Database::exportAccountList(QString filename) {
 }
 
 // Export Course list to file
-void Database::exportCourseList(QString filename) {
+void Database::exportCourseList(QString filename, Set<Course>& courseList) {
     std::ofstream ofs(filename.toStdString());
     ofs << "Course ID, Course Name, Class Name, Instructor Name, Credit, Max Students, Day, Session" << std::endl;
     for (int i = 0; i < courseList.size(); i++) {
@@ -280,7 +280,7 @@ void Database::exportCourseList(QString filename) {
 }
 
 // Export Semester list to file
-void Database::exportSemesterList(QString filename) {
+void Database::exportSemesterList(QString filename, Set<Semester>& semesterList) {
     std::ofstream ofs(filename.toStdString());
     ofs << "Semester ID, Semester No, School Year, Start Date, End Date" << std::endl;
     for (int i = 0; i < semesterList.size(); i++) {
@@ -290,7 +290,7 @@ void Database::exportSemesterList(QString filename) {
 }
 
 // Export Student list to file
-void Database::exportStudentList(QString filename) {
+void Database::exportStudentList(QString filename, Set<Student>& studentList) {
     std::ofstream ofs(filename.toStdString());
     ofs << "Student ID, First Name, Last Name, Gender, Date of Birth, Phone Number" << std::endl;
     for (int i = 0; i < studentList.size(); i++) {
@@ -300,7 +300,7 @@ void Database::exportStudentList(QString filename) {
 }
 
 // Export Staff list to file
-void Database::exportStaffList(QString filename) {
+void Database::exportStaffList(QString filename, Set<Staff>& staffList) {
     std::ofstream ofs(filename.toStdString());
     ofs << "Staff ID, Full Name, Gender, Date of Birth, Phone, Email, Facility Address" << std::endl;
     for (int i = 0; i < staffList.size(); i++) {
@@ -310,7 +310,7 @@ void Database::exportStaffList(QString filename) {
 }
 
 // Export Scoreboard list to file
-void Database::exportScoreboardList(QString filename) {
+void Database::exportScoreboardList(QString filename, Set<Scoreboard>& scoreboardList) {
     std::ofstream ofs(filename.toStdString());
     ofs << "Course ID, Class Name, Student ID, Student Full Name, Total Mark, Final Mark, Midterm Mark, Other Mark" << std::endl;
     for (int i = 0; i < scoreboardList.size(); i++) {
@@ -320,9 +320,9 @@ void Database::exportScoreboardList(QString filename) {
 }
 
 // Export Class list to file
-void Database::exportClassList(QString filename) {
+void Database::exportClassList(QString filename, Set<Class>& classList) {
     std::ofstream ofs(filename.toStdString());
-    ofs << "Class ID, Class Name, Room Number" << std::endl;
+    ofs << "Class ID, Class Name, Started School Year" << std::endl;
     for (int i = 0; i < classList.size(); i++) {
         ofs << classList[i];
     }
@@ -369,7 +369,7 @@ Set<Scoreboard> Database::getScoreboardListByCourseID(int courseID) {
 *
 ***************************************************************/
 // Load Course List
-void Database::loadCourseList(QTableWidget* table)
+void Database::loadCourseList(QTableWidget* table, Set<Course>& courseList)
 {
     // Setup table row & column
     table->setRowCount(courseList.size());
@@ -404,7 +404,7 @@ void Database::loadCourseList(QTableWidget* table)
 }
 
 // Load Account List
-void Database::loadAccountList(QTableWidget* table)
+void Database::loadAccountList(QTableWidget* table, Set<Account>& accountList)
 {
     // Setup table row & column
     table->setRowCount(accountList.size());
@@ -429,7 +429,7 @@ void Database::loadAccountList(QTableWidget* table)
 }
 
 // Load Student List
-void Database::loadStudentList(QTableWidget* table)
+void Database::loadStudentList(QTableWidget* table, Set<Student>& studentList)
 {
     // Setup table row & column
     table->setRowCount(studentList.size());
@@ -460,7 +460,7 @@ void Database::loadStudentList(QTableWidget* table)
 }
 
 // Load Semester List
-void Database::loadSemesterList(QTableWidget* table)
+void Database::loadSemesterList(QTableWidget* table, Set<Semester>& semesterList)
 {
     // Setup table row & column
     table->setRowCount(semesterList.size());
@@ -522,7 +522,7 @@ void Database::loadScoreboardList(QTableWidget* table, Set<Scoreboard>& scoreboa
 }
 
 // Load Class List
-void Database::loadClassList(QTableWidget* table)
+void Database::loadClassList(QTableWidget* table, Set<Class>& classList)
 {
     // Setup table row & column
     table->setRowCount(classList.size());
@@ -533,14 +533,14 @@ void Database::loadClassList(QTableWidget* table)
 
     // Set table headers
     table->setHorizontalHeaderItem(0, new QTableWidgetItem("Class Name"));
-    table->setHorizontalHeaderItem(1, new QTableWidgetItem("Room Number"));
+    table->setHorizontalHeaderItem(1, new QTableWidgetItem("Started Year"));
 
     // Display classes in the table
     for (int i = 0; i < classList.size(); i++)
     {
         Class classObj = classList[i];
         table->setItem(i, 0, new QTableWidgetItem(QString::fromStdString(classObj.getClassName())));
-        table->setItem(i, 1, new QTableWidgetItem(QString::fromStdString(classObj.getRoomNo())));
+        table->setItem(i, 1, new QTableWidgetItem(QString::number(classObj.getStartedYear())));
     }
 }
 
@@ -549,7 +549,7 @@ void Database::loadClassList(QTableWidget* table)
 // Implementation Functions Set: Update data to the database's attributes
 ******************************************/
 // Update Account List
-void Database::updateAccountList(Account account)
+void Database::updateAccountList(Account account, Set<Account>& accountList)
 {
     // Find the account in the list then update it
     for (int i = 0; i < accountList.size(); i++)
@@ -563,7 +563,7 @@ void Database::updateAccountList(Account account)
 }
 
 // Update Course List
-void Database::updateCourseList(Course course)
+void Database::updateCourseList(Course course, Set<Course>& courseList)
 {
     // Find the course in the list then update it
     for (int i = 0; i < courseList.size(); i++)
@@ -577,7 +577,7 @@ void Database::updateCourseList(Course course)
 }
 
 // Update Student List
-void Database::updateStudentList(Student student)
+void Database::updateStudentList(Student student, Set<Student>& studentList)
 {
     // Find the student in the list then update it
     for (int i = 0; i < studentList.size(); i++)
@@ -591,7 +591,7 @@ void Database::updateStudentList(Student student)
 }
 
 // Update Semester List
-void Database::updateSemesterList(Semester semester)
+void Database::updateSemesterList(Semester semester, Set<Semester>& semesterList)
 {
     // Find the semester in the list then update it
     for (int i = 0; i < semesterList.size(); i++)
@@ -605,7 +605,7 @@ void Database::updateSemesterList(Semester semester)
 }
 
 // Update Scoreboard List
-void Database::updateScoreboardList(Scoreboard scoreboard)
+void Database::updateScoreboardList(Scoreboard scoreboard, Set<Scoreboard>& scoreboardList)
 {
     // Find the scoreboard in the list then update it
     for (int i = 0; i < scoreboardList.size(); i++)
@@ -621,7 +621,7 @@ void Database::updateScoreboardList(Scoreboard scoreboard)
 }
 
 // Update Class List
-void Database::updateClassList(Class classObj)
+void Database::updateClassList(Class classObj, Set<Class>& classList)
 {
     // Find the class in the list then update it
     for (int i = 0; i < classList.size(); i++)
@@ -639,7 +639,7 @@ void Database::updateClassList(Class classObj)
 // Implementation Functions Set: Delete data from the database's attributes
 ******************************************/
 // Delete Account from Account List
-void Database::deleteFromAccountList(Account account)
+void Database::deleteFromAccountList(Account account, Set<Account>& accountList)
 {
     // Find the account in the list then delete it
     for (int i = 0; i < accountList.size(); i++)
@@ -653,7 +653,7 @@ void Database::deleteFromAccountList(Account account)
 }
 
 // Delete Course from Course List
-void Database::deleteFromCourseList(Course course)
+void Database::deleteFromCourseList(Course course, Set<Course>& courseList)
 {
     // Find the course in the list then delete it
     for (int i = 0; i < courseList.size(); i++)
@@ -667,7 +667,7 @@ void Database::deleteFromCourseList(Course course)
 }
 
 // Delete Student from Student List
-void Database::deleteFromStudentList(Student student)
+void Database::deleteFromStudentList(Student student, Set<Student>& studentList)
 {
     // Find the student in the list then delete it
     for (int i = 0; i < studentList.size(); i++)
@@ -681,7 +681,7 @@ void Database::deleteFromStudentList(Student student)
 }
 
 // Delete Semester from Semester List
-void Database::deleteFromSemesterList(Semester semester)
+void Database::deleteFromSemesterList(Semester semester, Set<Semester>& semesterList)
 {
     // Find the semester in the list then delete it
     for (int i = 0; i < semesterList.size(); i++)
@@ -695,7 +695,7 @@ void Database::deleteFromSemesterList(Semester semester)
 }
 
 // Delete Scoreboard from Scoreboard List
-void Database::deleteFromScoreboardList(Scoreboard scoreboard)
+void Database::deleteFromScoreboardList(Scoreboard scoreboard, Set<Scoreboard>& scoreboardList)
 {
     // Find the scoreboard in the list then delete it
     for (int i = 0; i < scoreboardList.size(); i++)
@@ -711,7 +711,7 @@ void Database::deleteFromScoreboardList(Scoreboard scoreboard)
 }
 
 // Delete Class from Class List
-void Database::deleteFromClassList(Class classObj)
+void Database::deleteFromClassList(Class classObj, Set<Class>& classList)
 {
     // Find the class in the list then delete it
     for (int i = 0; i < classList.size(); i++)
