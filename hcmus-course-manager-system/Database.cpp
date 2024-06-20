@@ -14,6 +14,7 @@ Database::Database() {
     importStaffList(STAFF_FILE_PATH, staffList);
     importScoreboardList(SCOREBOARD_FILE_PATH, scoreboardList);
     importClassList(CLASS_FILE_PATH, classList);
+    importStudentInClassList(STUDENT_IN_CLASS_FILE_PATH, studentInClassList);
 }
 
 // Destructor - Save all data to file, with first line header
@@ -25,6 +26,7 @@ Database::~Database() {
     exportStaffList(STAFF_FILE_PATH, staffList);
     exportScoreboardList(SCOREBOARD_FILE_PATH, scoreboardList);
     exportClassList(CLASS_FILE_PATH, classList);
+    exportStudentInClassList(STUDENT_IN_CLASS_FILE_PATH, studentInClassList);
 }
 
 void Database::registerAccount() {
@@ -64,7 +66,7 @@ void Database::importAccountList(QString filename, Set<Account>& accountList){
     while (!ifs.eof()) {
         Account account;
         ifs >> account;
-        // Check if the course read from is empty, then break, because default ID constructor is 0
+        // Check if the course read from is empty, then break, because default ID constructor is -1
         if (account.getAccountID() == -1)
             break;
 
@@ -94,7 +96,7 @@ void Database::importCourseList(QString filename, Set<Course>& courseList) {
         Course course;
         ifs >> course;
 
-        // Check if the course read from is empty, then break, because default ID constructor is 0
+        // Check if the course read from is empty, then break, because default ID constructor is -1
         if (course.getCourseID() == -1)
             break;
 
@@ -124,7 +126,7 @@ void Database::importSemesterList(QString filename, Set<Semester>& semesterList)
         Semester semester;
         ifs >> semester;
 
-        // Check if the course read from is empty, then break, because default No constructor is 0
+        // Check if the course read from is empty, then break, because default No constructor is -1
         if (semester.getNo() == -1)
             break;
 
@@ -154,7 +156,7 @@ void Database::importStudentList(QString filename, Set<Student>& studentList) {
         Student student;
         ifs >> student;
 
-        // Check if the course read from is empty, then break, because default ID constructor is 0
+        // Check if the course read from is empty, then break, because default ID constructor is -1
         if (student.getStudentID() == -1)
             break;
 
@@ -184,7 +186,7 @@ void Database::importStaffList(QString filename, Set<Staff>& staffList) {
         Staff staff;
         ifs >> staff;
 
-        // Check if the course read from is empty, then break, because default ID constructor is 0
+        // Check if the course read from is empty, then break, because default ID constructor is -1
         if (staff.getStaffID() == -1)
             break;
 
@@ -214,7 +216,7 @@ void Database::importScoreboardList(QString filename, Set<Scoreboard>& scoreboar
         Scoreboard scoreboard;
         ifs >> scoreboard;
 
-        // Check if the course read from is empty, then break, because default ID constructor is 0
+        // Check if the course read from is empty, then break, because default ID constructor is -1
         if (scoreboard.getCourseID() == -1)
             break;
 
@@ -244,11 +246,41 @@ void Database::importClassList(QString filename, Set<Class>& classList) {
         Class classObj;
         ifs >> classObj;
 
-        // Check if the course read from is empty, then break, because default ID constructor is 0
+        // Check if the course read from is empty, then break, because default ID constructor is -1
         if (classObj.getClassID() == -1)
             break;
 
         classList.insert(classObj);
+        // count++;
+    }
+
+    ifs.close();
+    // return count;
+}
+
+// Import StudentInClass list from file
+void Database::importStudentInClassList(QString filename, Set<StudentInClass>& studentInClassList) {
+    std::ifstream ifs(filename.toStdString());
+    // size_t count = 0;
+    if (!ifs.is_open()) {
+        // open message box
+        QMessageBox::information(nullptr, "Read Error", filename, QMessageBox::Ok | QMessageBox::Cancel);
+        return;
+    }
+
+    // Skip header - the first line
+    std::string line;
+    std::getline(ifs, line);
+
+    while (!ifs.eof()) {
+        StudentInClass studentInClass;
+        ifs >> studentInClass;
+
+        // Check if the course read from is empty, then break, because default ID constructor is -1
+        if (studentInClass.getStudentID() == -1)
+            break;
+
+        studentInClassList.insert(studentInClass);
         // count++;
     }
 
@@ -325,6 +357,16 @@ void Database::exportClassList(QString filename, Set<Class>& classList) {
     ofs << "Class ID, Class Name, Started School Year" << std::endl;
     for (int i = 0; i < classList.size(); i++) {
         ofs << classList[i];
+    }
+    ofs.close();
+}
+
+// Export StudentInClass list to file
+void Database::exportStudentInClassList(QString filename, Set<StudentInClass>& studentInClassList) {
+    std::ofstream ofs(filename.toStdString());
+    ofs << "Class Name, Student ID" << std::endl;
+    for (int i = 0; i < studentInClassList.size(); i++) {
+        ofs << studentInClassList[i];
     }
     ofs.close();
 }

@@ -17,6 +17,7 @@ SOURCES += \
     SemesterClass.cpp \
     StaffClass.cpp \
     StudentClass.cpp \
+    StudentInClass.cpp \
     changePassword.cpp \
     main.cpp \
     mainwindow.cpp
@@ -34,6 +35,7 @@ HEADERS += \
     Set.h \
     StaffClass.h \
     StudentClass.h \
+    StudentInClass.h \
     Vector.h \
     changePassword.h \
     mainwindow.h

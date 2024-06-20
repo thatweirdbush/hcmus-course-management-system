@@ -119,6 +119,8 @@ private slots:
 
     void on_btnSave_StartSchoolYear_clicked();
 
+    void on_btnStudentsInClass_clicked();
+
 private:
     // Page Loaders
     void loadPageProfileInfo_Staff();

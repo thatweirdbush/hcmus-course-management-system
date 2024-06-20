@@ -3512,7 +3512,7 @@ border: none;
        <rect>
         <x>30</x>
         <y>20</y>
-        <width>251</width>
+        <width>271</width>
         <height>41</height>
        </rect>
       </property>
@@ -3527,7 +3527,7 @@ border: none;
        <string notr="true">color: rgb(0, 0, 0);</string>
       </property>
       <property name="text">
-       <string>Students In Class</string>
+       <string>Students In Class -</string>
       </property>
      </widget>
      <widget class="QPushButton" name="btnBackToClass_Staff">
@@ -3763,7 +3763,7 @@ background-color: rgb(46, 47, 48);</string>
      <widget class="QLabel" name="labelStudentInClass_Binding">
       <property name="geometry">
        <rect>
-        <x>290</x>
+        <x>310</x>
         <y>20</y>
         <width>251</width>
         <height>41</height>

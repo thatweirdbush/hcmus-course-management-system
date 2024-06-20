@@ -13,6 +13,7 @@
 #include "ScoreboardClass.h"
 #include "StaffClass.h"
 #include "ClassClass.h"
+#include "StudentInClass.h"
 #include "Set.h"
 #include "qtablewidget.h"
 
@@ -24,6 +25,8 @@ const QString SEMESTER_FILE_PATH = "semester.csv";
 const QString STAFF_FILE_PATH = "staff.csv";
 const QString ACCOUNT_FILE_PATH = "account.csv";
 const QString CLASS_FILE_PATH = "class.csv";
+const QString STUDENT_IN_CLASS_FILE_PATH = "student-in-class.csv";
+const QString STUDENT_IN_COURSE_FILE_PATH = "student-in-course.csv";
 
 
 class Database {
@@ -35,6 +38,7 @@ public:
     Set<Staff> staffList;
     Set<Scoreboard> scoreboardList;
     Set<Class> classList;
+    Set<StudentInClass> studentInClassList;
 
 public:
     Database();
@@ -60,6 +64,8 @@ public:
 
     void importClassList(QString filename, Set<Class>& classList);
 
+    void importStudentInClassList(QString filename, Set<StudentInClass>& studentInClassList);
+
 public:
     // Export data to file
     void exportAccountList(QString filename, Set<Account>& accountList);
@@ -75,6 +81,8 @@ public:
     void exportScoreboardList(QString filename, Set<Scoreboard>& scoreboardList);
 
     void exportClassList(QString filename, Set<Class>& classList);
+
+    void exportStudentInClassList(QString filename, Set<StudentInClass>& studentInClassList);
 
 public:
     // Load Data Context To Table Widget
@@ -93,7 +101,7 @@ public:
     void loadClassList(QTableWidget* table, Set<Class>& classList);
 
 public:
-    // Search functions - return index of object in list
+    // Search functions - return object in list
     Student getStudentByID(int studentID);
 
     Staff getStaffByID(int staffID);

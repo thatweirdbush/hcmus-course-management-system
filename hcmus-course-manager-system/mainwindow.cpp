@@ -566,6 +566,41 @@ void MainWindow::on_btnBackToClass_Staff_clicked()
     ui->stackedWidget->setCurrentIndex(int(Page::Class_Staff));
 }
 
+// Go to Student In Class page using stack widget
+void MainWindow::on_btnStudentsInClass_clicked()
+{
+    // Get the selected class in the table widget
+    int selectedRow = ui->tableClasses->currentRow();
+    if (selectedRow < 0) {
+        QMessageBox::warning(this, "No Data Selected", "Please select a class to view students!", QMessageBox::Ok);
+        return;
+    }
+
+    // Get class name
+    QTableWidgetItem *item = ui->tableClasses->item(selectedRow, 0);
+    std::string selectClassName = item->text().toStdString();
+
+    // Create new Set of Student filter by class name
+    Set<Student> studentsInClass;
+
+    // Filter the studentID by class name in student-in-class.csv
+    for (int i = 0; i < db->studentInClassList.size(); i++) {
+        if (db->studentInClassList[i].getClassName() == selectClassName) {
+            Student st = db->getStudentByID(db->studentInClassList[i].getStudentID());
+            studentsInClass.insert(st);
+        }
+    }
+
+    // Load the student list of the class
+    db->loadStudentList(ui->tableStudentInClass, studentsInClass);
+
+    // Load page's components
+    ui->labelStudentInClass_Binding->setText(QString::fromStdString(selectClassName));
+
+    // Go to Student In Class page using stack widget
+    ui->stackedWidget->setCurrentIndex(int(Page::StudentInClass));
+}
+
 
 
 
@@ -803,6 +838,9 @@ void MainWindow::on_btnSave_StartSchoolYear_clicked()
         loadPageProfileInfo_Staff();
     }
 }
+
+
+
 
 
 
