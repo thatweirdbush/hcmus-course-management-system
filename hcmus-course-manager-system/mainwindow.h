@@ -121,6 +121,8 @@ private slots:
 
     void on_btnStudentsInClass_clicked();
 
+    void on_btnStudentsInCourse_clicked();
+
 private:
     // Page Loaders
     void loadPageProfileInfo_Staff();

@@ -555,6 +555,36 @@ void MainWindow::on_btnBackToCourse_Staff_clicked()
     ui->stackedWidget->setCurrentIndex(int(Page::Course_Staff));
 }
 
+// Go to Student In Course page using stack widget
+void MainWindow::on_btnStudentsInCourse_clicked()
+{
+    // Get the selected course in the table widget
+    int selectedRow = ui->tableCourses->currentRow();
+    if (selectedRow < 0) {
+        QMessageBox::warning(this, "No Data Selected", "Please select a course to view students!", QMessageBox::Ok);
+        return;
+    }
+
+    // // Get course name
+    // QTableWidgetItem *item = ui->tableCourses->item(selectedRow, 1);
+    // std::string selectCourseName = item->text().toStdString();
+
+    // // Create new Set of Student filter by course name
+    // Set<Student> studentsInCourse;
+
+    // // Filter the studentID by course name in student-in-course.csv
+    // for (int i = 0; i < db->studentInCourseList.size(); i++) {
+    //     if (db->studentInCourseList[i].getCourseName() == selectCourseName)
+    //         studentsInCourse.insert(db->studentInCourseList[i]);
+    // }
+
+    // // Load the students in the course
+    // db->loadStudentList(ui->tableStudentsInCourse, studentsInCourse);
+
+    // Go to Student In Course page using stack widget
+    ui->stackedWidget->setCurrentIndex(int(Page::StudentInCourse));
+
+}
 
 /**************************************************************
 * Implement Page - Class_Staff - Student_In_Class
@@ -838,6 +868,9 @@ void MainWindow::on_btnSave_StartSchoolYear_clicked()
         loadPageProfileInfo_Staff();
     }
 }
+
+
+
 
 
 

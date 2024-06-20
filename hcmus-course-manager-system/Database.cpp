@@ -15,6 +15,7 @@ Database::Database() {
     importScoreboardList(SCOREBOARD_FILE_PATH, scoreboardList);
     importClassList(CLASS_FILE_PATH, classList);
     importStudentInClassList(STUDENT_IN_CLASS_FILE_PATH, studentInClassList);
+    importStudentInCourseList(STUDENT_IN_COURSE_FILE_PATH, studentInCourseList);
 }
 
 // Destructor - Save all data to file, with first line header
@@ -27,6 +28,7 @@ Database::~Database() {
     exportScoreboardList(SCOREBOARD_FILE_PATH, scoreboardList);
     exportClassList(CLASS_FILE_PATH, classList);
     exportStudentInClassList(STUDENT_IN_CLASS_FILE_PATH, studentInClassList);
+    exportStudentInCourseList(STUDENT_IN_COURSE_FILE_PATH, studentInCourseList);
 }
 
 void Database::registerAccount() {
@@ -288,6 +290,36 @@ void Database::importStudentInClassList(QString filename, Set<StudentInClass>& s
     // return count;
 }
 
+// Import StudentInCourse list from file
+void Database::importStudentInCourseList(QString filename, Set<StudentInCourse>& studentInCourseList) {
+    std::ifstream ifs(filename.toStdString());
+    // size_t count = 0;
+    if (!ifs.is_open()) {
+        // open message box
+        QMessageBox::information(nullptr, "Read Error", filename, QMessageBox::Ok | QMessageBox::Cancel);
+        return;
+    }
+
+    // Skip header - the first line
+    std::string line;
+    std::getline(ifs, line);
+
+    while (!ifs.eof()) {
+        StudentInCourse studentInCourse;
+        ifs >> studentInCourse;
+
+        // Check if the course read from is empty, then break, because default ID constructor is -1
+        if (studentInCourse.getStudentID() == -1)
+            break;
+
+        studentInCourseList.insert(studentInCourse);
+        // count++;
+    }
+
+    ifs.close();
+    // return count;
+}
+
 /*****************************************
 // Implementation Functions Set: Export data to file
 ******************************************/
@@ -367,6 +399,16 @@ void Database::exportStudentInClassList(QString filename, Set<StudentInClass>& s
     ofs << "Class Name, Student ID" << std::endl;
     for (int i = 0; i < studentInClassList.size(); i++) {
         ofs << studentInClassList[i];
+    }
+    ofs.close();
+}
+
+// Export StudentInCourse list to file
+void Database::exportStudentInCourseList(QString filename, Set<StudentInCourse>& studentInCourseList) {
+    std::ofstream ofs(filename.toStdString());
+    ofs << "Semester ID, Course ID, Student ID" << std::endl;
+    for (int i = 0; i < studentInCourseList.size(); i++) {
+        ofs << studentInCourseList[i];
     }
     ofs.close();
 }

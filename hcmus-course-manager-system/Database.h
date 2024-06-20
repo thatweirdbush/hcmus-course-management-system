@@ -15,6 +15,7 @@
 #include "ClassClass.h"
 #include "StudentInClass.h"
 #include "Set.h"
+#include "StudentInCourse.h"
 #include "qtablewidget.h"
 
 // Define const file path
@@ -39,6 +40,7 @@ public:
     Set<Scoreboard> scoreboardList;
     Set<Class> classList;
     Set<StudentInClass> studentInClassList;
+    Set<StudentInCourse> studentInCourseList;
 
 public:
     Database();
@@ -66,6 +68,8 @@ public:
 
     void importStudentInClassList(QString filename, Set<StudentInClass>& studentInClassList);
 
+    void importStudentInCourseList(QString filename, Set<StudentInCourse>& studentInCourseList);
+
 public:
     // Export data to file
     void exportAccountList(QString filename, Set<Account>& accountList);
@@ -84,6 +88,8 @@ public:
 
     void exportStudentInClassList(QString filename, Set<StudentInClass>& studentInClassList);
 
+    void exportStudentInCourseList(QString filename, Set<StudentInCourse>& studentInCourseList);
+
 public:
     // Load Data Context To Table Widget
     void loadCourseList(QTableWidget* table, Set<Course>& courseList);
@@ -99,14 +105,6 @@ public:
     void loadAccountList(QTableWidget* table, Set<Account>& accountList);
 
     void loadClassList(QTableWidget* table, Set<Class>& classList);
-
-public:
-    // Search functions - return object in list
-    Student getStudentByID(int studentID);
-
-    Staff getStaffByID(int staffID);
-
-    Course getCourseByID(int courseID);
 
 public:
     // Update data to the database's attributes
@@ -138,7 +136,15 @@ public:
 
     void deleteFromAccountList(Account account, Set<Account>& accountList);
 
-    void deleteFromClassList(Class classObj, Set<Class>& classList);
+    void deleteFromClassList(Class classObj, Set<Class>& classList);    
+
+public:
+    // Search functions - return single object
+    Student getStudentByID(int studentID);
+
+    Staff getStaffByID(int staffID);
+
+    Course getCourseByID(int courseID);
 
 public:
     // Search functions - return all objects in list
