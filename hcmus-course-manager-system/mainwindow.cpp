@@ -15,7 +15,10 @@ MainWindow::MainWindow(QWidget *parent)
     , currentAccount(nullptr)
     , currentStudent(nullptr)
     , currentStaff(nullptr)
+    , studentsInCourse()
     , newStudentList()
+    , newCourseList()
+    , newScoreboardList()
 
 {
     ui->setupUi(this);
@@ -37,7 +40,11 @@ MainWindow::~MainWindow()
     if (currentStaff != nullptr)
         delete currentStaff;
 
+    // Free memory of cache data
+    studentsInCourse.clear();
     newStudentList.clear();
+    newCourseList.clear();
+    newScoreboardList.clear();
 }
 
 
@@ -60,13 +67,8 @@ void MainWindow::loadPageSignIn() {
 // Register button
 void MainWindow::on_btnRegister_clicked()
 {
-    // // Open default website
-    // QDesktopServices::openUrl(QUrl("https://hcmus.edu.vn"));
-
-    /// For easy debug
-    /// Go to Account List page using stack widget
-    db->loadAccountList(ui->tableAccounts, db->accountList);
-    ui->stackedWidget->setCurrentIndex(int(Page::Account_Staff));
+    // Open default website
+    QDesktopServices::openUrl(QUrl("https://hcmus.edu.vn"));
 }
 
 // Forgot Password button
@@ -351,6 +353,10 @@ void MainWindow::on_btnScoreboardOfCourse_clicked()
     QTableWidgetItem *item = ui->tableScoreboards->item(selectedRow, 0);
     int selectCourseID = item->text().toInt();
 
+    // Get course object
+    Course selectCourse = db->getCourseByID(selectCourseID);
+    std::string selectCourseName = selectCourse.getCourseName();
+
     // Create new Set of Scoreboard filter by course ID
     Set<Scoreboard> scoreboardOfCourse;
 
@@ -363,6 +369,10 @@ void MainWindow::on_btnScoreboardOfCourse_clicked()
 
     // Load the scoreboard of the course
     db->loadScoreboardList(ui->tableScoreboardOfCourse, scoreboardOfCourse);
+
+    // Load page's components
+    QString courseInfo = QString::fromStdString(selectCourseName) + " [" + QString::number(selectCourseID) + "]";
+    ui->labelCourseName_Binding->setText(courseInfo);
 
     // Get statistics of the course
     float avgGPA = 0.0f;
@@ -417,6 +427,9 @@ void MainWindow::on_btnScoreboardOfClass_clicked()
     // Load the scoreboard of the class
     db->loadScoreboardList(ui->tableScoreboardOfClass, scoreboardOfClass);
 
+    // Load page's components
+    ui->labelClassName_Binding->setText(QString::fromStdString(selectClassName));
+
     // Get statistics of the class
     float avgGPA = 0.0f;
     float highestGPA = 0.0f;
@@ -441,6 +454,50 @@ void MainWindow::on_btnScoreboardOfClass_clicked()
 
     // Go to Scoreboard Of Class page using stack widget
     ui->stackedWidget->setCurrentIndex(int(Page::ScoreboardOfClass));
+}
+
+// Import Scoreboard CSV file and add to datafile's scoreboard list
+void MainWindow::on_btnImportScoreboard_clicked()
+{
+    // Open file dialog to get file path
+    QString filePath = QFileDialog::getOpenFileName(this, "Open Student File", QDir::homePath(), "CSV files (*.csv)");
+    if (filePath.isEmpty()) {
+        return;
+    }
+    // Check file path is valid from text box
+    if (!QFile::exists(filePath)) {
+        QMessageBox::warning(this, "Invalid Input", "File does not exist!", QMessageBox::Ok);
+        return;
+    }
+    try {
+        // Get previous scoreboard list size
+        int previousSize = db->scoreboardList.size();
+
+        // Load student list from file
+        db->importScoreboardList(filePath, newScoreboardList);
+
+        for (int i = 0; i < newScoreboardList.size(); ++i) {
+            // Insert to datafile's scoreboard list
+            db->scoreboardList.insert(newScoreboardList[i]);
+        }
+
+        // Get new scoreboard list size
+        int newSize = db->scoreboardList.size();
+
+        // Check if datafile's scoreboard list has changed
+        if (newSize == previousSize) {
+            QMessageBox::warning(this, "Import Status", "Import successfully! But no new scoreboard added!", QMessageBox::Ok);
+            return;
+        }
+
+        // Reload table widget
+        db->loadScoreboardList(ui->tableScoreboards, db->scoreboardList);
+
+        // Open 'Import Success' message box
+        QMessageBox::information(this, "Import Success", "Import scoreboards successfully!", QMessageBox::Ok);
+    } catch (...) {
+        QMessageBox::warning(this, "Error", "Invalid data file. Please try again!", QMessageBox::Ok);
+    }
 }
 
 
@@ -552,6 +609,10 @@ void MainWindow::on_btnDeleteCourse_clicked()
 // Go back to Course page using stack widget
 void MainWindow::on_btnBackToCourse_Staff_clicked()
 {
+    // Clear the student in course list
+    studentsInCourse.clear();
+
+    // Go back to Course page
     ui->stackedWidget->setCurrentIndex(int(Page::Course_Staff));
 }
 
@@ -565,26 +626,79 @@ void MainWindow::on_btnStudentsInCourse_clicked()
         return;
     }
 
-    // // Get course name
-    // QTableWidgetItem *item = ui->tableCourses->item(selectedRow, 1);
-    // std::string selectCourseName = item->text().toStdString();
+    // Get course ID & course name
+    QTableWidgetItem *itemID = ui->tableCourses->item(selectedRow, 0);
+    QTableWidgetItem *itemName = ui->tableCourses->item(selectedRow, 1);
 
-    // // Create new Set of Student filter by course name
-    // Set<Student> studentsInCourse;
+    int selectCourseID = itemID->text().toInt();
+    QString selectCourseName = itemName->text();
 
-    // // Filter the studentID by course name in student-in-course.csv
-    // for (int i = 0; i < db->studentInCourseList.size(); i++) {
-    //     if (db->studentInCourseList[i].getCourseName() == selectCourseName)
-    //         studentsInCourse.insert(db->studentInCourseList[i]);
-    // }
+    // Filter the studentID by course name in student-in-course.csv
+    for (int i = 0; i < db->studentInCourseList.size(); i++) {
+        if (db->studentInCourseList[i].getCourseID() == selectCourseID)
+            studentsInCourse.insert(db->studentInCourseList[i]);
+    }
 
-    // // Load the students in the course
-    // db->loadStudentList(ui->tableStudentsInCourse, studentsInCourse);
+    // Load the students in the course
+    db->loadStudentInCourseList(ui->tableStudentInCourse, studentsInCourse);
+
+    // Load page's components
+    QString courseInfo = selectCourseName + " [" + QString::number(selectCourseID) + "]";
+    ui->labelStudentInCourse_Binding->setText(courseInfo);
 
     // Go to Student In Course page using stack widget
     ui->stackedWidget->setCurrentIndex(int(Page::StudentInCourse));
-
 }
+
+// Delete selected student in course from the table
+void MainWindow::on_btnDeleteStudentInCourse_clicked()
+{
+    // Get the selected student in course in the table widget
+    int selectedRow = ui->tableStudentInCourse->currentRow();
+    if (selectedRow < 0) {
+        QMessageBox::warning(this, "No Data Selected", "Please select a student to delete!", QMessageBox::Ok);
+        return;
+    }
+
+    // Get student in course object
+    StudentInCourse selectedStudentInCourse = studentsInCourse[selectedRow];
+
+    // Open 'Delete Student In Course Confirmation' message box
+    QMessageBox::StandardButton reply;
+    reply = QMessageBox::question(this, "Delete Confirmation", "Are you sure you want to delete this student in course?", QMessageBox::Yes | QMessageBox::No);
+
+    // Check if user wants to delete
+    if (reply == QMessageBox::Yes)
+    {
+        // Delete the student in course from the database
+        db->deleteFromStudentInCourseList(selectedStudentInCourse, studentsInCourse);
+
+        // Remove from table widget
+        ui->tableStudentInCourse->removeRow(selectedRow);
+
+        // Pop up a message to inform the user
+        QMessageBox::information(this, "Delete Student In Course", "Student in course has been deleted!", QMessageBox::Ok);
+    }
+}
+
+// Export student in selected course to CSV file
+void MainWindow::on_btnExportStudentInCourse_clicked()
+{
+    // Export to CSV file
+    QString fileName = QFileDialog::getSaveFileName(this, "Export Student In Course", "", "CSV File (*.csv)");
+    if (fileName.isEmpty()) return;
+    db->exportStudentInCourseList(fileName, studentsInCourse);
+
+    // Open 'Export Successful' message box
+    QMessageBox::StandardButton reply;
+    reply = QMessageBox::question(this, "Export Successful", "Export Successful! Do you want to open the file?", QMessageBox::Yes | QMessageBox::No);
+
+    if (reply == QMessageBox::Yes){
+        // Open the file to show the result
+        QDesktopServices::openUrl(QUrl("file:///" + fileName));
+    }
+}
+
 
 /**************************************************************
 * Implement Page - Class_Staff - Student_In_Class
@@ -632,13 +746,6 @@ void MainWindow::on_btnStudentsInClass_clicked()
 }
 
 
-
-
-
-
-
-
-
 /**************************************************************
 * Implement Page - Procedure - Start_School_Year
 *
@@ -660,7 +767,15 @@ void MainWindow::on_btnStartSchoolYear_clicked()
 // Go back to Profile page using stack widget
 void MainWindow::on_btnBackToProfile_6_clicked()
 {
-    loadPageProfileInfo_Staff();
+    // Open Confirmation message box
+    QMessageBox::StandardButton reply;
+    reply = QMessageBox::question(this, "Back to Profile", "Are you sure you want to go back? Any unsaved data will be lost!", QMessageBox::Yes | QMessageBox::No);
+
+    // Check if user wants to go back to Profile page
+    if (reply == QMessageBox::Yes)
+    {
+        loadPageProfileInfo_Staff();
+    }
 }
 
 // Add new class to the list
@@ -677,7 +792,7 @@ void MainWindow::on_btnAddNewClass_clicked()
     for (int i = 0; i < ui->listNewClasses->count(); ++i) {
         QListWidgetItem* item = ui->listNewClasses->item(i);
         if (item && item->text() == className) {
-            QMessageBox::warning(this, "Duplicate Entry", "Class name already exists in the list!", QMessageBox::Ok);
+            QMessageBox::warning(this, "Duplicate Entry", "Class already exists. Try a different name!", QMessageBox::Ok);
             return;
         }
     }
@@ -695,8 +810,10 @@ void MainWindow::on_btnAddNewClass_clicked()
 void MainWindow::on_btnRemoveClass_clicked()
 {
     int currentRow = ui->listNewClasses->currentRow();
-    if (currentRow < 0 || currentRow >= ui->listNewClasses->count())
+    if (currentRow < 0 || currentRow >= ui->listNewClasses->count()) {
+        QMessageBox::warning(this, "Invalid Selection", "Please select a class to remove!", QMessageBox::Ok);
         return;
+    }
 
     QListWidgetItem* item = ui->listNewClasses->takeItem(currentRow);
     delete item;
@@ -711,6 +828,12 @@ void MainWindow::on_btnRemoveAllClass_clicked()
 // Save new classes with started school year & go to Page Add_Student_To_Class
 void MainWindow::on_btnNext_StartSchoolYear_clicked()
 {
+    // Check if there are any classes to add
+    if (ui->listNewClasses->count() == 0) {
+        QMessageBox::warning(this, "No Classes Added", "Please add at least one class to start the school year!", QMessageBox::Ok);
+        return;
+    }
+
     // Get school year from Spin Box
     int schoolYear = ui->spinBoxSchoolYear->value();
 
@@ -735,11 +858,11 @@ void MainWindow::on_btnNext_StartSchoolYear_clicked()
     db->exportClassList(CLASS_FILE_PATH, db->classList);
 
     // Pop up a message to inform the user
-    QString message = "New classes have been added! New school year is " + QString::number(schoolYear);
+    QString message = "New classes have been added to school year " + QString::number(schoolYear);
     QMessageBox::information(this, "Start School Year", message, QMessageBox::Ok);
 
     // Clear current page's components
-    ui->spinBoxSchoolYear->setValue(2021);
+    ui->spinBoxSchoolYear->setValue(2024);
     ui->listNewClasses->clear();
     ui->txtClassName->clear();
 
@@ -750,6 +873,7 @@ void MainWindow::on_btnNext_StartSchoolYear_clicked()
     ui->stackedWidget->setCurrentIndex(int(Page::StartSchoolYear_Next));
 }
 
+
 /**************************************************************
 * Implement Page - Procedure - Start_School_Year_Next
 *
@@ -757,18 +881,33 @@ void MainWindow::on_btnNext_StartSchoolYear_clicked()
 // Go back to Start School Year page using stack widget
 void MainWindow::on_btnBackToStartSchoolYear_clicked()
 {
-    // Clear current page's components
-    ui->comboBoxStudentClass->clear();
-    ui->txtClassName_8->clear();
-    ui->tableNewStudentsInClass->clear();
+    // Open Confirmation message box
+    QMessageBox::StandardButton reply;
+    reply = QMessageBox::question(this, "Back Confirmation", "Are you sure you want to go back? Any unsaved data will be lost!", QMessageBox::Yes | QMessageBox::No);
 
-    // Go back to Start School Year page
-    ui->stackedWidget->setCurrentIndex(int(Page::StartSchoolYear));
+    // Check if user wants to go back to Start School Year page
+    if (reply == QMessageBox::Yes)
+    {
+        // Clear current page's components
+        ui->comboBoxStudentClass->clear();
+        ui->txtClassName_8->clear();
+        ui->tableNewStudentsInClass->clear();
+
+        // Go back to Start School Year page
+        ui->stackedWidget->setCurrentIndex(int(Page::StartSchoolYear));
+    }
 }
 
 // Load Page Start_School_Year_Next
 void MainWindow::loadPageStartSchoolYear_Next()
-{
+{    
+    // Clear page's components first
+    ui->txtClassName_8->clear();
+    ui->tableNewStudentsInClass->clear();
+    ui->tableNewStudentsInClass->setColumnCount(0);
+    ui->tableNewStudentsInClass->setRowCount(0);
+    newStudentList.clear();
+
     // Load all classes to combobox
     for (int i = 0; i < db->classList.size(); ++i) {
         ui->comboBoxStudentClass->addItem(QString::fromStdString(db->classList[i].getClassName()));
@@ -783,20 +922,13 @@ void MainWindow::loadPageStartSchoolYear_Next()
 // Choose file to add students (from text box or file dialog)
 void MainWindow::on_btnAddFileStudent_clicked()
 {
-    // Get class name from combo box
-    QString className = ui->comboBoxStudentClass->currentText();
-    if (className.isEmpty()) {
-        QMessageBox::warning(this, "Invalid Input", "Please select a class!", QMessageBox::Ok);
-        return;
-    }
-
     // Get file path from Dialog if filename text box is empty
     QString filePath = ui->txtClassName_8->text();
 
     // Check if filename text box is empty
     if (filePath.isEmpty()) {
         // Open file dialog to get file path
-        filePath = QFileDialog::getOpenFileName(this, "Open Student File", QDir::homePath(), "Text/CSV files (*.txt *.csv)");
+        filePath = QFileDialog::getOpenFileName(this, "Open Student File", QDir::homePath(), "CSV files (*.csv)");
         if (filePath.isEmpty()) {
             return;
         }
@@ -826,8 +958,10 @@ void MainWindow::on_btnRemoveStudentInClass_clicked()
 {
     // Get selected row
     int selectedRow = ui->tableNewStudentsInClass->currentRow();
-    if (selectedRow < 0 || selectedRow >= ui->tableNewStudentsInClass->rowCount())
+    if (selectedRow < 0 || selectedRow >= ui->tableNewStudentsInClass->rowCount()) {
+        QMessageBox::warning(this, "Invalid Input", "Please select a student to remove!", QMessageBox::Ok);
         return;
+    }
 
     // Remove selected row
     ui->tableNewStudentsInClass->removeRow(selectedRow);
@@ -849,40 +983,562 @@ void MainWindow::on_btnRemoveAllStudentInClass_clicked()
     newStudentList.clear();
 }
 
+// Save new students to class
 void MainWindow::on_btnSave_StartSchoolYear_clicked()
-{
+{    
+    // Check if student list is empty
+    if (newStudentList.size() == 0) {
+        QMessageBox::warning(this, "Invalid Input", "There's no student to be added. Please add at least one student!", QMessageBox::Ok);
+        return;
+    }
+
+    // Get selected class name
+    std::string className = ui->comboBoxStudentClass->currentText().toStdString();
+
+    // Build message string
+    QString message = "Are you sure you want to save these students to class " + QString::fromStdString(className) + "?";
+
     // Open message box to confirm
     QMessageBox::StandardButton reply;
-    reply = QMessageBox::question(this, "Save Confirmation", "Are you sure you want to save these students to the class?", QMessageBox::Yes | QMessageBox::No);
+    reply = QMessageBox::question(this, "Save Confirmation", message, QMessageBox::Yes | QMessageBox::No);
 
     if (reply == QMessageBox::Yes) {
+        // Get new students in the Table Widget, combine with new class name, and insert to datafile's student list
+        StudentInClass student;
+
+        for (int i = 0; i < newStudentList.size(); ++i) {
+            // Set class name & student ID for each student-in-class object
+            student.setClassName(className);
+            student.setStudentID(newStudentList[i].getStudentID());
+
+            // Insert to datafile's student list
+            db->studentInClassList.insert(student);
+        }
+
+        // Immediately save to datafile
+        db->exportStudentInClassList(STUDENT_IN_CLASS_FILE_PATH, db->studentInClassList);
+
         // Open success message box
         QMessageBox::information(this, "Save Success", "Students have been added to the class!", QMessageBox::Ok);
+
+        // Reload current page's components
+        loadPageStartSchoolYear_Next();
+    }
+}
+
+// Finish adding new students to class, no saving data
+void MainWindow::on_btnFinishAll_StartSchoolYear_2_clicked()
+{
+    // Check if there are still new students in the list
+    if (newStudentList.size() > 0) {
+        // Open Confirmation message box
+        QMessageBox::StandardButton reply;
+        reply = QMessageBox::question(this, "Finish Confirmation", "Are you sure you want to finish? Any unsaved data will be lost!", QMessageBox::Yes | QMessageBox::No);
+
+        // Check if user wants to finish
+        if (reply == QMessageBox::Yes) {
+            // Clear current page's components
+            ui->comboBoxStudentClass->clear();
+            ui->txtClassName_8->clear();
+            ui->tableNewStudentsInClass->clear();
+
+            // Go back to Profile page
+            loadPageProfileInfo_Staff();
+        }
+    }
+    else {
+        // Open Notification message box
+        QMessageBox::information(this, "Finish", "Start School Year completed!", QMessageBox::Ok);
 
         // Clear current page's components
         ui->comboBoxStudentClass->clear();
         ui->txtClassName_8->clear();
         ui->tableNewStudentsInClass->clear();
 
-        // Go back to Profile page using stack widget
+        // Go back to Profile page
         loadPageProfileInfo_Staff();
     }
 }
 
 
+/**************************************************************
+* Implement Page - Procedure - Start_Semester
+*
+***************************************************************/
+// Go back to Profile Page
+void MainWindow::on_btnBackToProfile_7_clicked()
+{
+    // Open Confirmation message box
+    QMessageBox::StandardButton reply;
+    reply = QMessageBox::question(this, "Back Confirmation", "Are you sure you want to go back? Any unsaved data will be lost!", QMessageBox::Yes | QMessageBox::No);
+
+    // Check if user wants to go back to Profile page
+    if (reply == QMessageBox::Yes)
+    {
+        // Reset current page's components
+        ui->spinBoxSchoolYear_2->setValue(2024);
+        ui->spinBoxSemesterNo->setValue(1);
+        ui->dateEdit_Start->setDate(QDate(2024, 9, 5));
+        ui->dateEdit_End->setDate(QDate(2025, 1, 5));
+
+        // Go back to Profile page
+        loadPageProfileInfo_Staff();
+    }
+}
+
+// Procedure - Start Semester
+void MainWindow::on_btnStartSemester_clicked()
+{
+    // Open 'Start Semester Confirmation' message box
+    QMessageBox::StandardButton reply;
+    reply = QMessageBox::question(this, "Start Semester Confirmation", "Are you sure you want to start a semester?", QMessageBox::Yes | QMessageBox::No);
+
+    // Check if user wants to start a new school year
+    if (reply == QMessageBox::Yes)
+    {
+        ui->stackedWidget->setCurrentIndex(int(Page::StartSemester));
+    }
+}
+
+// Save new semester with started school year & go to Page Start_Semester_Next
+void MainWindow::on_btnNext_StartSemester_clicked()
+{
+    // Get all info from Spin Boxs
+    int schoolYear = ui->spinBoxSchoolYear_2->value();
+    int semesterNo = ui->spinBoxSemesterNo->value();
+
+    // Convert QDate to std::string
+    std::string startDate = ui->dateEdit_Start->date().toString("dd/MM/yyyy").toStdString();
+    std::string endDate = ui->dateEdit_End->date().toString("dd/MM/yyyy").toStdString();
+
+    // Get newest semesterID in list
+    int newestID = db->semesterList.back().getSemesterID();
+
+    // Create new semester object, with increased semesterID
+    Semester newSemester(++newestID, semesterNo, schoolYear, startDate, endDate);
+
+    // Insert to datafile's semester list
+    db->semesterList.insert(newSemester);
+
+    // Immediately save to datafile
+    db->exportSemesterList(SEMESTER_FILE_PATH, db->semesterList);
+
+    // Pop up a message to inform the user
+    QString message = "New semester have been added to school year " + QString::number(schoolYear);
+    QMessageBox::information(this, "Start Semester", message, QMessageBox::Ok);
+
+    // Clear current page's components
+    ui->spinBoxSchoolYear_2->setValue(2024);
+    ui->spinBoxSemesterNo->setValue(1);
+    ui->dateEdit_Start->setDate(QDate(2024, 9, 5));
+    ui->dateEdit_End->setDate(QDate(2025, 1, 5));
+
+    // Load Page Start_Semester_Next's components
+    loadPageStartSemester_Next();
+
+    // Go to Start_Semester_Next page
+    ui->stackedWidget->setCurrentIndex(int(Page::StartSemester_Next));
+}
 
 
+/**************************************************************
+* Implement Page - Procedure - Start_Semester_Next
+*
+***************************************************************/
+// Load Page Start_Semester_Next
+void MainWindow::loadPageStartSemester_Next()
+{
+    // Clear page's components first
+    ui->txtCourseFile->clear();
+    ui->tableNewCourse->clear();
+    ui->tableNewCourse->setColumnCount(0);
+    ui->tableNewCourse->setRowCount(0);
+    newCourseList.clear();
+
+    // Load all semester to combobox
+    for (int i = 0; i < db->semesterList.size(); ++i) {
+        QString semesterInfoStr = QString::number(db->semesterList[i].getNo()) + " - " + QString::number(db->semesterList[i].getSchoolYear());
+        ui->comboBoxSemester->addItem(semesterInfoStr);
+    }
+
+    // Set default semester for combo box - last semester info
+    if (db->classList.size() > 0) {
+        ui->comboBoxSemester->setCurrentIndex(db->semesterList.size() - 1);
+    }
+}
+
+// Save new course list to datafile's course list & Go to Page Start_Semester_Next_2
+void MainWindow::on_btnNextToSemester_2_clicked()
+{
+    // Check if course list is empty
+    if (newCourseList.size() == 0) {
+        QMessageBox::warning(this, "Invalid Input", "There's no course to be added. Please add at least one course!", QMessageBox::Ok);
+        return;
+    }
+
+    // Get current semester info
+    std::string semesterInfo = std::to_string(db->semesterList[ui->comboBoxSemester->currentIndex()].getNo()) + " - " +
+                               std::to_string(db->semesterList[ui->comboBoxSemester->currentIndex()].getSchoolYear());
+
+    // Build message string
+    QString message = "Are you sure you want to save these course to semester " + QString::fromStdString(semesterInfo) + "?";
+
+    // Open message box to confirm
+    QMessageBox::StandardButton reply;
+    reply = QMessageBox::question(this, "Save Confirmation", message, QMessageBox::Yes | QMessageBox::No);
+
+    if (reply == QMessageBox::Yes) {
+        // Get newest courseID in list
+        int newestID = db->courseList.back().getCourseID();
+
+        // Get new courses in the Table Widget
+        for (int i = 0; i < newCourseList.size(); ++i) {
+            // Readjust courseID
+            newCourseList[i].setCourseID(++newestID);
+
+            // Insert to datafile's student list
+            db->courseList.insert(newCourseList[i]);
+        }
+
+        // Immediately save to datafile
+        db->exportCourseList(COURSE_FILE_PATH, db->courseList);
+
+        // Open success message box
+        QMessageBox::information(this, "Save Success", "Courses have been added to new semester!", QMessageBox::Ok);
+
+        // Reload current page's components
+        loadPageStartSemester_Next();
+
+        // Load Page Start_Semester_Next_2's components
+        loadPageStartSemester_Next_2();
+    }
+}
+
+// Go back to Page Start_Semester
+void MainWindow::on_btnBackFromStartSemester_clicked()
+{
+    // Open Confirmation message box
+    QMessageBox::StandardButton reply;
+    reply = QMessageBox::question(this, "Back Confirmation", "Are you sure you want to go back? Any unsaved data will be lost!", QMessageBox::Yes | QMessageBox::No);
+
+    // Check if user wants to go back to Start_Semester page
+    if (reply == QMessageBox::Yes)
+    {
+        // Reset current page's components
+        loadPageStartSemester_Next();
+
+        // Go back to Start_Semester page
+        ui->stackedWidget->setCurrentIndex(int(Page::StartSemester));
+    }
+}
+
+// Choose file to add courses (from text box or file dialog)
+void MainWindow::on_btnAddFileCourse_clicked()
+{
+    // Get file path from Dialog if filename text box is empty
+    QString filePath = ui->txtCourseFile->text();
+
+    // Check if filename text box is empty
+    if (filePath.isEmpty()) {
+        // Open file dialog to get file path
+        filePath = QFileDialog::getOpenFileName(this, "Open Course File", QDir::homePath(), "CSV files (*.csv)");
+        if (filePath.isEmpty()) {
+            return;
+        }
+        // Update text box
+        ui->txtCourseFile->setText(filePath);
+    }
+    else {
+        // Check file path is valid from text box
+        if (!QFile::exists(filePath)) {
+            QMessageBox::warning(this, "Invalid Input", "File does not exist!", QMessageBox::Ok);
+            return;
+        }
+    }
+    try {
+        // Load course list from file
+        db->importCourseList(filePath, newCourseList);
+
+        // Add courses to table widget
+        db->loadCourseList(ui->tableNewCourse, newCourseList);
+    } catch (...) {
+        QMessageBox::warning(this, "Error", "Invalid data file. Please try again!", QMessageBox::Ok);
+    }
+}
+
+// Remove selected course from the list
+void MainWindow::on_btnRemoveCourse_clicked()
+{
+    // Get selected row
+    int selectedRow = ui->tableNewCourse->currentRow();
+    if (selectedRow < 0 || selectedRow >= ui->tableNewCourse->rowCount()) {
+        QMessageBox::warning(this, "Invalid Input", "Please select a course to remove!", QMessageBox::Ok);
+        return;
+    }
+
+    // Remove selected row
+    ui->tableNewCourse->removeRow(selectedRow);
+
+    // Create temp course object
+    Course tempCourse= newCourseList[selectedRow];
+
+    // Remove from course list
+    db->deleteFromCourseList(tempCourse, newCourseList);
+}
+
+// Remove all courses from the list
+void MainWindow::on_btnRemoveAllCourse_clicked()
+{
+    // Clear table widget
+    ui->tableNewCourse->clearContents();
+
+    // Clear course list
+    newCourseList.clear();
+}
 
 
+/**************************************************************
+* Implement Page - Procedure - Start_Semester_Next_2
+*
+***************************************************************/
+// Load Page Start_Semester_Next_2
+void MainWindow::loadPageStartSemester_Next_2()
+{
+    // Clear page's components first
+    ui->txtStudentFile->clear();
+    ui->tableNewStudents_StartSemester->clear();
+    ui->tableNewStudents_StartSemester->setColumnCount(0);
+    ui->tableNewStudents_StartSemester->setRowCount(0);
+    newStudentList.clear();
+
+    // Load all courses to combobox
+    for (int i = 0; i < db->courseList.size(); ++i) {
+        std::string courseInfoStr = std::to_string(db->courseList[i].getCourseID()) + " - " + db->courseList[i].getCourseName() + " - " + db->courseList[i].getClassName();
+        ui->comboBoxCourse_StartSemester->addItem(QString::fromStdString(courseInfoStr));
+    }
+
+    // Set default course name for combo box - last course info
+    if (db->courseList.size() > 0) {
+        ui->comboBoxCourse_StartSemester->setCurrentIndex(db->courseList.size() - 1);
+    }
+
+    // Go to Page Start_Semester_Next_2
+    ui->stackedWidget->setCurrentIndex(int(Page::StartSemester_Next_2));
+}
+
+// Choose file to add students (from text box or file dialog)
+void MainWindow::on_btnAddFileStudent_StartSemester_clicked()
+{
+    // Get file path from Dialog if filename text box is empty
+    QString filePath = ui->txtStudentFile->text();
+
+    // Check if filename text box is empty
+    if (filePath.isEmpty()) {
+        // Open file dialog to get file path
+        filePath = QFileDialog::getOpenFileName(this, "Open Student File", QDir::homePath(), "CSV files (*.csv)");
+        if (filePath.isEmpty()) {
+            return;
+        }
+        // Update text box
+        ui->txtStudentFile->setText(filePath);
+    }
+    else {
+        // Check file path is valid from text box
+        if (!QFile::exists(filePath)) {
+            QMessageBox::warning(this, "Invalid Input", "File does not exist!", QMessageBox::Ok);
+            return;
+        }
+    }
+    try {
+        // Load student list from file
+        db->importStudentList(filePath, newStudentList);
+
+        // Add students to table widget
+        db->loadStudentList(ui->tableNewStudents_StartSemester, newStudentList);
+    } catch (...) {
+        QMessageBox::warning(this, "Error", "Invalid data file. Please try again!", QMessageBox::Ok);
+    }
+}
+
+// Remove selected student from the list
+void MainWindow::on_btnRemoveStudent_StartSemester_clicked()
+{
+    // Get selected row
+    int selectedRow = ui->tableNewStudents_StartSemester->currentRow();
+    if (selectedRow < 0 || selectedRow >= ui->tableNewStudents_StartSemester->rowCount()) {
+        QMessageBox::warning(this, "Invalid Input", "Please select a student to remove!", QMessageBox::Ok);
+        return;
+    }
+
+    // Remove selected row
+    ui->tableNewStudents_StartSemester->removeRow(selectedRow);
+
+    // Create temp student object
+    Student tempStudent = newStudentList[selectedRow];
+
+    // Remove from student list
+    db->deleteFromStudentList(tempStudent, newStudentList);
+}
+
+// Remove all students from the list
+void MainWindow::on_btnRemoveAllStudent_StartSemester_clicked()
+{
+    // Clear table widget
+    ui->tableNewStudents_StartSemester->clearContents();
+
+    // Clear student list
+    newStudentList.clear();
+}
+
+// Back to Start_Semester page
+void MainWindow::on_btnBackToStartSemester_Next_clicked()
+{
+    // Open Confirmation message box
+    QMessageBox::StandardButton reply;
+    reply = QMessageBox::question(this, "Back Confirmation", "Are you sure you want to go back? Any unsaved data will be lost!", QMessageBox::Yes | QMessageBox::No);
+
+    // Check if user wants to go back to Start_Semester page
+    if (reply == QMessageBox::Yes)
+    {
+        // Reset current page's components
+        loadPageStartSemester_Next();
+
+        // Go back to Start_Semester page
+        ui->stackedWidget->setCurrentIndex(int(Page::StartSemester_Next));
+    }
+}
+
+// Finish adding new students to course, no saving data
+void MainWindow::on_btnFinishAll_AddStudentToCourse_clicked()
+{
+    // Check if there are still new students in the list
+    if (newStudentList.size() > 0) {
+        // Open Confirmation message box
+        QMessageBox::StandardButton reply;
+        reply = QMessageBox::question(this, "Finish Confirmation", "Are you sure you want to finish? Any unsaved data will be lost!", QMessageBox::Yes | QMessageBox::No);
+
+        // Check if user wants to finish
+        if (reply == QMessageBox::Yes) {
+            // Reset current page's components
+            loadPageStartSemester_Next_2();
+
+            // Go back to Profile page
+            loadPageProfileInfo_Staff();
+        }
+    }
+    else {
+        // Open Notification message box
+        QMessageBox::information(this, "Finish", "Start Semester completed!", QMessageBox::Ok);
+
+        // Reset current page's components
+        loadPageStartSemester_Next_2();
+
+        // Go back to Profile page
+        loadPageProfileInfo_Staff();
+    }
+}
+
+// Save new students to course & Reload current page
+void MainWindow::on_btnSave_AddStudentToCourse_clicked()
+{
+    // Check if student list is empty
+    if (newStudentList.size() == 0) {
+        QMessageBox::warning(this, "Invalid Input", "There's no student to be added. Please add at least one student!", QMessageBox::Ok);
+        return;
+    }
+
+    // Build message string
+    QString message = "Are you sure you want to save these students to Course " + ui->comboBoxCourse_StartSemester->currentText() + "?";
+
+    // Open message box to confirm
+    QMessageBox::StandardButton reply;
+    reply = QMessageBox::question(this, "Save Confirmation", message, QMessageBox::Yes | QMessageBox::No);
+
+    if (reply == QMessageBox::Yes) {
+        // Get current semester ID
+        int currentSemesterID = db->semesterList[db->semesterList.size() - 1].getSemesterID();
+
+        // Get selected course ID from combo box by index
+        int selectedCourseIndex = ui->comboBoxCourse_StartSemester->currentIndex();
+        int selectedCourseID = db->courseList[selectedCourseIndex].getCourseID();
+        std::string selectedClassName = db->courseList[selectedCourseIndex].getClassName();
+
+        // Get newest student ID in datafile's list
+        int newestStudentID = db->studentList.back().getStudentID();
+
+        // Get new students in the Table Widget, with readjusted student ID
+        StudentInClass studentInClass;
+        StudentInCourse studentInCours;
+
+        for (int i = 0; i < newStudentList.size(); ++i) {
+            // Set class name & student ID for each student-in-class object
+            newStudentList[i].setStudentID(++newestStudentID);
+
+            // Insert to datafile's student list
+            db->studentList.insert(newStudentList[i]);
+
+            // Insert to datafile's student-in-class
+            studentInClass.setClassName(selectedClassName);
+            studentInClass.setStudentID(newestStudentID);
+            db->studentInClassList.insert(studentInClass);
+
+            // Insert to datafile's student-in-course list
+            studentInCours.setSemesterID(currentSemesterID);
+            studentInCours.setCourseID(selectedCourseID);
+            studentInCours.setStudentID(newestStudentID);
+            db->studentInCourseList.insert(studentInCours);
+        }
+
+        // Immediately save to datafiles
+        db->exportStudentList(STUDENT_FILE_PATH, db->studentList);
+        db->exportStudentInClassList(STUDENT_IN_CLASS_FILE_PATH, db->studentInClassList);
+        db->exportStudentInCourseList(STUDENT_IN_COURSE_FILE_PATH, db->studentInCourseList);
+
+        // Open success message box
+        QMessageBox::information(this, "Save Success", "Students have been added to the course this semester!", QMessageBox::Ok);
+
+        // Reload current page's components
+        loadPageStartSemester_Next_2();
+    }
+}
 
 
+/**************************************************************
+* Implement Page - Procedure - End Semester
+*
+***************************************************************/
+// Go to End_Semester page - Actually this page is Scoreboard_Staff page
+void MainWindow::on_btnEndSemester_clicked()
+{
+    // Get current semester info
+    Semester currentSemester = db->semesterList[db->semesterList.size() - 1];
+    QString message = "Are you sure you want to end the current Semester " +
+                      QString::number(currentSemester.getNo()) + " - " +
+                      QString::number(currentSemester.getSchoolYear()) + "?";
+
+    // Open Confirmation message box
+    QMessageBox::StandardButton reply;
+    reply = QMessageBox::question(this, "End Semester Confirmation", message, QMessageBox::Yes | QMessageBox::No);
+
+    // Check if user wants to end the semester
+    if (reply == QMessageBox::Yes) {
+        // Load page's components
+        db->loadScoreboardList(ui->tableScoreboards, db->scoreboardList);
+        // Go to Scoreboard page
+        ui->stackedWidget->setCurrentIndex(int(Page::Scoreboard_Staff));
+    }
+}
 
 
-
-
-
-
-
+/**************************************************************
+* Implement Page - Procedure - Others
+*
+***************************************************************/
+// Show "Coming soon" message box
+void MainWindow::on_btnOthers_clicked()
+{
+    QMessageBox::information(this, "Coming Soon", "New feature coming soon!", QMessageBox::Ok);
+}
 
 
 

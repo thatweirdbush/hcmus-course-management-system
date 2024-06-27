@@ -106,6 +106,10 @@ public:
 
     void loadClassList(QTableWidget* table, Set<Class>& classList);
 
+    void loadStudentInClassList(QTableWidget* table, Set<StudentInClass>& studentInClassList);
+
+    void loadStudentInCourseList(QTableWidget* table, Set<StudentInCourse>& studentInCourseList);
+
 public:
     // Update data to the database's attributes
     void updateCourseList(Course course, Set<Course>& courseList);
@@ -136,7 +140,11 @@ public:
 
     void deleteFromAccountList(Account account, Set<Account>& accountList);
 
-    void deleteFromClassList(Class classObj, Set<Class>& classList);    
+    void deleteFromClassList(Class classObj, Set<Class>& classList);
+
+    void deleteFromStudentInClassList(StudentInClass studentInClass, Set<StudentInClass>& studentInClassList);
+
+    void deleteFromStudentInCourseList(StudentInCourse studentInCourse, Set<StudentInCourse>& studentInCourseList);
 
 public:
     // Search functions - return single object
@@ -146,9 +154,10 @@ public:
 
     Course getCourseByID(int courseID);
 
+    Semester getSemesterByID(int semesterID);
+
 public:
     // Search functions - return all objects in list
     Set<Scoreboard> getScoreboardListByCourseID(int courseID);
-
 };
 #endif // DATABASE_H

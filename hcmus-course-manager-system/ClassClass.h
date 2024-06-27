@@ -42,7 +42,8 @@ public:
 
 public:
     bool operator==(const Class& classObj) {
-        return this->classID == classObj.classID;
+        // Not using classID here because this fails when adding new classes.
+        return this->className == classObj.className && this->startedYear == classObj.startedYear;
     }
 };
 #endif // _CLASS_CLASS_H_

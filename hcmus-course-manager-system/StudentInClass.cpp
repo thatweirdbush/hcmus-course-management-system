@@ -37,7 +37,7 @@ std::istream& operator>>(std::istream& is, StudentInClass& studentInClass) {
 // Output Operator Method
 std::ostream& operator<<(std::ostream& os, StudentInClass& studentInClass) {
     os << studentInClass.getClassName() << CSV_DELIMITER
-        << studentInClass.getStudentID() << CSV_DELIMITER << std::endl;
+        << studentInClass.getStudentID() << std::endl;
 
     return os;
 }

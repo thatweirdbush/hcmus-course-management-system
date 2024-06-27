@@ -52,7 +52,7 @@
      <string notr="true"/>
     </property>
     <property name="currentIndex">
-     <number>3</number>
+     <number>8</number>
     </property>
     <widget class="QWidget" name="pageSignIn">
      <widget class="QFrame" name="leftFrame">
@@ -2360,13 +2360,13 @@ border: none;
       </property>
       <property name="styleSheet">
        <string notr="true">QPushButton#btnDeleteCourse {
-background-color: rgb(255, 196, 54);
+background-color: rgb(168, 15, 46);
 color: rgb(0, 0, 0);
 border: none;
 }
 
 QPushButton#btnDeleteCourse:hover {
-background-color: rgb(229, 176, 48);
+background-color: rgb(227, 66, 52);
 color: rgb(0, 0, 0);
 border: none;
 }</string>
@@ -2843,8 +2843,8 @@ border: none;
      <widget class="QPushButton" name="btnScoreboardOfClass">
       <property name="geometry">
        <rect>
-        <x>340</x>
-        <y>530</y>
+        <x>610</x>
+        <y>470</y>
         <width>260</width>
         <height>50</height>
        </rect>
@@ -2944,6 +2944,53 @@ border: none;
        <bool>false</bool>
       </property>
      </widget>
+     <widget class="QPushButton" name="btnImportScoreboard">
+      <property name="geometry">
+       <rect>
+        <x>170</x>
+        <y>540</y>
+        <width>125</width>
+        <height>45</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Segoe UI Semibold</family>
+        <pointsize>11</pointsize>
+        <italic>false</italic>
+        <bold>false</bold>
+        <kerning>true</kerning>
+       </font>
+      </property>
+      <property name="cursor">
+       <cursorShape>PointingHandCursor</cursorShape>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton#btnImportScoreboard {
+background-color: rgb(255, 196, 54);
+color: rgb(0, 0, 0);
+border: none;
+}
+
+QPushButton#btnImportScoreboard:hover {
+background-color: rgb(229, 176, 48);
+color: rgb(0, 0, 0);
+border: none;
+}</string>
+      </property>
+      <property name="text">
+       <string>Import</string>
+      </property>
+      <property name="autoDefault">
+       <bool>false</bool>
+      </property>
+      <property name="default">
+       <bool>false</bool>
+      </property>
+      <property name="flat">
+       <bool>false</bool>
+      </property>
+     </widget>
     </widget>
     <widget class="QWidget" name="pageScoreboardOfCourse">
      <property name="styleSheet">
@@ -2967,7 +3014,7 @@ border: none;
        <rect>
         <x>30</x>
         <y>20</y>
-        <width>331</width>
+        <width>351</width>
         <height>41</height>
        </rect>
       </property>
@@ -2982,7 +3029,7 @@ border: none;
        <string notr="true">color: rgb(0, 0, 0);</string>
       </property>
       <property name="text">
-       <string>Scoreboard of Course</string>
+       <string>Scoreboard of Course -</string>
       </property>
      </widget>
      <widget class="QPushButton" name="btnBackToScoreboard_Staff">
@@ -3214,10 +3261,34 @@ background-color: rgb(46, 47, 48);</string>
        </property>
       </widget>
      </widget>
+     <widget class="QLabel" name="labelCourseName_Binding">
+      <property name="geometry">
+       <rect>
+        <x>380</x>
+        <y>20</y>
+        <width>491</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Segoe UI Semibold</family>
+        <pointsize>24</pointsize>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color: rgb(0, 0, 0);</string>
+      </property>
+      <property name="text">
+       <string>CourseName</string>
+      </property>
+     </widget>
      <zorder>frameStatic</zorder>
      <zorder>tableScoreboardOfCourse</zorder>
      <zorder>labelScoreboardOfCourse</zorder>
      <zorder>btnBackToScoreboard_Staff</zorder>
+     <zorder>labelCourseName_Binding</zorder>
     </widget>
     <widget class="QWidget" name="pageScoreboardOfClass">
      <property name="styleSheet">
@@ -3424,7 +3495,7 @@ background-color: rgb(46, 47, 48);</string>
        <rect>
         <x>30</x>
         <y>20</y>
-        <width>331</width>
+        <width>311</width>
         <height>41</height>
        </rect>
       </property>
@@ -3439,7 +3510,7 @@ background-color: rgb(46, 47, 48);</string>
        <string notr="true">color: rgb(0, 0, 0);</string>
       </property>
       <property name="text">
-       <string>Scoreboard of Class</string>
+       <string>Scoreboard of Class -</string>
       </property>
      </widget>
      <widget class="QPushButton" name="btnBackToScoreboard_Staff_2">
@@ -3487,6 +3558,29 @@ border: none;
       </property>
       <property name="flat">
        <bool>false</bool>
+      </property>
+     </widget>
+     <widget class="QLabel" name="labelClassName_Binding">
+      <property name="geometry">
+       <rect>
+        <x>350</x>
+        <y>20</y>
+        <width>521</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Segoe UI Semibold</family>
+        <pointsize>24</pointsize>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color: rgb(0, 0, 0);</string>
+      </property>
+      <property name="text">
+       <string>ClassName</string>
       </property>
      </widget>
     </widget>
@@ -3821,7 +3915,7 @@ background-color: rgb(46, 47, 48);</string>
        <string notr="true">color: rgb(0, 0, 0);</string>
       </property>
       <property name="text">
-       <string>Students In Course</string>
+       <string>Students In Course -</string>
       </property>
      </widget>
      <widget class="QPushButton" name="btnBackToCourse_Staff">
@@ -3871,188 +3965,122 @@ border: none;
        <bool>false</bool>
       </property>
      </widget>
-     <widget class="QFrame" name="frameStatic_4">
+     <widget class="QLabel" name="labelStudentInCourse_Binding">
       <property name="geometry">
        <rect>
         <x>340</x>
-        <y>410</y>
+        <y>20</y>
         <width>531</width>
-        <height>171</height>
+        <height>41</height>
        </rect>
       </property>
+      <property name="font">
+       <font>
+        <family>Segoe UI Semibold</family>
+        <pointsize>24</pointsize>
+        <bold>true</bold>
+       </font>
+      </property>
       <property name="styleSheet">
-       <string notr="true">QFrame#frameStatic_4 {
-background-color: rgb(12, 53, 106);
+       <string notr="true">color: rgb(0, 0, 0);</string>
+      </property>
+      <property name="text">
+       <string>Course Information</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="btnExportStudentInCourse">
+      <property name="geometry">
+       <rect>
+        <x>740</x>
+        <y>540</y>
+        <width>125</width>
+        <height>45</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Segoe UI Semibold</family>
+        <pointsize>11</pointsize>
+        <italic>false</italic>
+        <bold>false</bold>
+        <kerning>true</kerning>
+       </font>
+      </property>
+      <property name="cursor">
+       <cursorShape>PointingHandCursor</cursorShape>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton#btnExportStudentInCourse {
+background-color: rgb(255, 196, 54);
+color: rgb(0, 0, 0);
 border: none;
 }
 
-QFrame#frameStatic_4 :hover {
-background-color: rgb(14, 63, 127);
+QPushButton#btnExportStudentInCourse:hover {
+background-color: rgb(229, 176, 48);
+color: rgb(0, 0, 0);
+border: none;
+}</string>
+      </property>
+      <property name="text">
+       <string>Export</string>
+      </property>
+      <property name="autoDefault">
+       <bool>false</bool>
+      </property>
+      <property name="default">
+       <bool>false</bool>
+      </property>
+      <property name="flat">
+       <bool>false</bool>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="btnDeleteStudentInCourse">
+      <property name="geometry">
+       <rect>
+        <x>600</x>
+        <y>540</y>
+        <width>125</width>
+        <height>45</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Segoe UI Semibold</family>
+        <pointsize>11</pointsize>
+        <italic>false</italic>
+        <bold>false</bold>
+        <kerning>true</kerning>
+       </font>
+      </property>
+      <property name="cursor">
+       <cursorShape>PointingHandCursor</cursorShape>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton#btnDeleteStudentInCourse {
+background-color: rgb(168, 15, 46);
+color: rgb(0, 0, 0);
 border: none;
 }
-</string>
+
+QPushButton#btnDeleteStudentInCourse:hover {
+background-color: rgb(227, 66, 52);
+color: rgb(0, 0, 0);
+border: none;
+}</string>
       </property>
-      <property name="frameShape">
-       <enum>QFrame::StyledPanel</enum>
+      <property name="text">
+       <string>Delete</string>
       </property>
-      <property name="frameShadow">
-       <enum>QFrame::Raised</enum>
+      <property name="autoDefault">
+       <bool>false</bool>
       </property>
-      <widget class="QLabel" name="labelHighestScore_Binding_4">
-       <property name="geometry">
-        <rect>
-         <x>190</x>
-         <y>62</y>
-         <width>161</width>
-         <height>41</height>
-        </rect>
-       </property>
-       <property name="font">
-        <font>
-         <family>Segoe UI Semibold</family>
-         <pointsize>12</pointsize>
-         <bold>true</bold>
-        </font>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">color: rgb(223, 223, 223);</string>
-       </property>
-       <property name="text">
-        <string>Highest Score</string>
-       </property>
-      </widget>
-      <widget class="QLabel" name="labelAchievedBy_Binding_4">
-       <property name="geometry">
-        <rect>
-         <x>190</x>
-         <y>102</y>
-         <width>161</width>
-         <height>41</height>
-        </rect>
-       </property>
-       <property name="font">
-        <font>
-         <family>Segoe UI Semibold</family>
-         <pointsize>12</pointsize>
-         <bold>true</bold>
-        </font>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">color: rgb(223, 223, 223);</string>
-       </property>
-       <property name="text">
-        <string>Achieved By</string>
-       </property>
-      </widget>
-      <widget class="QLabel" name="labelAvgGPA_4">
-       <property name="geometry">
-        <rect>
-         <x>20</x>
-         <y>20</y>
-         <width>161</width>
-         <height>41</height>
-        </rect>
-       </property>
-       <property name="font">
-        <font>
-         <family>Segoe UI Semibold</family>
-         <pointsize>16</pointsize>
-         <bold>true</bold>
-        </font>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">color: rgb(223, 223, 223);</string>
-       </property>
-       <property name="text">
-        <string>• Average GPA: </string>
-       </property>
-      </widget>
-      <widget class="QLabel" name="labelAchievedBy_4">
-       <property name="geometry">
-        <rect>
-         <x>20</x>
-         <y>100</y>
-         <width>161</width>
-         <height>41</height>
-        </rect>
-       </property>
-       <property name="font">
-        <font>
-         <family>Segoe UI Semibold</family>
-         <pointsize>16</pointsize>
-         <bold>true</bold>
-        </font>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">color: rgb(223, 223, 223);</string>
-       </property>
-       <property name="text">
-        <string>• Achieved By: </string>
-       </property>
-      </widget>
-      <widget class="QLabel" name="labelAvgGPA_Binding_4">
-       <property name="geometry">
-        <rect>
-         <x>190</x>
-         <y>22</y>
-         <width>161</width>
-         <height>41</height>
-        </rect>
-       </property>
-       <property name="font">
-        <font>
-         <family>Segoe UI Semibold</family>
-         <pointsize>12</pointsize>
-         <bold>true</bold>
-        </font>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">color: rgb(223, 223, 223);</string>
-       </property>
-       <property name="text">
-        <string>Average GPA</string>
-       </property>
-      </widget>
-      <widget class="QLabel" name="labelAppIcon_4">
-       <property name="geometry">
-        <rect>
-         <x>370</x>
-         <y>20</y>
-         <width>130</width>
-         <height>130</height>
-        </rect>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">image: url(:/assets/app-logo.ico);
-background-color: rgb(46, 47, 48);</string>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
-      <widget class="QLabel" name="labelHighestScore_4">
-       <property name="geometry">
-        <rect>
-         <x>20</x>
-         <y>60</y>
-         <width>161</width>
-         <height>41</height>
-        </rect>
-       </property>
-       <property name="font">
-        <font>
-         <family>Segoe UI Semibold</family>
-         <pointsize>16</pointsize>
-         <bold>true</bold>
-        </font>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">color: rgb(223, 223, 223);</string>
-       </property>
-       <property name="text">
-        <string>• Highest Score: </string>
-       </property>
-      </widget>
+      <property name="default">
+       <bool>false</bool>
+      </property>
+      <property name="flat">
+       <bool>false</bool>
+      </property>
      </widget>
     </widget>
     <widget class="QWidget" name="pageStartSchoolYear">
@@ -4467,7 +4495,7 @@ border: none;
      <widget class="QPushButton" name="btnNext_StartSchoolYear">
       <property name="geometry">
        <rect>
-        <x>760</x>
+        <x>740</x>
         <y>540</y>
         <width>125</width>
         <height>45</height>
@@ -4569,7 +4597,7 @@ border: none;
      <widget class="QPushButton" name="btnSave_StartSchoolYear">
       <property name="geometry">
        <rect>
-        <x>760</x>
+        <x>740</x>
         <y>540</y>
         <width>125</width>
         <height>45</height>
@@ -5033,22 +5061,2601 @@ border: none;</string>
        <string>Add Students To New Class</string>
       </property>
      </widget>
+     <widget class="QPushButton" name="btnFinishAll_StartSchoolYear_2">
+      <property name="geometry">
+       <rect>
+        <x>600</x>
+        <y>540</y>
+        <width>125</width>
+        <height>45</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Segoe UI Semibold</family>
+        <pointsize>11</pointsize>
+        <italic>false</italic>
+        <bold>false</bold>
+        <kerning>true</kerning>
+       </font>
+      </property>
+      <property name="cursor">
+       <cursorShape>PointingHandCursor</cursorShape>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton#btnFinishAll_StartSchoolYear_2 {
+background-color: rgb(12, 53, 106);
+color: rgb(223, 223, 223);
+border: none;
+}
+
+QPushButton#btnFinishAll_StartSchoolYear_2:hover {
+background-color: rgb(14, 63, 127);
+color: rgb(223, 223, 223);
+border: none;
+}</string>
+      </property>
+      <property name="text">
+       <string>Finish All</string>
+      </property>
+      <property name="autoDefault">
+       <bool>false</bool>
+      </property>
+      <property name="default">
+       <bool>false</bool>
+      </property>
+      <property name="flat">
+       <bool>false</bool>
+      </property>
+     </widget>
     </widget>
-    <widget class="QWidget" name="pageStudentsInClass">
+    <widget class="QWidget" name="pageAddStudentToCourseManual">
      <property name="styleSheet">
-      <string notr="true">QWidget#pageStudentsInClass{
+      <string notr="true">QWidget#pageAddStudentToCourseManual{
 	border-image: url(:/assets/blue-gradient.png) 0 0 0 0 stretch stretch;
 }
 </string>
      </property>
+     <widget class="QLabel" name="labelStudentInCourse_6">
+      <property name="geometry">
+       <rect>
+        <x>250</x>
+        <y>30</y>
+        <width>401</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Segoe UI Semibold</family>
+        <pointsize>24</pointsize>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color: rgb(0, 0, 0);</string>
+      </property>
+      <property name="text">
+       <string>Add Students To Course</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="btnSave_AddStudentToCourseManual">
+      <property name="geometry">
+       <rect>
+        <x>740</x>
+        <y>540</y>
+        <width>125</width>
+        <height>45</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Segoe UI Semibold</family>
+        <pointsize>11</pointsize>
+        <italic>false</italic>
+        <bold>false</bold>
+        <kerning>true</kerning>
+       </font>
+      </property>
+      <property name="cursor">
+       <cursorShape>PointingHandCursor</cursorShape>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton#btnSave_AddStudentToCourseManual {
+background-color: rgb(255, 196, 54);
+color: rgb(0, 0, 0);
+border: none;
+}
+
+QPushButton#btnSave_AddStudentToCourseManual:hover {
+background-color: rgb(229, 176, 48);
+color: rgb(0, 0, 0);
+border: none;
+}</string>
+      </property>
+      <property name="text">
+       <string>Save</string>
+      </property>
+      <property name="autoDefault">
+       <bool>false</bool>
+      </property>
+      <property name="default">
+       <bool>false</bool>
+      </property>
+      <property name="flat">
+       <bool>false</bool>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="btnFinishAll_StartSchoolYear_3">
+      <property name="geometry">
+       <rect>
+        <x>600</x>
+        <y>540</y>
+        <width>125</width>
+        <height>45</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Segoe UI Semibold</family>
+        <pointsize>11</pointsize>
+        <italic>false</italic>
+        <bold>false</bold>
+        <kerning>true</kerning>
+       </font>
+      </property>
+      <property name="cursor">
+       <cursorShape>PointingHandCursor</cursorShape>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton#btnFinishAll_StartSchoolYear_2 {
+background-color: rgb(12, 53, 106);
+color: rgb(223, 223, 223);
+border: none;
+}
+
+QPushButton#btnFinishAll_StartSchoolYear_2:hover {
+background-color: rgb(14, 63, 127);
+color: rgb(223, 223, 223);
+border: none;
+}</string>
+      </property>
+      <property name="text">
+       <string>Finish All</string>
+      </property>
+      <property name="autoDefault">
+       <bool>false</bool>
+      </property>
+      <property name="default">
+       <bool>false</bool>
+      </property>
+      <property name="flat">
+       <bool>false</bool>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="btnBackToStudentInCourse_Manual">
+      <property name="geometry">
+       <rect>
+        <x>30</x>
+        <y>540</y>
+        <width>125</width>
+        <height>45</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Segoe UI Semibold</family>
+        <pointsize>11</pointsize>
+        <italic>false</italic>
+        <bold>false</bold>
+        <kerning>true</kerning>
+       </font>
+      </property>
+      <property name="cursor">
+       <cursorShape>PointingHandCursor</cursorShape>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton#btnBackToStudentInCourse_Manual {
+background-color: rgb(12, 53, 106);
+color: rgb(223, 223, 223);
+border: none;
+}
+
+QPushButton#btnBackToStudentInCourse_Manual:hover {
+background-color: rgb(14, 63, 127);
+color: rgb(223, 223, 223);
+border: none;
+}</string>
+      </property>
+      <property name="text">
+       <string>Back</string>
+      </property>
+      <property name="autoDefault">
+       <bool>false</bool>
+      </property>
+      <property name="default">
+       <bool>false</bool>
+      </property>
+      <property name="flat">
+       <bool>false</bool>
+      </property>
+     </widget>
+     <widget class="QFrame" name="frameProcedure_2">
+      <property name="geometry">
+       <rect>
+        <x>50</x>
+        <y>90</y>
+        <width>801</width>
+        <height>421</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QFrame#frameProcedure_2 {
+border-image: url(:/assets/blue-gradient-xswap.png) 0 0 0 0 stretch stretch;
+border: none;
+}
+
+</string>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::StyledPanel</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Raised</enum>
+      </property>
+      <widget class="QLabel" name="labelHighestScore_26">
+       <property name="geometry">
+        <rect>
+         <x>50</x>
+         <y>120</y>
+         <width>231</width>
+         <height>41</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <family>Segoe UI Semibold</family>
+         <pointsize>16</pointsize>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">color: rgb(223, 223, 223);</string>
+       </property>
+       <property name="text">
+        <string>Enter Student CSV file:</string>
+       </property>
+      </widget>
+      <widget class="QFrame" name="frameStudentInCourse_2">
+       <property name="geometry">
+        <rect>
+         <x>350</x>
+         <y>120</y>
+         <width>251</width>
+         <height>50</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QFrame#frameStudentInCourse_2 {
+background-color: whitesmoke;
+border: none;
+}
+</string>
+       </property>
+       <property name="frameShape">
+        <enum>QFrame::StyledPanel</enum>
+       </property>
+       <property name="frameShadow">
+        <enum>QFrame::Raised</enum>
+       </property>
+       <widget class="QLineEdit" name="txtClassName_9">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>10</y>
+          <width>211</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <family>Segoe UI Semibold</family>
+          <pointsize>12</pointsize>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">border: none;
+color: rgb(0, 0, 0);
+background-color: whitesmoke;
+
+</string>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="placeholderText">
+         <string>File Name</string>
+        </property>
+       </widget>
+      </widget>
+      <widget class="QPushButton" name="btnAddFileStudent_2">
+       <property name="geometry">
+        <rect>
+         <x>620</x>
+         <y>120</y>
+         <width>131</width>
+         <height>50</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <family>Segoe UI Semibold</family>
+         <pointsize>11</pointsize>
+         <italic>false</italic>
+         <bold>false</bold>
+         <kerning>true</kerning>
+        </font>
+       </property>
+       <property name="cursor">
+        <cursorShape>PointingHandCursor</cursorShape>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QPushButton#btnAddFileStudent {
+background-color: rgb(12, 53, 106);
+color: rgb(223, 223, 223);
+border: none;
+}
+
+QPushButton#btnAddFileStudent:hover {
+background-color: rgb(14, 63, 127);
+color: rgb(223, 223, 223);
+border: none;
+}</string>
+       </property>
+       <property name="text">
+        <string>Upload File</string>
+       </property>
+       <property name="autoDefault">
+        <bool>false</bool>
+       </property>
+       <property name="default">
+        <bool>false</bool>
+       </property>
+       <property name="flat">
+        <bool>false</bool>
+       </property>
+      </widget>
+      <widget class="QLabel" name="labelHighestScore_27">
+       <property name="geometry">
+        <rect>
+         <x>50</x>
+         <y>190</y>
+         <width>261</width>
+         <height>101</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <family>Segoe UI Semibold</family>
+         <pointsize>16</pointsize>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">color: rgb(223, 223, 223);</string>
+       </property>
+       <property name="text">
+        <string>New students will be added in the selected class:</string>
+       </property>
+       <property name="wordWrap">
+        <bool>true</bool>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="btnRemoveStudentInClass_2">
+       <property name="geometry">
+        <rect>
+         <x>190</x>
+         <y>330</y>
+         <width>125</width>
+         <height>50</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <family>Segoe UI Semibold</family>
+         <pointsize>11</pointsize>
+         <italic>false</italic>
+         <bold>false</bold>
+         <kerning>true</kerning>
+        </font>
+       </property>
+       <property name="cursor">
+        <cursorShape>PointingHandCursor</cursorShape>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QPushButton#btnRemoveStudentInClass{
+background-color: rgb(12, 53, 106);
+color: rgb(223, 223, 223);
+border: none;
+}
+
+QPushButton#btnRemoveStudentInClass:hover {
+background-color: rgb(14, 63, 127);
+color: rgb(223, 223, 223);
+border: none;
+}</string>
+       </property>
+       <property name="text">
+        <string>Remove</string>
+       </property>
+       <property name="autoDefault">
+        <bool>false</bool>
+       </property>
+       <property name="default">
+        <bool>false</bool>
+       </property>
+       <property name="flat">
+        <bool>false</bool>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="btnRemoveAllStudentInClass_2">
+       <property name="geometry">
+        <rect>
+         <x>50</x>
+         <y>330</y>
+         <width>125</width>
+         <height>50</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <family>Segoe UI Semibold</family>
+         <pointsize>11</pointsize>
+         <italic>false</italic>
+         <bold>false</bold>
+         <kerning>true</kerning>
+        </font>
+       </property>
+       <property name="cursor">
+        <cursorShape>PointingHandCursor</cursorShape>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QPushButton#btnRemoveAllStudentInClass {
+background-color: rgb(255, 196, 54);
+color: rgb(0, 0, 0);
+border: none;
+}
+
+QPushButton#btnRemoveAllStudentInClass:hover {
+background-color: rgb(229, 176, 48);
+color: rgb(0, 0, 0);
+border: none;
+}</string>
+       </property>
+       <property name="text">
+        <string>Remove All</string>
+       </property>
+       <property name="autoDefault">
+        <bool>false</bool>
+       </property>
+       <property name="default">
+        <bool>false</bool>
+       </property>
+       <property name="flat">
+        <bool>false</bool>
+       </property>
+      </widget>
+      <widget class="QFrame" name="frameStudentInCourse">
+       <property name="geometry">
+        <rect>
+         <x>350</x>
+         <y>40</y>
+         <width>401</width>
+         <height>41</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QFrame#frameStudentInCourse {
+background-color: whitesmoke;
+border: none;
+}
+</string>
+       </property>
+       <property name="frameShape">
+        <enum>QFrame::StyledPanel</enum>
+       </property>
+       <property name="frameShadow">
+        <enum>QFrame::Raised</enum>
+       </property>
+       <widget class="QComboBox" name="comboBoxStudentClass_2">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>0</y>
+          <width>381</width>
+          <height>41</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <family>Segoe UI Semibold</family>
+          <pointsize>12</pointsize>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">border: none;
+color: rgb(0, 0, 0);
+background-color: whitesmoke;</string>
+        </property>
+        <property name="currentText">
+         <string/>
+        </property>
+       </widget>
+      </widget>
+      <widget class="QLabel" name="labelHighestScore_28">
+       <property name="geometry">
+        <rect>
+         <x>50</x>
+         <y>40</y>
+         <width>231</width>
+         <height>41</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <family>Segoe UI Semibold</family>
+         <pointsize>16</pointsize>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">color: rgb(223, 223, 223);</string>
+       </property>
+       <property name="text">
+        <string>Select class:</string>
+       </property>
+      </widget>
+      <widget class="QTableWidget" name="tableNewStudentsInClass_2">
+       <property name="geometry">
+        <rect>
+         <x>350</x>
+         <y>210</y>
+         <width>401</width>
+         <height>171</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">background-color: whitesmoke;
+border: none;</string>
+       </property>
+      </widget>
+     </widget>
     </widget>
-    <widget class="QWidget" name="pageStudentsInCourse">
+    <widget class="QWidget" name="pageAddStudentToCourseUsingFile">
      <property name="styleSheet">
-      <string notr="true">QWidget#pageStudentsInCourse{
+      <string notr="true">QWidget#pageAddStudentToCourseUsingFile{
 	border-image: url(:/assets/blue-gradient.png) 0 0 0 0 stretch stretch;
 }
 </string>
      </property>
+     <widget class="QLabel" name="labelStudentInCourse_7">
+      <property name="geometry">
+       <rect>
+        <x>250</x>
+        <y>30</y>
+        <width>401</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Segoe UI Semibold</family>
+        <pointsize>24</pointsize>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color: rgb(0, 0, 0);</string>
+      </property>
+      <property name="text">
+       <string>Add Students To Course</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="btnSave_StartSchoolYear_3">
+      <property name="geometry">
+       <rect>
+        <x>740</x>
+        <y>540</y>
+        <width>125</width>
+        <height>45</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Segoe UI Semibold</family>
+        <pointsize>11</pointsize>
+        <italic>false</italic>
+        <bold>false</bold>
+        <kerning>true</kerning>
+       </font>
+      </property>
+      <property name="cursor">
+       <cursorShape>PointingHandCursor</cursorShape>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton#btnSave_StartSchoolYear {
+background-color: rgb(255, 196, 54);
+color: rgb(0, 0, 0);
+border: none;
+}
+
+QPushButton#btnSave_StartSchoolYear:hover {
+background-color: rgb(229, 176, 48);
+color: rgb(0, 0, 0);
+border: none;
+}</string>
+      </property>
+      <property name="text">
+       <string>Save</string>
+      </property>
+      <property name="autoDefault">
+       <bool>false</bool>
+      </property>
+      <property name="default">
+       <bool>false</bool>
+      </property>
+      <property name="flat">
+       <bool>false</bool>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="btnFinishAll_StartSchoolYear_4">
+      <property name="geometry">
+       <rect>
+        <x>600</x>
+        <y>540</y>
+        <width>125</width>
+        <height>45</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Segoe UI Semibold</family>
+        <pointsize>11</pointsize>
+        <italic>false</italic>
+        <bold>false</bold>
+        <kerning>true</kerning>
+       </font>
+      </property>
+      <property name="cursor">
+       <cursorShape>PointingHandCursor</cursorShape>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton#btnFinishAll_StartSchoolYear_2 {
+background-color: rgb(12, 53, 106);
+color: rgb(223, 223, 223);
+border: none;
+}
+
+QPushButton#btnFinishAll_StartSchoolYear_2:hover {
+background-color: rgb(14, 63, 127);
+color: rgb(223, 223, 223);
+border: none;
+}</string>
+      </property>
+      <property name="text">
+       <string>Finish All</string>
+      </property>
+      <property name="autoDefault">
+       <bool>false</bool>
+      </property>
+      <property name="default">
+       <bool>false</bool>
+      </property>
+      <property name="flat">
+       <bool>false</bool>
+      </property>
+     </widget>
+     <widget class="QFrame" name="frameProcedure_3">
+      <property name="geometry">
+       <rect>
+        <x>50</x>
+        <y>90</y>
+        <width>801</width>
+        <height>421</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QFrame#frameProcedure_3 {
+border-image: url(:/assets/blue-gradient-xswap.png) 0 0 0 0 stretch stretch;
+border: none;
+}
+
+</string>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::StyledPanel</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Raised</enum>
+      </property>
+      <widget class="QLabel" name="labelHighestScore_29">
+       <property name="geometry">
+        <rect>
+         <x>50</x>
+         <y>120</y>
+         <width>231</width>
+         <height>41</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <family>Segoe UI Semibold</family>
+         <pointsize>16</pointsize>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">color: rgb(223, 223, 223);</string>
+       </property>
+       <property name="text">
+        <string>Enter Student CSV file:</string>
+       </property>
+      </widget>
+      <widget class="QFrame" name="frameStudentFile_3">
+       <property name="geometry">
+        <rect>
+         <x>350</x>
+         <y>120</y>
+         <width>251</width>
+         <height>50</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QFrame#frameStudentFile_3 {
+background-color: whitesmoke;
+border: none;
+}
+</string>
+       </property>
+       <property name="frameShape">
+        <enum>QFrame::StyledPanel</enum>
+       </property>
+       <property name="frameShadow">
+        <enum>QFrame::Raised</enum>
+       </property>
+       <widget class="QLineEdit" name="txtClassName_10">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>10</y>
+          <width>211</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <family>Segoe UI Semibold</family>
+          <pointsize>12</pointsize>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">border: none;
+color: rgb(0, 0, 0);
+background-color: whitesmoke;
+
+</string>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="placeholderText">
+         <string>File Name</string>
+        </property>
+       </widget>
+      </widget>
+      <widget class="QPushButton" name="btnAddFileStudent_3">
+       <property name="geometry">
+        <rect>
+         <x>620</x>
+         <y>120</y>
+         <width>131</width>
+         <height>50</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <family>Segoe UI Semibold</family>
+         <pointsize>11</pointsize>
+         <italic>false</italic>
+         <bold>false</bold>
+         <kerning>true</kerning>
+        </font>
+       </property>
+       <property name="cursor">
+        <cursorShape>PointingHandCursor</cursorShape>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QPushButton#btnAddFileStudent {
+background-color: rgb(12, 53, 106);
+color: rgb(223, 223, 223);
+border: none;
+}
+
+QPushButton#btnAddFileStudent:hover {
+background-color: rgb(14, 63, 127);
+color: rgb(223, 223, 223);
+border: none;
+}</string>
+       </property>
+       <property name="text">
+        <string>Upload File</string>
+       </property>
+       <property name="autoDefault">
+        <bool>false</bool>
+       </property>
+       <property name="default">
+        <bool>false</bool>
+       </property>
+       <property name="flat">
+        <bool>false</bool>
+       </property>
+      </widget>
+      <widget class="QLabel" name="labelHighestScore_30">
+       <property name="geometry">
+        <rect>
+         <x>50</x>
+         <y>190</y>
+         <width>261</width>
+         <height>101</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <family>Segoe UI Semibold</family>
+         <pointsize>16</pointsize>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">color: rgb(223, 223, 223);</string>
+       </property>
+       <property name="text">
+        <string>New students will be added in the selected class:</string>
+       </property>
+       <property name="wordWrap">
+        <bool>true</bool>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="btnRemoveStudentInClass_3">
+       <property name="geometry">
+        <rect>
+         <x>190</x>
+         <y>330</y>
+         <width>125</width>
+         <height>50</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <family>Segoe UI Semibold</family>
+         <pointsize>11</pointsize>
+         <italic>false</italic>
+         <bold>false</bold>
+         <kerning>true</kerning>
+        </font>
+       </property>
+       <property name="cursor">
+        <cursorShape>PointingHandCursor</cursorShape>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QPushButton#btnRemoveStudentInClass{
+background-color: rgb(12, 53, 106);
+color: rgb(223, 223, 223);
+border: none;
+}
+
+QPushButton#btnRemoveStudentInClass:hover {
+background-color: rgb(14, 63, 127);
+color: rgb(223, 223, 223);
+border: none;
+}</string>
+       </property>
+       <property name="text">
+        <string>Remove</string>
+       </property>
+       <property name="autoDefault">
+        <bool>false</bool>
+       </property>
+       <property name="default">
+        <bool>false</bool>
+       </property>
+       <property name="flat">
+        <bool>false</bool>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="btnRemoveAllStudentInClass_3">
+       <property name="geometry">
+        <rect>
+         <x>50</x>
+         <y>330</y>
+         <width>125</width>
+         <height>50</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <family>Segoe UI Semibold</family>
+         <pointsize>11</pointsize>
+         <italic>false</italic>
+         <bold>false</bold>
+         <kerning>true</kerning>
+        </font>
+       </property>
+       <property name="cursor">
+        <cursorShape>PointingHandCursor</cursorShape>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QPushButton#btnRemoveAllStudentInClass {
+background-color: rgb(255, 196, 54);
+color: rgb(0, 0, 0);
+border: none;
+}
+
+QPushButton#btnRemoveAllStudentInClass:hover {
+background-color: rgb(229, 176, 48);
+color: rgb(0, 0, 0);
+border: none;
+}</string>
+       </property>
+       <property name="text">
+        <string>Remove All</string>
+       </property>
+       <property name="autoDefault">
+        <bool>false</bool>
+       </property>
+       <property name="default">
+        <bool>false</bool>
+       </property>
+       <property name="flat">
+        <bool>false</bool>
+       </property>
+      </widget>
+      <widget class="QFrame" name="frameStudentClass_3">
+       <property name="geometry">
+        <rect>
+         <x>350</x>
+         <y>40</y>
+         <width>401</width>
+         <height>41</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QFrame#frameStudentClass_3 {
+background-color: whitesmoke;
+border: none;
+}
+</string>
+       </property>
+       <property name="frameShape">
+        <enum>QFrame::StyledPanel</enum>
+       </property>
+       <property name="frameShadow">
+        <enum>QFrame::Raised</enum>
+       </property>
+       <widget class="QComboBox" name="comboBoxStudentClass_3">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>0</y>
+          <width>381</width>
+          <height>41</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <family>Segoe UI Semibold</family>
+          <pointsize>12</pointsize>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">border: none;
+color: rgb(0, 0, 0);
+background-color: whitesmoke;</string>
+        </property>
+        <property name="currentText">
+         <string/>
+        </property>
+       </widget>
+      </widget>
+      <widget class="QLabel" name="labelHighestScore_31">
+       <property name="geometry">
+        <rect>
+         <x>50</x>
+         <y>40</y>
+         <width>231</width>
+         <height>41</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <family>Segoe UI Semibold</family>
+         <pointsize>16</pointsize>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">color: rgb(223, 223, 223);</string>
+       </property>
+       <property name="text">
+        <string>Select class:</string>
+       </property>
+      </widget>
+      <widget class="QTableWidget" name="tableNewStudentsInClass_3">
+       <property name="geometry">
+        <rect>
+         <x>350</x>
+         <y>210</y>
+         <width>401</width>
+         <height>171</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">background-color: whitesmoke;
+border: none;</string>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QPushButton" name="btnBackToStartSchoolYear_3">
+      <property name="geometry">
+       <rect>
+        <x>30</x>
+        <y>540</y>
+        <width>125</width>
+        <height>45</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Segoe UI Semibold</family>
+        <pointsize>11</pointsize>
+        <italic>false</italic>
+        <bold>false</bold>
+        <kerning>true</kerning>
+       </font>
+      </property>
+      <property name="cursor">
+       <cursorShape>PointingHandCursor</cursorShape>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton#btnBackToStartSchoolYear {
+background-color: rgb(12, 53, 106);
+color: rgb(223, 223, 223);
+border: none;
+}
+
+QPushButton#btnBackToStartSchoolYear:hover {
+background-color: rgb(14, 63, 127);
+color: rgb(223, 223, 223);
+border: none;
+}</string>
+      </property>
+      <property name="text">
+       <string>Back</string>
+      </property>
+      <property name="autoDefault">
+       <bool>false</bool>
+      </property>
+      <property name="default">
+       <bool>false</bool>
+      </property>
+      <property name="flat">
+       <bool>false</bool>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="pageStartSemester">
+     <property name="styleSheet">
+      <string notr="true">QWidget#pageStartSemester{
+	border-image: url(:/assets/blue-gradient.png) 0 0 0 0 stretch stretch;
+}
+</string>
+     </property>
+     <widget class="QLabel" name="labelStudentInCourse_8">
+      <property name="geometry">
+       <rect>
+        <x>330</x>
+        <y>30</y>
+        <width>251</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Segoe UI Semibold</family>
+        <pointsize>24</pointsize>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color: rgb(0, 0, 0);</string>
+      </property>
+      <property name="text">
+       <string>Start A Semester</string>
+      </property>
+     </widget>
+     <widget class="QFrame" name="frameProcedure_4">
+      <property name="geometry">
+       <rect>
+        <x>50</x>
+        <y>90</y>
+        <width>801</width>
+        <height>421</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QFrame#frameProcedure_4 {
+border-image: url(:/assets/blue-gradient-xswap.png) 0 0 0 0 stretch stretch;
+border: none;
+}
+
+</string>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::StyledPanel</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Raised</enum>
+      </property>
+      <widget class="QLabel" name="labelAvgGPA_6">
+       <property name="geometry">
+        <rect>
+         <x>50</x>
+         <y>70</y>
+         <width>261</width>
+         <height>41</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <family>Segoe UI Semibold</family>
+         <pointsize>16</pointsize>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">color: rgb(223, 223, 223);</string>
+       </property>
+       <property name="text">
+        <string>Select school year:</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="labelHighestScore_7">
+       <property name="geometry">
+        <rect>
+         <x>50</x>
+         <y>152</y>
+         <width>261</width>
+         <height>41</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <family>Segoe UI Semibold</family>
+         <pointsize>16</pointsize>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">color: rgb(223, 223, 223);</string>
+       </property>
+       <property name="text">
+        <string>Select semester number:</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="labelHighestScore_8">
+       <property name="geometry">
+        <rect>
+         <x>50</x>
+         <y>232</y>
+         <width>261</width>
+         <height>41</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <family>Segoe UI Semibold</family>
+         <pointsize>16</pointsize>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">color: rgb(223, 223, 223);</string>
+       </property>
+       <property name="text">
+        <string>Select start date:</string>
+       </property>
+       <property name="wordWrap">
+        <bool>true</bool>
+       </property>
+      </widget>
+      <widget class="QFrame" name="frameClassName_4">
+       <property name="geometry">
+        <rect>
+         <x>350</x>
+         <y>72</y>
+         <width>401</width>
+         <height>41</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">background-color: whitesmoke;
+border: none;</string>
+       </property>
+       <property name="frameShape">
+        <enum>QFrame::StyledPanel</enum>
+       </property>
+       <property name="frameShadow">
+        <enum>QFrame::Raised</enum>
+       </property>
+       <widget class="QSpinBox" name="spinBoxSchoolYear_2">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>0</y>
+          <width>381</width>
+          <height>41</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <family>Segoe UI Semibold</family>
+          <pointsize>12</pointsize>
+         </font>
+        </property>
+        <property name="cursor">
+         <cursorShape>PointingHandCursor</cursorShape>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">background-color: whitesmoke;
+color: black;
+border: none;</string>
+        </property>
+        <property name="wrapping">
+         <bool>false</bool>
+        </property>
+        <property name="buttonSymbols">
+         <enum>QAbstractSpinBox::UpDownArrows</enum>
+        </property>
+        <property name="minimum">
+         <number>2000</number>
+        </property>
+        <property name="maximum">
+         <number>2050</number>
+        </property>
+        <property name="value">
+         <number>2024</number>
+        </property>
+       </widget>
+      </widget>
+      <widget class="QFrame" name="frameClassName_5">
+       <property name="geometry">
+        <rect>
+         <x>350</x>
+         <y>152</y>
+         <width>401</width>
+         <height>41</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">background-color: whitesmoke;
+border: none;</string>
+       </property>
+       <property name="frameShape">
+        <enum>QFrame::StyledPanel</enum>
+       </property>
+       <property name="frameShadow">
+        <enum>QFrame::Raised</enum>
+       </property>
+       <widget class="QSpinBox" name="spinBoxSemesterNo">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>0</y>
+          <width>381</width>
+          <height>41</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <family>Segoe UI Semibold</family>
+          <pointsize>12</pointsize>
+         </font>
+        </property>
+        <property name="cursor">
+         <cursorShape>PointingHandCursor</cursorShape>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">background-color: whitesmoke;
+color: black;
+border: none;</string>
+        </property>
+        <property name="wrapping">
+         <bool>false</bool>
+        </property>
+        <property name="buttonSymbols">
+         <enum>QAbstractSpinBox::UpDownArrows</enum>
+        </property>
+        <property name="minimum">
+         <number>1</number>
+        </property>
+        <property name="maximum">
+         <number>3</number>
+        </property>
+        <property name="value">
+         <number>1</number>
+        </property>
+       </widget>
+      </widget>
+      <widget class="QFrame" name="frameClassName_6">
+       <property name="geometry">
+        <rect>
+         <x>350</x>
+         <y>232</y>
+         <width>401</width>
+         <height>41</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">background-color: whitesmoke;
+border: none;</string>
+       </property>
+       <property name="frameShape">
+        <enum>QFrame::StyledPanel</enum>
+       </property>
+       <property name="frameShadow">
+        <enum>QFrame::Raised</enum>
+       </property>
+       <widget class="QDateEdit" name="dateEdit_Start">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>0</y>
+          <width>381</width>
+          <height>41</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <family>Segoe UI Semibold</family>
+          <pointsize>12</pointsize>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">background-color: whitesmoke;
+color: black;
+border: none;</string>
+        </property>
+        <property name="calendarPopup">
+         <bool>true</bool>
+        </property>
+        <property name="timeSpec">
+         <enum>Qt::UTC</enum>
+        </property>
+        <property name="date">
+         <date>
+          <year>2024</year>
+          <month>9</month>
+          <day>5</day>
+         </date>
+        </property>
+       </widget>
+      </widget>
+      <widget class="QLabel" name="labelHighestScore_9">
+       <property name="geometry">
+        <rect>
+         <x>50</x>
+         <y>312</y>
+         <width>261</width>
+         <height>41</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <family>Segoe UI Semibold</family>
+         <pointsize>16</pointsize>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">color: rgb(223, 223, 223);</string>
+       </property>
+       <property name="text">
+        <string>Select end date:</string>
+       </property>
+       <property name="wordWrap">
+        <bool>true</bool>
+       </property>
+      </widget>
+      <widget class="QFrame" name="frameClassName_7">
+       <property name="geometry">
+        <rect>
+         <x>350</x>
+         <y>312</y>
+         <width>401</width>
+         <height>41</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">background-color: whitesmoke;
+border: none;</string>
+       </property>
+       <property name="frameShape">
+        <enum>QFrame::StyledPanel</enum>
+       </property>
+       <property name="frameShadow">
+        <enum>QFrame::Raised</enum>
+       </property>
+       <widget class="QDateEdit" name="dateEdit_End">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>0</y>
+          <width>381</width>
+          <height>41</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <family>Segoe UI Semibold</family>
+          <pointsize>12</pointsize>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">background-color: whitesmoke;
+color: black;
+border: none;</string>
+        </property>
+        <property name="calendarPopup">
+         <bool>true</bool>
+        </property>
+        <property name="timeSpec">
+         <enum>Qt::UTC</enum>
+        </property>
+        <property name="date">
+         <date>
+          <year>2025</year>
+          <month>1</month>
+          <day>5</day>
+         </date>
+        </property>
+       </widget>
+      </widget>
+     </widget>
+     <widget class="QPushButton" name="btnNext_StartSemester">
+      <property name="geometry">
+       <rect>
+        <x>740</x>
+        <y>540</y>
+        <width>125</width>
+        <height>45</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Segoe UI Semibold</family>
+        <pointsize>11</pointsize>
+        <italic>false</italic>
+        <bold>false</bold>
+        <kerning>true</kerning>
+       </font>
+      </property>
+      <property name="cursor">
+       <cursorShape>PointingHandCursor</cursorShape>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton#btnNext_StartSemester {
+background-color: rgb(255, 196, 54);
+color: rgb(0, 0, 0);
+border: none;
+}
+
+QPushButton#btnNext_StartSemester:hover {
+background-color: rgb(229, 176, 48);
+color: rgb(0, 0, 0);
+border: none;
+}</string>
+      </property>
+      <property name="text">
+       <string>Next</string>
+      </property>
+      <property name="autoDefault">
+       <bool>false</bool>
+      </property>
+      <property name="default">
+       <bool>false</bool>
+      </property>
+      <property name="flat">
+       <bool>false</bool>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="btnBackToProfile_7">
+      <property name="geometry">
+       <rect>
+        <x>30</x>
+        <y>540</y>
+        <width>125</width>
+        <height>45</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Segoe UI Semibold</family>
+        <pointsize>11</pointsize>
+        <italic>false</italic>
+        <bold>false</bold>
+        <kerning>true</kerning>
+       </font>
+      </property>
+      <property name="cursor">
+       <cursorShape>PointingHandCursor</cursorShape>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton#btnBackToProfile_7 {
+background-color: rgb(12, 53, 106);
+color: rgb(223, 223, 223);
+border: none;
+}
+
+QPushButton#btnBackToProfile_7:hover {
+background-color: rgb(14, 63, 127);
+color: rgb(223, 223, 223);
+border: none;
+}</string>
+      </property>
+      <property name="text">
+       <string>Back</string>
+      </property>
+      <property name="autoDefault">
+       <bool>false</bool>
+      </property>
+      <property name="default">
+       <bool>false</bool>
+      </property>
+      <property name="flat">
+       <bool>false</bool>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="pageEndSemester">
+     <property name="styleSheet">
+      <string notr="true">QWidget#pageEndSemester {
+	border-image: url(:/assets/blue-gradient.png) 0 0 0 0 stretch stretch;
+}
+</string>
+     </property>
+     <widget class="QLabel" name="labelStudentInCourse_11">
+      <property name="geometry">
+       <rect>
+        <x>340</x>
+        <y>30</y>
+        <width>231</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Segoe UI Semibold</family>
+        <pointsize>24</pointsize>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color: rgb(0, 0, 0);</string>
+      </property>
+      <property name="text">
+       <string>End A Semester</string>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="pageStartSemester_Next2">
+     <property name="styleSheet">
+      <string notr="true">QWidget#pageStartSemester_Next2 {
+	border-image: url(:/assets/blue-gradient.png) 0 0 0 0 stretch stretch;
+}
+</string>
+     </property>
+     <widget class="QLabel" name="labelStudentInCourse_9">
+      <property name="geometry">
+       <rect>
+        <x>240</x>
+        <y>30</y>
+        <width>431</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Segoe UI Semibold</family>
+        <pointsize>24</pointsize>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color: rgb(0, 0, 0);</string>
+      </property>
+      <property name="text">
+       <string>Add Students To New Course</string>
+      </property>
+     </widget>
+     <widget class="QFrame" name="frameProcedure_5">
+      <property name="geometry">
+       <rect>
+        <x>50</x>
+        <y>90</y>
+        <width>801</width>
+        <height>421</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QFrame#frameProcedure_5 {
+border-image: url(:/assets/blue-gradient-xswap.png) 0 0 0 0 stretch stretch;
+border: none;
+}
+
+</string>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::StyledPanel</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Raised</enum>
+      </property>
+      <widget class="QLabel" name="labelHighestScore_32">
+       <property name="geometry">
+        <rect>
+         <x>50</x>
+         <y>120</y>
+         <width>231</width>
+         <height>41</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <family>Segoe UI Semibold</family>
+         <pointsize>16</pointsize>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">color: rgb(223, 223, 223);</string>
+       </property>
+       <property name="text">
+        <string>Enter student CSV file:</string>
+       </property>
+      </widget>
+      <widget class="QFrame" name="frameStudentFile_2">
+       <property name="geometry">
+        <rect>
+         <x>350</x>
+         <y>120</y>
+         <width>251</width>
+         <height>50</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QFrame#frameStudentFile_2 {
+background-color: whitesmoke;
+border: none;
+}
+</string>
+       </property>
+       <property name="frameShape">
+        <enum>QFrame::StyledPanel</enum>
+       </property>
+       <property name="frameShadow">
+        <enum>QFrame::Raised</enum>
+       </property>
+       <widget class="QLineEdit" name="txtStudentFile">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>10</y>
+          <width>211</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <family>Segoe UI Semibold</family>
+          <pointsize>12</pointsize>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">border: none;
+color: rgb(0, 0, 0);
+background-color: whitesmoke;
+
+</string>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="placeholderText">
+         <string>File Name</string>
+        </property>
+       </widget>
+      </widget>
+      <widget class="QPushButton" name="btnAddFileStudent_StartSemester">
+       <property name="geometry">
+        <rect>
+         <x>620</x>
+         <y>120</y>
+         <width>131</width>
+         <height>50</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <family>Segoe UI Semibold</family>
+         <pointsize>11</pointsize>
+         <italic>false</italic>
+         <bold>false</bold>
+         <kerning>true</kerning>
+        </font>
+       </property>
+       <property name="cursor">
+        <cursorShape>PointingHandCursor</cursorShape>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QPushButton#btnAddFileStudent_StartSemester {
+background-color: rgb(12, 53, 106);
+color: rgb(223, 223, 223);
+border: none;
+}
+
+QPushButton#btnAddFileStudent_StartSemester:hover {
+background-color: rgb(14, 63, 127);
+color: rgb(223, 223, 223);
+border: none;
+}</string>
+       </property>
+       <property name="text">
+        <string>Upload File</string>
+       </property>
+       <property name="autoDefault">
+        <bool>false</bool>
+       </property>
+       <property name="default">
+        <bool>false</bool>
+       </property>
+       <property name="flat">
+        <bool>false</bool>
+       </property>
+      </widget>
+      <widget class="QLabel" name="labelHighestScore_33">
+       <property name="geometry">
+        <rect>
+         <x>50</x>
+         <y>190</y>
+         <width>261</width>
+         <height>101</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <family>Segoe UI Semibold</family>
+         <pointsize>16</pointsize>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">color: rgb(223, 223, 223);</string>
+       </property>
+       <property name="text">
+        <string>New students will be added in the selected course:</string>
+       </property>
+       <property name="wordWrap">
+        <bool>true</bool>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="btnRemoveStudent_StartSemester">
+       <property name="geometry">
+        <rect>
+         <x>190</x>
+         <y>330</y>
+         <width>125</width>
+         <height>50</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <family>Segoe UI Semibold</family>
+         <pointsize>11</pointsize>
+         <italic>false</italic>
+         <bold>false</bold>
+         <kerning>true</kerning>
+        </font>
+       </property>
+       <property name="cursor">
+        <cursorShape>PointingHandCursor</cursorShape>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QPushButton#btnRemoveStudent_StartSemester{
+background-color: rgb(12, 53, 106);
+color: rgb(223, 223, 223);
+border: none;
+}
+
+QPushButton#btnRemoveStudent_StartSemester:hover {
+background-color: rgb(14, 63, 127);
+color: rgb(223, 223, 223);
+border: none;
+}</string>
+       </property>
+       <property name="text">
+        <string>Remove</string>
+       </property>
+       <property name="autoDefault">
+        <bool>false</bool>
+       </property>
+       <property name="default">
+        <bool>false</bool>
+       </property>
+       <property name="flat">
+        <bool>false</bool>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="btnRemoveAllStudent_StartSemester">
+       <property name="geometry">
+        <rect>
+         <x>50</x>
+         <y>330</y>
+         <width>125</width>
+         <height>50</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <family>Segoe UI Semibold</family>
+         <pointsize>11</pointsize>
+         <italic>false</italic>
+         <bold>false</bold>
+         <kerning>true</kerning>
+        </font>
+       </property>
+       <property name="cursor">
+        <cursorShape>PointingHandCursor</cursorShape>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QPushButton#btnRemoveAllStudent_StartSemester {
+background-color: rgb(255, 196, 54);
+color: rgb(0, 0, 0);
+border: none;
+}
+
+QPushButton#btnRemoveAllStudent_StartSemester:hover {
+background-color: rgb(229, 176, 48);
+color: rgb(0, 0, 0);
+border: none;
+}</string>
+       </property>
+       <property name="text">
+        <string>Remove All</string>
+       </property>
+       <property name="autoDefault">
+        <bool>false</bool>
+       </property>
+       <property name="default">
+        <bool>false</bool>
+       </property>
+       <property name="flat">
+        <bool>false</bool>
+       </property>
+      </widget>
+      <widget class="QFrame" name="frameStudentClass_2">
+       <property name="geometry">
+        <rect>
+         <x>350</x>
+         <y>40</y>
+         <width>401</width>
+         <height>41</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QFrame#frameStudentClass_2 {
+background-color: whitesmoke;
+border: none;
+}
+</string>
+       </property>
+       <property name="frameShape">
+        <enum>QFrame::StyledPanel</enum>
+       </property>
+       <property name="frameShadow">
+        <enum>QFrame::Raised</enum>
+       </property>
+       <widget class="QComboBox" name="comboBoxCourse_StartSemester">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>0</y>
+          <width>381</width>
+          <height>41</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <family>Segoe UI Semibold</family>
+          <pointsize>12</pointsize>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">border: none;
+color: rgb(0, 0, 0);
+background-color: whitesmoke;</string>
+        </property>
+        <property name="currentText">
+         <string/>
+        </property>
+       </widget>
+      </widget>
+      <widget class="QLabel" name="labelHighestScore_34">
+       <property name="geometry">
+        <rect>
+         <x>50</x>
+         <y>40</y>
+         <width>231</width>
+         <height>41</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <family>Segoe UI Semibold</family>
+         <pointsize>16</pointsize>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">color: rgb(223, 223, 223);</string>
+       </property>
+       <property name="text">
+        <string>Select course:</string>
+       </property>
+      </widget>
+      <widget class="QTableWidget" name="tableNewStudents_StartSemester">
+       <property name="geometry">
+        <rect>
+         <x>350</x>
+         <y>210</y>
+         <width>401</width>
+         <height>171</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">background-color: whitesmoke;
+border: none;</string>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QPushButton" name="btnSave_AddStudentToCourse">
+      <property name="geometry">
+       <rect>
+        <x>740</x>
+        <y>540</y>
+        <width>125</width>
+        <height>45</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Segoe UI Semibold</family>
+        <pointsize>11</pointsize>
+        <italic>false</italic>
+        <bold>false</bold>
+        <kerning>true</kerning>
+       </font>
+      </property>
+      <property name="cursor">
+       <cursorShape>PointingHandCursor</cursorShape>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton#btnSave_AddStudentToCourse {
+background-color: rgb(255, 196, 54);
+color: rgb(0, 0, 0);
+border: none;
+}
+
+QPushButton#btnSave_AddStudentToCourse:hover {
+background-color: rgb(229, 176, 48);
+color: rgb(0, 0, 0);
+border: none;
+}</string>
+      </property>
+      <property name="text">
+       <string>Save</string>
+      </property>
+      <property name="autoDefault">
+       <bool>false</bool>
+      </property>
+      <property name="default">
+       <bool>false</bool>
+      </property>
+      <property name="flat">
+       <bool>false</bool>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="btnBackToStartSemester_Next">
+      <property name="geometry">
+       <rect>
+        <x>30</x>
+        <y>540</y>
+        <width>125</width>
+        <height>45</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Segoe UI Semibold</family>
+        <pointsize>11</pointsize>
+        <italic>false</italic>
+        <bold>false</bold>
+        <kerning>true</kerning>
+       </font>
+      </property>
+      <property name="cursor">
+       <cursorShape>PointingHandCursor</cursorShape>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton#btnBackToStartSemester_Next {
+background-color: rgb(12, 53, 106);
+color: rgb(223, 223, 223);
+border: none;
+}
+
+QPushButton#btnBackToStartSemester_Next:hover {
+background-color: rgb(14, 63, 127);
+color: rgb(223, 223, 223);
+border: none;
+}</string>
+      </property>
+      <property name="text">
+       <string>Back</string>
+      </property>
+      <property name="autoDefault">
+       <bool>false</bool>
+      </property>
+      <property name="default">
+       <bool>false</bool>
+      </property>
+      <property name="flat">
+       <bool>false</bool>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="btnFinishAll_AddStudentToCourse">
+      <property name="geometry">
+       <rect>
+        <x>600</x>
+        <y>540</y>
+        <width>125</width>
+        <height>45</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Segoe UI Semibold</family>
+        <pointsize>11</pointsize>
+        <italic>false</italic>
+        <bold>false</bold>
+        <kerning>true</kerning>
+       </font>
+      </property>
+      <property name="cursor">
+       <cursorShape>PointingHandCursor</cursorShape>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton#btnFinishAll_AddStudentToCourse {
+background-color: rgb(12, 53, 106);
+color: rgb(223, 223, 223);
+border: none;
+}
+
+QPushButton#btnFinishAll_AddStudentToCourse:hover {
+background-color: rgb(14, 63, 127);
+color: rgb(223, 223, 223);
+border: none;
+}</string>
+      </property>
+      <property name="text">
+       <string>Finish All</string>
+      </property>
+      <property name="autoDefault">
+       <bool>false</bool>
+      </property>
+      <property name="default">
+       <bool>false</bool>
+      </property>
+      <property name="flat">
+       <bool>false</bool>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="pageStartSemester_Next">
+     <property name="styleSheet">
+      <string notr="true">QWidget#pageStartSemester_Next {
+	border-image: url(:/assets/blue-gradient.png) 0 0 0 0 stretch stretch;
+}
+</string>
+     </property>
+     <widget class="QLabel" name="labelStudentInCourse_10">
+      <property name="geometry">
+       <rect>
+        <x>230</x>
+        <y>30</y>
+        <width>451</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Segoe UI Semibold</family>
+        <pointsize>24</pointsize>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color: rgb(0, 0, 0);</string>
+      </property>
+      <property name="text">
+       <string>Add Courses To New Semester</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="btnNextToSemester_2">
+      <property name="geometry">
+       <rect>
+        <x>740</x>
+        <y>540</y>
+        <width>125</width>
+        <height>45</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Segoe UI Semibold</family>
+        <pointsize>11</pointsize>
+        <italic>false</italic>
+        <bold>false</bold>
+        <kerning>true</kerning>
+       </font>
+      </property>
+      <property name="cursor">
+       <cursorShape>PointingHandCursor</cursorShape>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton#btnNextToSemester_2 {
+background-color: rgb(255, 196, 54);
+color: rgb(0, 0, 0);
+border: none;
+}
+
+QPushButton#btnNextToSemester_2:hover {
+background-color: rgb(229, 176, 48);
+color: rgb(0, 0, 0);
+border: none;
+}</string>
+      </property>
+      <property name="text">
+       <string>Next</string>
+      </property>
+      <property name="autoDefault">
+       <bool>false</bool>
+      </property>
+      <property name="default">
+       <bool>false</bool>
+      </property>
+      <property name="flat">
+       <bool>false</bool>
+      </property>
+     </widget>
+     <widget class="QFrame" name="frameProcedure_6">
+      <property name="geometry">
+       <rect>
+        <x>50</x>
+        <y>90</y>
+        <width>801</width>
+        <height>421</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QFrame#frameProcedure_6 {
+border-image: url(:/assets/blue-gradient-xswap.png) 0 0 0 0 stretch stretch;
+border: none;
+}
+
+</string>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::StyledPanel</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Raised</enum>
+      </property>
+      <widget class="QLabel" name="labelHighestScore_35">
+       <property name="geometry">
+        <rect>
+         <x>50</x>
+         <y>120</y>
+         <width>231</width>
+         <height>41</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <family>Segoe UI Semibold</family>
+         <pointsize>16</pointsize>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">color: rgb(223, 223, 223);</string>
+       </property>
+       <property name="text">
+        <string>Enter course CSV file:</string>
+       </property>
+      </widget>
+      <widget class="QFrame" name="frameStudentFile_4">
+       <property name="geometry">
+        <rect>
+         <x>350</x>
+         <y>120</y>
+         <width>251</width>
+         <height>50</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QFrame#frameStudentFile_4 {
+background-color: whitesmoke;
+border: none;
+}
+</string>
+       </property>
+       <property name="frameShape">
+        <enum>QFrame::StyledPanel</enum>
+       </property>
+       <property name="frameShadow">
+        <enum>QFrame::Raised</enum>
+       </property>
+       <widget class="QLineEdit" name="txtCourseFile">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>10</y>
+          <width>211</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <family>Segoe UI Semibold</family>
+          <pointsize>12</pointsize>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">border: none;
+color: rgb(0, 0, 0);
+background-color: whitesmoke;
+
+</string>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="placeholderText">
+         <string>File Name</string>
+        </property>
+       </widget>
+      </widget>
+      <widget class="QPushButton" name="btnAddFileCourse">
+       <property name="geometry">
+        <rect>
+         <x>620</x>
+         <y>120</y>
+         <width>131</width>
+         <height>50</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <family>Segoe UI Semibold</family>
+         <pointsize>11</pointsize>
+         <italic>false</italic>
+         <bold>false</bold>
+         <kerning>true</kerning>
+        </font>
+       </property>
+       <property name="cursor">
+        <cursorShape>PointingHandCursor</cursorShape>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QPushButton#btnAddFileCourse {
+background-color: rgb(12, 53, 106);
+color: rgb(223, 223, 223);
+border: none;
+}
+
+QPushButton#btnAddFileCourse:hover {
+background-color: rgb(14, 63, 127);
+color: rgb(223, 223, 223);
+border: none;
+}</string>
+       </property>
+       <property name="text">
+        <string>Upload File</string>
+       </property>
+       <property name="autoDefault">
+        <bool>false</bool>
+       </property>
+       <property name="default">
+        <bool>false</bool>
+       </property>
+       <property name="flat">
+        <bool>false</bool>
+       </property>
+      </widget>
+      <widget class="QLabel" name="labelHighestScore_36">
+       <property name="geometry">
+        <rect>
+         <x>50</x>
+         <y>190</y>
+         <width>261</width>
+         <height>101</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <family>Segoe UI Semibold</family>
+         <pointsize>16</pointsize>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">color: rgb(223, 223, 223);</string>
+       </property>
+       <property name="text">
+        <string>New courses will be added in the current semester:</string>
+       </property>
+       <property name="wordWrap">
+        <bool>true</bool>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="btnRemoveCourse">
+       <property name="geometry">
+        <rect>
+         <x>190</x>
+         <y>330</y>
+         <width>125</width>
+         <height>50</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <family>Segoe UI Semibold</family>
+         <pointsize>11</pointsize>
+         <italic>false</italic>
+         <bold>false</bold>
+         <kerning>true</kerning>
+        </font>
+       </property>
+       <property name="cursor">
+        <cursorShape>PointingHandCursor</cursorShape>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QPushButton#btnRemoveCourse{
+background-color: rgb(12, 53, 106);
+color: rgb(223, 223, 223);
+border: none;
+}
+
+QPushButton#btnRemoveCourse:hover {
+background-color: rgb(14, 63, 127);
+color: rgb(223, 223, 223);
+border: none;
+}</string>
+       </property>
+       <property name="text">
+        <string>Remove</string>
+       </property>
+       <property name="autoDefault">
+        <bool>false</bool>
+       </property>
+       <property name="default">
+        <bool>false</bool>
+       </property>
+       <property name="flat">
+        <bool>false</bool>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="btnRemoveAllCourse">
+       <property name="geometry">
+        <rect>
+         <x>50</x>
+         <y>330</y>
+         <width>125</width>
+         <height>50</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <family>Segoe UI Semibold</family>
+         <pointsize>11</pointsize>
+         <italic>false</italic>
+         <bold>false</bold>
+         <kerning>true</kerning>
+        </font>
+       </property>
+       <property name="cursor">
+        <cursorShape>PointingHandCursor</cursorShape>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QPushButton#btnRemoveAllCourse {
+background-color: rgb(255, 196, 54);
+color: rgb(0, 0, 0);
+border: none;
+}
+
+QPushButton#btnRemoveAllCourse:hover {
+background-color: rgb(229, 176, 48);
+color: rgb(0, 0, 0);
+border: none;
+}</string>
+       </property>
+       <property name="text">
+        <string>Remove All</string>
+       </property>
+       <property name="autoDefault">
+        <bool>false</bool>
+       </property>
+       <property name="default">
+        <bool>false</bool>
+       </property>
+       <property name="flat">
+        <bool>false</bool>
+       </property>
+      </widget>
+      <widget class="QFrame" name="frameStudentClass_4">
+       <property name="geometry">
+        <rect>
+         <x>350</x>
+         <y>40</y>
+         <width>401</width>
+         <height>41</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QFrame#frameStudentClass_4 {
+background-color: whitesmoke;
+border: none;
+}
+</string>
+       </property>
+       <property name="frameShape">
+        <enum>QFrame::StyledPanel</enum>
+       </property>
+       <property name="frameShadow">
+        <enum>QFrame::Raised</enum>
+       </property>
+       <widget class="QComboBox" name="comboBoxSemester">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>0</y>
+          <width>381</width>
+          <height>41</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <family>Segoe UI Semibold</family>
+          <pointsize>12</pointsize>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">border: none;
+color: rgb(0, 0, 0);
+background-color: whitesmoke;</string>
+        </property>
+        <property name="editable">
+         <bool>false</bool>
+        </property>
+        <property name="currentText">
+         <string/>
+        </property>
+       </widget>
+      </widget>
+      <widget class="QLabel" name="labelHighestScore_37">
+       <property name="geometry">
+        <rect>
+         <x>50</x>
+         <y>40</y>
+         <width>231</width>
+         <height>41</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <family>Segoe UI Semibold</family>
+         <pointsize>16</pointsize>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">color: rgb(223, 223, 223);</string>
+       </property>
+       <property name="text">
+        <string>Current semester:</string>
+       </property>
+      </widget>
+      <widget class="QTableWidget" name="tableNewCourse">
+       <property name="geometry">
+        <rect>
+         <x>350</x>
+         <y>210</y>
+         <width>401</width>
+         <height>171</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">background-color: whitesmoke;
+border: none;</string>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QPushButton" name="btnBackFromStartSemester">
+      <property name="geometry">
+       <rect>
+        <x>30</x>
+        <y>540</y>
+        <width>125</width>
+        <height>45</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Segoe UI Semibold</family>
+        <pointsize>11</pointsize>
+        <italic>false</italic>
+        <bold>false</bold>
+        <kerning>true</kerning>
+       </font>
+      </property>
+      <property name="cursor">
+       <cursorShape>PointingHandCursor</cursorShape>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton#btnBackFromStartSemester {
+background-color: rgb(12, 53, 106);
+color: rgb(223, 223, 223);
+border: none;
+}
+
+QPushButton#btnBackFromStartSemester:hover {
+background-color: rgb(14, 63, 127);
+color: rgb(223, 223, 223);
+border: none;
+}</string>
+      </property>
+      <property name="text">
+       <string>Back</string>
+      </property>
+      <property name="autoDefault">
+       <bool>false</bool>
+      </property>
+      <property name="default">
+       <bool>false</bool>
+      </property>
+      <property name="flat">
+       <bool>false</bool>
+      </property>
+     </widget>
     </widget>
    </widget>
   </widget>

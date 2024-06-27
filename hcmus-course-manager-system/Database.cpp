@@ -437,7 +437,32 @@ Staff Database::getStaffByID(int staffID) {
     return Staff();
 }
 
-// Search Course using unique ID
+// Get Course using unique ID
+Course Database::getCourseByID(int courseID){
+    for (int i = 0; i < courseList.size(); i++) {
+        if (courseList[i].getCourseID() == courseID) {
+            return courseList[i];
+        }
+    }
+    return Course();
+}
+
+// Get Semester usingunique ID
+Semester Database::getSemesterByID(int semesterID) {
+    for (int i = 0; i < semesterList.size(); i++) {
+        if (semesterList[i].getSemesterID() == semesterID) {
+            return semesterList[i];
+        }
+    }
+    return Semester();
+}
+
+
+/**************************************************************
+* Implementation Functions Set: Search functions - return all objects in list
+*
+***************************************************************/
+// Search Scoreboard using unique CourseID
 Set<Scoreboard> Database::getScoreboardListByCourseID(int courseID) {
     Set<Scoreboard> result;
     for (int i = 0; i < scoreboardList.size(); i++) {
@@ -447,6 +472,7 @@ Set<Scoreboard> Database::getScoreboardListByCourseID(int courseID) {
     }
     return result;
 }
+
 
 /**************************************************************
 * Implement Load Data Context
@@ -625,6 +651,61 @@ void Database::loadClassList(QTableWidget* table, Set<Class>& classList)
         Class classObj = classList[i];
         table->setItem(i, 0, new QTableWidgetItem(QString::fromStdString(classObj.getClassName())));
         table->setItem(i, 1, new QTableWidgetItem(QString::number(classObj.getStartedYear())));
+    }
+}
+
+// Load Student In Class List
+void Database::loadStudentInClassList(QTableWidget* table, Set<StudentInClass>& studentInClassList){
+    // Setup table row & column
+    table->setRowCount(studentInClassList.size());
+    table->setColumnCount(2);
+
+    // Adjust columns to fill the table width
+    table->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+
+    // Set table headers
+    table->setHorizontalHeaderItem(0, new QTableWidgetItem("Class Name"));
+    table->setHorizontalHeaderItem(1, new QTableWidgetItem("Student ID"));
+
+    // Display student-in-class objects in the table
+    for (int i = 0; i < studentInClassList.size(); i++)
+    {
+        StudentInClass studentInClass = studentInClassList[i];
+        table->setItem(i, 0, new QTableWidgetItem(QString::fromStdString(studentInClass.getClassName())));
+        table->setItem(i, 1, new QTableWidgetItem(QString::number(studentInClass.getStudentID())));
+    }
+}
+
+// Load Student In Course List
+void Database::loadStudentInCourseList(QTableWidget* table, Set<StudentInCourse>& studentInCourseList){
+    // Setup table row & column
+    table->setRowCount(studentInCourseList.size());
+    table->setColumnCount(4);
+
+    // Adjust columns to fill the table width
+    table->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+
+    // Set table headers
+    table->setHorizontalHeaderItem(0, new QTableWidgetItem("Semester"));
+    table->setHorizontalHeaderItem(1, new QTableWidgetItem("School Year"));
+    table->setHorizontalHeaderItem(2, new QTableWidgetItem("Student ID"));
+    table->setHorizontalHeaderItem(3, new QTableWidgetItem("Student Name"));
+
+    // Display student-in-class objects in the table
+    for (int i = 0; i < studentInCourseList.size(); i++)
+    {
+        StudentInCourse studentInCourse = studentInCourseList[i];
+
+        // Init Student, Course & Semester objects using search functions by unique ID
+        Student student = getStudentByID(studentInCourse.getStudentID());
+        // Course course = getCourseByID(studentInCourse.getCourseID());
+        Semester semester = getSemesterByID(studentInCourse.getSemesterID());
+
+        // Display attributes to the table
+        table->setItem(i, 0, new QTableWidgetItem(QString::number(semester.getNo())));
+        table->setItem(i, 1, new QTableWidgetItem(QString::number(semester.getSchoolYear())));
+        table->setItem(i, 2, new QTableWidgetItem(QString::number(student.getStudentID())));
+        table->setItem(i, 3, new QTableWidgetItem(QString::fromStdString(student.getFullname())));
     }
 }
 
@@ -808,7 +889,36 @@ void Database::deleteFromClassList(Class classObj, Set<Class>& classList)
     }
 }
 
+// Delete Student from Student In Class List
+void Database::deleteFromStudentInClassList(StudentInClass studentInClass, Set<StudentInClass>& studentInClassList)
+{
+    // Find the student-in-class in the list then delete it
+    for (int i = 0; i < studentInClassList.size(); i++)
+    {
+        if (studentInClassList[i].getClassName() == studentInClass.getClassName() &&
+            studentInClassList[i].getStudentID() == studentInClass.getStudentID())
+        {
+            studentInClassList.erase(i);
+            break;
+        }
+    }
+}
 
+// Delete Student from Student In Course List
+void Database::deleteFromStudentInCourseList(StudentInCourse studentInCourse, Set<StudentInCourse>& studentInCourseList)
+{
+    // Find the student-in-course in the list then delete it
+    for (int i = 0; i < studentInCourseList.size(); i++)
+    {
+        if (studentInCourseList[i].getSemesterID() == studentInCourse.getSemesterID() &&
+            studentInCourseList[i].getCourseID() == studentInCourse.getCourseID() &&
+            studentInCourseList[i].getStudentID() == studentInCourse.getStudentID())
+        {
+            studentInCourseList.erase(i);
+            break;
+        }
+    }
+}
 
 
 

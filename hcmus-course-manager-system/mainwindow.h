@@ -28,9 +28,13 @@ enum class Page
     StudentInCourse = 11,
     StartSchoolYear = 12,
     StartSchoolYear_Next = 13,
-    StartSemester = 14,
-    EndSemester = 15,
-    Others = 16
+    AddStudentToCourseUsingFile = 14,
+    AddStudentToCourseManual = 15,
+    StartSemester = 16,
+    StartSemester_Next = 18,
+    StartSemester_Next_2 = 17,
+    EndSemester = 18,
+    Others = 19
 };
 
 
@@ -123,6 +127,46 @@ private slots:
 
     void on_btnStudentsInCourse_clicked();
 
+    void on_btnFinishAll_StartSchoolYear_2_clicked();
+
+    void on_btnExportStudentInCourse_clicked();
+
+    void on_btnDeleteStudentInCourse_clicked();
+
+    void on_btnStartSemester_clicked();
+
+    void on_btnBackToProfile_7_clicked();
+
+    void on_btnNext_StartSemester_clicked();
+
+    void on_btnAddFileStudent_StartSemester_clicked();
+
+    void on_btnRemoveStudent_StartSemester_clicked();
+
+    void on_btnRemoveAllStudent_StartSemester_clicked();
+
+    void on_btnBackToStartSemester_Next_clicked();
+
+    void on_btnFinishAll_AddStudentToCourse_clicked();
+
+    void on_btnSave_AddStudentToCourse_clicked();
+
+    void on_btnNextToSemester_2_clicked();
+
+    void on_btnBackFromStartSemester_clicked();
+
+    void on_btnAddFileCourse_clicked();
+
+    void on_btnRemoveCourse_clicked();
+
+    void on_btnRemoveAllCourse_clicked();
+
+    void on_btnOthers_clicked();
+
+    void on_btnImportScoreboard_clicked();
+
+    void on_btnEndSemester_clicked();
+
 private:
     // Page Loaders
     void loadPageProfileInfo_Staff();
@@ -133,6 +177,10 @@ private:
 
     void loadPageStartSchoolYear_Next();
 
+    void loadPageStartSemester_Next();
+
+    void loadPageStartSemester_Next_2();
+
 private:
     Ui::MainWindow *ui;
     Database *db;
@@ -142,7 +190,16 @@ private:
     Student *currentStudent;
     Staff *currentStaff;
 
+    // For Student In Course Page
+    Set<StudentInCourse> studentsInCourse;
+
     // For Start School Year Procedure
     Set<Student> newStudentList;
+
+    // For Start Semester Procedure
+    Set<Course> newCourseList;
+
+    // For End Semester Procedure
+    Set<Scoreboard> newScoreboardList;
 };
 #endif // MAINWINDOW_H
