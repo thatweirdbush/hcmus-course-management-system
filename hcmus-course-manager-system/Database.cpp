@@ -18,21 +18,34 @@ Database::Database() {
     importStudentInCourseList(STUDENT_IN_COURSE_FILE_PATH, studentInCourseList);
 }
 
-// Destructor - Save all data to file, with first line header
+/// Destructor - Save all data to file, with first line header
+/// Currently no need to export data file like this because all changes in data are saved immediately
+/// Instead, we need to free up memory by deleting all objects in the list
 Database::~Database() {
-    exportAccountList(ACCOUNT_FILE_PATH, accountList);
-    exportCourseList(COURSE_FILE_PATH, courseList);
-    exportSemesterList(SEMESTER_FILE_PATH, semesterList);
-    exportStudentList(STUDENT_FILE_PATH, studentList);
-    exportStaffList(STAFF_FILE_PATH, staffList);
-    exportScoreboardList(SCOREBOARD_FILE_PATH, scoreboardList);
-    exportClassList(CLASS_FILE_PATH, classList);
-    exportStudentInClassList(STUDENT_IN_CLASS_FILE_PATH, studentInClassList);
-    exportStudentInCourseList(STUDENT_IN_COURSE_FILE_PATH, studentInCourseList);
+    // exportAccountList(ACCOUNT_FILE_PATH, accountList);
+    // exportCourseList(COURSE_FILE_PATH, courseList);
+    // exportSemesterList(SEMESTER_FILE_PATH, semesterList);
+    // exportStudentList(STUDENT_FILE_PATH, studentList);
+    // exportStaffList(STAFF_FILE_PATH, staffList);
+    // exportScoreboardList(SCOREBOARD_FILE_PATH, scoreboardList);
+    // exportClassList(CLASS_FILE_PATH, classList);
+    // exportStudentInClassList(STUDENT_IN_CLASS_FILE_PATH, studentInClassList);
+    // exportStudentInCourseList(STUDENT_IN_COURSE_FILE_PATH, studentInCourseList);
+
+    // Free up memory
+    accountList.clear();
+    courseList.clear();
+    semesterList.clear();
+    studentList.clear();
+    staffList.clear();
+    scoreboardList.clear();
+    classList.clear();
+    studentInClassList.clear();
+    studentInCourseList.clear();
 }
 
 void Database::registerAccount() {
-    /// NOT IMPLEMENTED YET
+    /// NO IMPLEMENT
 }
 
 // Get account object in account list when login

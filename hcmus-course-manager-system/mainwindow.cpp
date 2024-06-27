@@ -19,6 +19,8 @@ MainWindow::MainWindow(QWidget *parent)
     , newStudentList()
     , newCourseList()
     , newScoreboardList()
+    , courseListForStudent()
+    , scoreboardListForStudent()
 
 {
     ui->setupUi(this);
@@ -45,6 +47,8 @@ MainWindow::~MainWindow()
     newStudentList.clear();
     newCourseList.clear();
     newScoreboardList.clear();
+    courseListForStudent.clear();
+    scoreboardListForStudent.clear();
 }
 
 
@@ -291,6 +295,15 @@ void MainWindow::loadPageProfileInfo_Student() {
     ui->labelStudentGender->setText(QString::fromStdString(currentStudent->getGender()));
     ui->labelStudentSocialID->setText(QString::fromStdString(currentStudent->getSocialID()));
 
+    // Temporarily disconnect the itemChanged signal
+    disconnect(ui->tableCourses, SIGNAL(itemChanged(QTableWidgetItem*)), this, SLOT(on_tableCourses_itemChanged(QTableWidgetItem*)));
+
+    // Load course & scoreboard list to cache
+    // db->loadCourseList(ui->tableCourses, db->courseList);
+    // db->loadScoreboardList(ui->tableScoreboards, db->scoreboardList);
+    db->importCourseList(COURSE_FILE_PATH, db->courseList);
+
+
     // Go to Profile Info page using stack widget
     ui->stackedWidget->setCurrentIndex(int(Page::ProfileInfo_Student));
 }
@@ -326,6 +339,18 @@ void MainWindow::on_btnSignOut_ProfileInfo_Student_clicked()
         // Go to Sign In page using stack widget
         loadPageSignIn();
     }
+}
+
+// Go to Student's Course page using stack widget
+void MainWindow::on_btnCourses_ProfileInfo_Student_clicked()
+{
+
+}
+
+// Go to Student's Scoreboard page using stack widget
+void MainWindow::on_btnScoreboard_ProfileInfo_Student_clicked()
+{
+
 }
 
 
@@ -1539,10 +1564,6 @@ void MainWindow::on_btnOthers_clicked()
 {
     QMessageBox::information(this, "Coming Soon", "New feature coming soon!", QMessageBox::Ok);
 }
-
-
-
-
 
 
 

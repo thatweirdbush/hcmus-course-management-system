@@ -167,6 +167,10 @@ private slots:
 
     void on_btnEndSemester_clicked();
 
+    void on_btnCourses_ProfileInfo_Student_clicked();
+
+    void on_btnScoreboard_ProfileInfo_Student_clicked();
+
 private:
     // Page Loaders
     void loadPageProfileInfo_Staff();
@@ -201,5 +205,11 @@ private:
 
     // For End Semester Procedure
     Set<Scoreboard> newScoreboardList;
+
+    // For Student
+    Set<Course> courseListForStudent;
+
+    Set<Scoreboard> scoreboardListForStudent;
+
 };
 #endif // MAINWINDOW_H

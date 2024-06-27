@@ -52,7 +52,7 @@
      <string notr="true"/>
     </property>
     <property name="currentIndex">
-     <number>8</number>
+     <number>1</number>
     </property>
     <widget class="QWidget" name="pageSignIn">
      <widget class="QFrame" name="leftFrame">
@@ -1178,45 +1178,50 @@ background-color: rgb(46, 47, 48);</string>
        </property>
       </widget>
      </widget>
-     <widget class="QPushButton" name="btnNext_ProfileInfo_Student">
+     <widget class="QPushButton" name="btnScoreboard_ProfileInfo_Student">
       <property name="geometry">
        <rect>
-        <x>760</x>
-        <y>540</y>
-        <width>125</width>
-        <height>45</height>
+        <x>600</x>
+        <y>340</y>
+        <width>220</width>
+        <height>50</height>
        </rect>
       </property>
       <property name="font">
        <font>
         <family>Segoe UI Semibold</family>
-        <pointsize>11</pointsize>
-        <italic>false</italic>
-        <bold>false</bold>
-        <kerning>true</kerning>
+        <pointsize>12</pointsize>
+        <bold>true</bold>
        </font>
       </property>
       <property name="cursor">
        <cursorShape>PointingHandCursor</cursorShape>
       </property>
       <property name="styleSheet">
-       <string notr="true">QPushButton#btnNext_ProfileInfo_Student {
-background-color: rgb(255, 196, 54);
-color: rgb(0, 0, 0);
+       <string notr="true">QPushButton#btnScoreboard_ProfileInfo_Student {
 border: none;
+color: rgb(0, 0, 0);
+background-color: rgb(255, 255, 255);
 }
 
-QPushButton#btnNext_ProfileInfo_Student:hover {
-background-color: rgb(229, 176, 48);
+QPushButton#btnScoreboard_ProfileInfo_Student:hover {
+background-color: rgb(234, 234, 234);
 color: rgb(0, 0, 0);
 border: none;
 }</string>
       </property>
       <property name="text">
-       <string>Next</string>
+       <string> Scoreboard</string>
       </property>
-      <property name="autoDefault">
-       <bool>false</bool>
+      <property name="icon">
+       <iconset resource="resource.qrc">
+        <normaloff>:/assets/scoreboard-icon.png</normaloff>:/assets/scoreboard-icon.png</iconset>
+      </property>
+      <property name="iconSize">
+       <size>
+        <width>30</width>
+        <height>30</height>
+       </size>
       </property>
       <property name="default">
        <bool>false</bool>
@@ -1224,6 +1229,309 @@ border: none;
       <property name="flat">
        <bool>false</bool>
       </property>
+     </widget>
+     <widget class="QPushButton" name="btnCourses_ProfileInfo_Student">
+      <property name="geometry">
+       <rect>
+        <x>370</x>
+        <y>340</y>
+        <width>220</width>
+        <height>50</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Segoe UI Semibold</family>
+        <pointsize>12</pointsize>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="cursor">
+       <cursorShape>PointingHandCursor</cursorShape>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton#btnCourses_ProfileInfo_Student {
+border: none;
+color: rgb(0, 0, 0);
+background-color: rgb(255, 255, 255);
+}
+
+QPushButton#btnCourses_ProfileInfo_Student:hover {
+background-color: rgb(234, 234, 234);
+color: rgb(0, 0, 0);
+border: none;
+}</string>
+      </property>
+      <property name="text">
+       <string> Course</string>
+      </property>
+      <property name="icon">
+       <iconset resource="resource.qrc">
+        <normaloff>:/assets/course-icon.png</normaloff>:/assets/course-icon.png</iconset>
+      </property>
+      <property name="iconSize">
+       <size>
+        <width>30</width>
+        <height>30</height>
+       </size>
+      </property>
+      <property name="default">
+       <bool>false</bool>
+      </property>
+      <property name="flat">
+       <bool>false</bool>
+      </property>
+     </widget>
+     <widget class="QLabel" name="labelViewData_3">
+      <property name="geometry">
+       <rect>
+        <x>320</x>
+        <y>280</y>
+        <width>541</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Segoe UI Semibold</family>
+        <pointsize>20</pointsize>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color: rgb(0, 0, 0);</string>
+      </property>
+      <property name="text">
+       <string>View Data</string>
+      </property>
+     </widget>
+     <widget class="QFrame" name="frameStatic_4">
+      <property name="geometry">
+       <rect>
+        <x>330</x>
+        <y>30</y>
+        <width>531</width>
+        <height>211</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QFrame#frameStatic_4 {
+background-color: rgb(12, 53, 106);
+border: none;
+}
+
+QFrame#frameStatic_4 :hover {
+background-color: rgb(14, 63, 127);
+border: none;
+}</string>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::StyledPanel</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Raised</enum>
+      </property>
+      <widget class="QLabel" name="labelAchievedBy_Binding_4">
+       <property name="geometry">
+        <rect>
+         <x>210</x>
+         <y>62</y>
+         <width>141</width>
+         <height>41</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <family>Segoe UI Semibold</family>
+         <pointsize>12</pointsize>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">color: rgb(223, 223, 223);</string>
+       </property>
+       <property name="text">
+        <string>Semester</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="labelAvgGPA_4">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>20</y>
+         <width>161</width>
+         <height>41</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <family>Segoe UI Semibold</family>
+         <pointsize>16</pointsize>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">color: rgb(223, 223, 223);</string>
+       </property>
+       <property name="text">
+        <string>• GPA: </string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="labelAchievedBy_4">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>60</y>
+         <width>161</width>
+         <height>41</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <family>Segoe UI Semibold</family>
+         <pointsize>16</pointsize>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">color: rgb(223, 223, 223);</string>
+       </property>
+       <property name="text">
+        <string>• Semester:</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="labelAvgGPA_Binding_4">
+       <property name="geometry">
+        <rect>
+         <x>210</x>
+         <y>22</y>
+         <width>141</width>
+         <height>41</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <family>Segoe UI Semibold</family>
+         <pointsize>12</pointsize>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">color: rgb(223, 223, 223);</string>
+       </property>
+       <property name="text">
+        <string>GPA</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="labelAppIcon_4">
+       <property name="geometry">
+        <rect>
+         <x>370</x>
+         <y>40</y>
+         <width>130</width>
+         <height>130</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">image: url(:/assets/app-logo.ico);
+background-color: rgb(46, 47, 48);</string>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+      <widget class="QLabel" name="labelAchievedBy_5">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>100</y>
+         <width>161</width>
+         <height>41</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <family>Segoe UI Semibold</family>
+         <pointsize>16</pointsize>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">color: rgb(223, 223, 223);</string>
+       </property>
+       <property name="text">
+        <string>• School Year:</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="labelAchievedBy_Binding_5">
+       <property name="geometry">
+        <rect>
+         <x>210</x>
+         <y>100</y>
+         <width>141</width>
+         <height>41</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <family>Segoe UI Semibold</family>
+         <pointsize>12</pointsize>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">color: rgb(223, 223, 223);</string>
+       </property>
+       <property name="text">
+        <string>School Year</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="labelHighestScore_Binding_4">
+       <property name="geometry">
+        <rect>
+         <x>210</x>
+         <y>140</y>
+         <width>141</width>
+         <height>41</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <family>Segoe UI Semibold</family>
+         <pointsize>12</pointsize>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">color: rgb(223, 223, 223);</string>
+       </property>
+       <property name="text">
+        <string>Normal</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="labelHighestScore_4">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>138</y>
+         <width>161</width>
+         <height>41</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <family>Segoe UI Semibold</family>
+         <pointsize>16</pointsize>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">color: rgb(223, 223, 223);</string>
+       </property>
+       <property name="text">
+        <string>• Account Status: </string>
+       </property>
+      </widget>
      </widget>
     </widget>
     <widget class="QWidget" name="pageProfileInfo_Staff">
@@ -7668,7 +7976,6 @@ border: none;
   <tabstop>btnSignIn</tabstop>
   <tabstop>btnForgotPassword</tabstop>
   <tabstop>btnSignOut_ProfileInfo_Student</tabstop>
-  <tabstop>btnNext_ProfileInfo_Student</tabstop>
   <tabstop>btnEdit_ProfileInfo_Staff</tabstop>
   <tabstop>btnEdit_ProfileInfo_Student</tabstop>
   <tabstop>btnSignOut_ProfileInfo_Staff</tabstop>
