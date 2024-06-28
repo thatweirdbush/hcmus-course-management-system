@@ -49,7 +49,7 @@ public:
 	std::string getGender() { return gender; }
 	Date getDateOfBirth() { return dateOfBirth; }
 	std::string getSocialID() { return socialID; }
-	std::string getFullname() { return firstName + " " + lastName; }
+    std::string getFullname() { return lastName + " " + firstName; }
 
 	// Input/Output Operator Methods
     friend std::istream &operator>>(std::istream &is, Student &student);
