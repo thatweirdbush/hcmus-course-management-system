@@ -19,6 +19,7 @@ MainWindow::MainWindow(QWidget *parent)
     , newStudentList()
     , newCourseList()
     , newScoreboardList()
+    , studentInCourseListForStudent()
     , courseListForStudent()
     , scoreboardListForStudent()
 
@@ -47,6 +48,7 @@ MainWindow::~MainWindow()
     newStudentList.clear();
     newCourseList.clear();
     newScoreboardList.clear();
+    studentInCourseListForStudent.clear();
     courseListForStudent.clear();
     scoreboardListForStudent.clear();
 }
@@ -288,21 +290,46 @@ void MainWindow::on_btnBackToProfile_4_clicked()
 ***************************************************************/
 // Load all data in page's components
 void MainWindow::loadPageProfileInfo_Student() {
-    // Load student info
+    // Load student info in left panel
     ui->labelUsernameHere_Student->setText(QString::fromStdString(currentStudent->getFullname()));
     ui->labelStudentID->setText(QString::number(currentStudent->getStudentID()));
     ui->labelStudentBirth->setText(QString::fromStdString(currentStudent->getDateOfBirth().toString()));
     ui->labelStudentGender->setText(QString::fromStdString(currentStudent->getGender()));
     ui->labelStudentSocialID->setText(QString::fromStdString(currentStudent->getSocialID()));
 
-    // Temporarily disconnect the itemChanged signal
-    disconnect(ui->tableCourses, SIGNAL(itemChanged(QTableWidgetItem*)), this, SLOT(on_tableCourses_itemChanged(QTableWidgetItem*)));
+    // Import student-in-course list, filter by studentID
+    db->importStudentInCourseList(STUDENT_IN_COURSE_FILE_PATH, studentInCourseListForStudent, currentStudent->getStudentID());
 
-    // Load course & scoreboard list to cache
-    // db->loadCourseList(ui->tableCourses, db->courseList);
-    // db->loadScoreboardList(ui->tableScoreboards, db->scoreboardList);
-    db->importCourseList(COURSE_FILE_PATH, db->courseList);
+    // Load student's course & scoreboard list from student-in-course list to cache
+    for (int i = 0; i < studentInCourseListForStudent.size(); i++) {
+        // Load course
+        Course course = db->getCourseByID(studentInCourseListForStudent[i].getCourseID());
+        if (course.getCourseID() != -1) {
+            courseListForStudent.insert(course);
+        }
+    }
+    for (int i = 0; i < db->scoreboardList.size(); i++) {
+        // Load scoreboard
+        if (db->scoreboardList[i].getStudentID() == currentStudent->getStudentID()) {
+            scoreboardListForStudent.insert(db->scoreboardList[i]);
+        }
+    }
+    // Calculate GPA
+    float gpa = -1;
+    for (int i = 0; i < scoreboardListForStudent.size(); i++){
+        gpa = scoreboardListForStudent[i].getTotalMark();
+    }
+    if (gpa != -1){
+        gpa = gpa / scoreboardListForStudent.size();
+    }
 
+    // Get current semester object from the last student-in-course object
+    Semester currentSemester = db->getSemesterByID(studentInCourseListForStudent[scoreboardListForStudent.size() - 1].getSemesterID());
+
+    // Load page's statistic frame components
+    ui->labelAvgGPA_Binding_4->setText(QString::number(gpa));
+    ui->labelSemester_2->setText(QString::number(currentSemester.getNo()));
+    ui->labelSchoolYear->setText(QString::number(currentSemester.getSchoolYear()));
 
     // Go to Profile Info page using stack widget
     ui->stackedWidget->setCurrentIndex(int(Page::ProfileInfo_Student));
@@ -311,8 +338,8 @@ void MainWindow::loadPageProfileInfo_Student() {
 // Change Password button
 void MainWindow::on_btnEdit_ProfileInfo_Student_clicked()
 {
-    // Open a new window to change password
-    ChangePassword *changePasswordForm = new ChangePassword(this);
+    // Open a new window to change password, with current password pass to it
+    ChangePassword *changePasswordForm = new ChangePassword(this, currentAccount->getPassword());
     connect(changePasswordForm, &ChangePassword::passwordChanged, this, &MainWindow::on_changePassword);
     changePasswordForm->show();
 }
@@ -344,13 +371,43 @@ void MainWindow::on_btnSignOut_ProfileInfo_Student_clicked()
 // Go to Student's Course page using stack widget
 void MainWindow::on_btnCourses_ProfileInfo_Student_clicked()
 {
+    // Load student's course list
+    db->loadCourseList(ui->tableCourses_Student, courseListForStudent);
 
+    // Go to Course page using stack widget
+    ui->stackedWidget->setCurrentIndex(int(Page::Course_Student));
 }
 
 // Go to Student's Scoreboard page using stack widget
 void MainWindow::on_btnScoreboard_ProfileInfo_Student_clicked()
 {
+    // Load student's scoreboard list
+    db->loadScoreboardList(ui->tableScoreboard_Student, scoreboardListForStudent);
 
+    // Go to Scoreboard page using stack widget
+    ui->stackedWidget->setCurrentIndex(int(Page::Scoreboard_Student));
+}
+
+
+/**************************************************************
+* Implement Page - Course_Student
+*
+***************************************************************/
+// Go back to Profile Info page using stack widget
+void MainWindow::on_btnBackToProfile_Student_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(int(Page::ProfileInfo_Student));
+}
+
+
+/**************************************************************
+* Implement Page - Scoreboard_Student
+*
+***************************************************************/
+// Go back to Profile Info page using stack widget
+void MainWindow::on_btnBackToProfile_Student_2_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(int(Page::ProfileInfo_Student));
 }
 
 
@@ -1564,6 +1621,12 @@ void MainWindow::on_btnOthers_clicked()
 {
     QMessageBox::information(this, "Coming Soon", "New feature coming soon!", QMessageBox::Ok);
 }
+
+
+
+
+
+
 
 
 

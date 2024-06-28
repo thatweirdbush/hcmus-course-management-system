@@ -34,7 +34,9 @@ enum class Page
     StartSemester_Next = 18,
     StartSemester_Next_2 = 17,
     EndSemester = 18,
-    Others = 19
+    Others = 19,
+    Course_Student = 20,
+    Scoreboard_Student = 21
 };
 
 
@@ -171,6 +173,10 @@ private slots:
 
     void on_btnScoreboard_ProfileInfo_Student_clicked();
 
+    void on_btnBackToProfile_Student_clicked();
+
+    void on_btnBackToProfile_Student_2_clicked();
+
 private:
     // Page Loaders
     void loadPageProfileInfo_Staff();
@@ -207,6 +213,8 @@ private:
     Set<Scoreboard> newScoreboardList;
 
     // For Student
+    Set<StudentInCourse> studentInCourseListForStudent;
+
     Set<Course> courseListForStudent;
 
     Set<Scoreboard> scoreboardListForStudent;

@@ -304,7 +304,8 @@ void Database::importStudentInClassList(QString filename, Set<StudentInClass>& s
 }
 
 // Import StudentInCourse list from file
-void Database::importStudentInCourseList(QString filename, Set<StudentInCourse>& studentInCourseList) {
+/// Optional parameter studentID to filter student-in-course list, default is -1, which means no filter
+void Database::importStudentInCourseList(QString filename, Set<StudentInCourse>& studentInCourseList, int studentID) {
     std::ifstream ifs(filename.toStdString());
     // size_t count = 0;
     if (!ifs.is_open()) {
@@ -324,6 +325,10 @@ void Database::importStudentInCourseList(QString filename, Set<StudentInCourse>&
         // Check if the course read from is empty, then break, because default ID constructor is -1
         if (studentInCourse.getStudentID() == -1)
             break;
+
+        // If no studentID is requested (not -1), then skip the filter process
+        if (studentID != -1 && studentInCourse.getStudentID() != studentID)
+            continue;
 
         studentInCourseList.insert(studentInCourse);
         // count++;

@@ -51,7 +51,7 @@ public:
     Account login(QString username, QString password);
 
 public:
-    // Import data from file
+    // Import data from file - For Staff
     void importAccountList(QString filename, Set<Account>& accountList);
 
     void importCourseList(QString filename, Set<Course>& courseList);
@@ -68,7 +68,8 @@ public:
 
     void importStudentInClassList(QString filename, Set<StudentInClass>& studentInClassList);
 
-    void importStudentInCourseList(QString filename, Set<StudentInCourse>& studentInCourseList);
+    // Import data from file - For Staff (and Student)
+    void importStudentInCourseList(QString filename, Set<StudentInCourse>& studentInCourseList, int studentID = -1);
 
 public:
     // Export data to file
