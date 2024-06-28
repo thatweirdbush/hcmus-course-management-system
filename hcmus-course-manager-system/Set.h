@@ -38,6 +38,7 @@ public:
 	void erase(int index);
 	void clear();
     bool contains(T& value);
+    T& back();
 
 private:
 	// Reserve memory for the set
@@ -188,5 +189,13 @@ void Set<T>::reserve(int new_capacity)
 	data = new_data;
 	capacity = new_capacity;
 }
+
+// Get the newest element in the set
+template <class T>
+T& Set<T>::back()
+{
+    return data[length - 1];
+}
+
 /*****************************************/
 #endif // !_SET_H_

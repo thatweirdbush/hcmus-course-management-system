@@ -9,11 +9,16 @@ CONFIG += c++17
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    AccountClass.cpp \
+    ClassClass.cpp \
     CourseClass.cpp \
     Database.cpp \
     ScoreboardClass.cpp \
     SemesterClass.cpp \
     StaffClass.cpp \
+    StudentClass.cpp \
+    StudentInClass.cpp \
+    StudentInCourse.cpp \
     changePassword.cpp \
     main.cpp \
     mainwindow.cpp
@@ -21,6 +26,7 @@ SOURCES += \
 HEADERS += \
     AccountClass.h \
     AccountManagerClass.h \
+    ClassClass.h \
     CourseClass.h \
     Database.h \
     DateClass.h \
@@ -30,6 +36,8 @@ HEADERS += \
     Set.h \
     StaffClass.h \
     StudentClass.h \
+    StudentInClass.h \
+    StudentInCourse.h \
     Vector.h \
     changePassword.h \
     mainwindow.h

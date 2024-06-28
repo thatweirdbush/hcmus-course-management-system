@@ -37,6 +37,13 @@ std::string sessionToString(Session session);
 // Convert DayOfWeek to string
 std::string dayOfWeekToString(DayOfWeek dayOfWeek);
 
+// Convert string to Session
+Session stringToSession(std::string session);
+
+// Convert string to DayOfWeek
+DayOfWeek stringToDayOfWeek(std::string dayOfWeek);
+
+
 /*****************************************
 // Define Class: Course
 ******************************************/
@@ -56,29 +63,32 @@ public:
 	Course(int courseID, std::string courseName, std::string className,
 		std::string teacherName, int numOfCredits, int maxStudents,
 		DayOfWeek dayOfWeek, Session session);
-	~Course();
+    ~Course() {}
 
 public:
-	int getCourseID();
-	std::string getCourseName();
-	std::string getClassName();
-	std::string getTeacherName();
-	int getNumOfCredits();
-	int getMaxStudents();
-	DayOfWeek getDayOfWeek();
-	Session getSession();
+    // Getters
+    int getCourseID() { return courseID; }
+    std::string getCourseName() { return courseName; }
+    std::string getClassName() { return className; }
+    std::string getTeacherName() { return teacherName; }
+    int getNumOfCredits() { return numOfCredits; }
+    int getMaxStudents() { return maxStudents; }
+    DayOfWeek getDayOfWeek() { return dayOfWeek; }
+    Session getSession() { return session; }
 
-	void setCourseID(int courseID);
-	void setCourseName(std::string courseName);
-	void setClassName(std::string className);
-	void setTeacherName(std::string teacherName);
-	void setNumOfCredits(int numOfCredits);
-	void setMaxStudents(int maxStudents);
-	void setDayOfWeek(DayOfWeek dayOfWeek);
-	void setSession(Session session);
+    // Setters
+    void setCourseID(int courseID) { this->courseID = courseID; }
+    void setCourseName(std::string courseName) { this->courseName = courseName; }
+    void setClassName(std::string className) { this->className = className; }
+    void setTeacherName(std::string teacherName) { this->teacherName = teacherName; }
+    void setNumOfCredits(int numOfCredits) { this->numOfCredits = numOfCredits; }
+    void setMaxStudents(int maxStudents) { this->maxStudents = maxStudents; }
+    void setDayOfWeek(DayOfWeek dayOfWeek) { this->dayOfWeek = dayOfWeek; }
+    void setSession(Session session) { this->session = session; }
 
 public:
-	friend std::ostream& operator<<(std::ostream& os, Course& course);
+    // Input/Output Operator
+    friend std::ostream& operator<<(std::ostream& os, Course& course);
 	friend std::istream& operator>>(std::istream& is, Course& course);
 
 public:
@@ -86,10 +96,4 @@ public:
         return this->courseID == course.courseID;
     }
 };
-
-/*****************************************
-// Define Function: Course Reader
-******************************************/
-size_t readCoursesFromFile(QString filename, Vector<Course>& courses);
-
 #endif // !_COURSE_CLASS_H_

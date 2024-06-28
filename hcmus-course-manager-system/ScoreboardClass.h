@@ -16,6 +16,7 @@ class Scoreboard {
 private:
 	// Raw data
 	int courseID;
+    std::string className;
     int studentID;
     std::string fullName;
     float totalMark;
@@ -31,7 +32,7 @@ private:
 
 public:
     Scoreboard();
-    Scoreboard(int courseID, int studentID, std::string fullName, float totalMark, float finalMark, float midtermMark, float otherMark);
+    Scoreboard(int courseID, std::string className, int studentID, std::string fullName, float totalMark, float finalMark, float midtermMark, float otherMark);
 	~Scoreboard();
 	Scoreboard(const Scoreboard& scoreboard);
 	Scoreboard& operator=(const Scoreboard& scoreboard);
@@ -39,6 +40,7 @@ public:
 public:
 	// Setters
 	void setCourseID(int courseID) { this->courseID = courseID; }
+    void setClassName(std::string className) { this->className = className; }
     void setStudentID(int studentID) { this->studentID = studentID; }
 	void setFullName(std::string fullName) { this->fullName = fullName; }
 	void setTotalMark(float totalMark) { this->totalMark = totalMark; }
@@ -48,6 +50,7 @@ public:
 
 	// Getters
 	int getCourseID() { return courseID; }
+    std::string getClassName() { return className; }
     int getStudentID() { return studentID; }
 	std::string getFullName() { return fullName; }
 	float getTotalMark() { return totalMark; }
@@ -62,7 +65,7 @@ public:
 
 public:
     bool operator==(const Scoreboard& scoreboard) {
-        return this->courseID == scoreboard.courseID && this->studentID == scoreboard.studentID;
+        return this->courseID == scoreboard.courseID && this->className == scoreboard.className && this->studentID == scoreboard.studentID;
     }
 };
 #endif // !_SCOREBOARD_CLASS_H_
