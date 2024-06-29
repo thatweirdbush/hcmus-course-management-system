@@ -33,7 +33,6 @@ enum class Page
     StartSemester = 16,
     StartSemester_Next = 18,
     StartSemester_Next_2 = 17,
-    EndSemester = 18,
     Others = 19,
     Course_Student = 20,
     Scoreboard_Student = 21
