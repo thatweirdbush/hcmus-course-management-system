@@ -52,7 +52,7 @@
      <string notr="true"/>
     </property>
     <property name="currentIndex">
-     <number>1</number>
+     <number>17</number>
     </property>
     <widget class="QWidget" name="pageSignIn">
      <widget class="QFrame" name="leftFrame">
@@ -6931,37 +6931,6 @@ border: none;
       </property>
       <property name="flat">
        <bool>false</bool>
-      </property>
-     </widget>
-    </widget>
-    <widget class="QWidget" name="pageEndSemester">
-     <property name="styleSheet">
-      <string notr="true">QWidget#pageEndSemester {
-	border-image: url(:/assets/blue-gradient.png) 0 0 0 0 stretch stretch;
-}
-</string>
-     </property>
-     <widget class="QLabel" name="labelStudentInCourse_11">
-      <property name="geometry">
-       <rect>
-        <x>340</x>
-        <y>30</y>
-        <width>231</width>
-        <height>41</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <family>Segoe UI Semibold</family>
-        <pointsize>24</pointsize>
-        <bold>true</bold>
-       </font>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">color: rgb(0, 0, 0);</string>
-      </property>
-      <property name="text">
-       <string>End A Semester</string>
       </property>
      </widget>
     </widget>
