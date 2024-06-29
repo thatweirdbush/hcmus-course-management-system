@@ -1,6 +1,10 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
+#include <QDesktopServices>
+#include <QMessageBox>
+#include <QListWidgetItem>
+#include <QDialog>
 #include <QMainWindow>
 #include <QFileDialog>
 #include "Database.h"
@@ -176,6 +180,8 @@ private slots:
 
     void on_btnBackToProfile_Student_2_clicked();
 
+    void on_tableScoreboards_itemChanged(QTableWidgetItem *item);
+
 private:
     // Page Loaders
     void loadPageProfileInfo_Staff();
@@ -183,6 +189,10 @@ private:
     void clearPageProfileInfo_Staff();
 
     void loadPageProfileInfo_Student();
+
+    void loadCourseTable();
+
+    void loadScoreboardTable();
 
     void loadPageStartSchoolYear_Next();
 

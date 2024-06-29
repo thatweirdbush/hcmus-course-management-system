@@ -2,11 +2,6 @@
 #include "changePassword.h"
 #include "ui_mainwindow.h"
 
-#include <QDesktopServices>
-#include <QMessageBox>
-#include <QListWidgetItem>
-#include <QDialog>
-
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
@@ -220,9 +215,8 @@ void MainWindow::on_changePassword(const QString &newPassword)
     db->exportAccountList(ACCOUNT_FILE_PATH, db->accountList);
 }
 
-// Go to Course page using stack widget
-void MainWindow::on_btnCourses_ProfileInfo_Staff_clicked()
-{
+// Load Course table widget without signal
+void MainWindow::loadCourseTable() {
     // Temporarily disconnect the itemChanged signal
     disconnect(ui->tableCourses, SIGNAL(itemChanged(QTableWidgetItem*)), this, SLOT(on_tableCourses_itemChanged(QTableWidgetItem*)));
 
@@ -231,6 +225,13 @@ void MainWindow::on_btnCourses_ProfileInfo_Staff_clicked()
 
     // Reconnect the itemChanged signal after loading the data
     connect(ui->tableCourses, SIGNAL(itemChanged(QTableWidgetItem*)), this, SLOT(on_tableCourses_itemChanged(QTableWidgetItem*)));
+}
+
+// Go to Course page using stack widget
+void MainWindow::on_btnCourses_ProfileInfo_Staff_clicked()
+{
+    // Load course table widget
+    loadCourseTable();
 
     // Go to Course page using stack widget
     ui->stackedWidget->setCurrentIndex(int(Page::Course_Staff));
@@ -253,7 +254,10 @@ void MainWindow::on_btnClass_ProfileInfo_Staff_clicked()
 // Go to Scoreboard page using stack widget
 void MainWindow::on_btnScoreboard_ProfileInfo_Staff_clicked()
 {
-    db->loadScoreboardList(ui->tableScoreboards, db->scoreboardList);
+    // Load scoreboard table widget
+    loadScoreboardTable();
+
+    // Go to Scoreboard page using stack widget
     ui->stackedWidget->setCurrentIndex(int(Page::Scoreboard_Staff));
 }
 
@@ -420,6 +424,50 @@ void MainWindow::on_btnBackToProfile_5_clicked()
 {
     ui->stackedWidget->setCurrentIndex(int(Page::ProfileInfo_Staff));
 }
+
+// Load table widget without signal
+void MainWindow::loadScoreboardTable() {
+    // Temporarily disconnect the itemChanged signal
+    disconnect(ui->tableScoreboards, SIGNAL(itemChanged(QTableWidgetItem*)), this, SLOT(on_tableScoreboards_itemChanged(QTableWidgetItem*)));
+
+    // Load scoreboard list
+    db->loadScoreboardList(ui->tableScoreboards, db->scoreboardList);
+
+    // Reconnect the itemChanged signal after loading the data
+    connect(ui->tableScoreboards, SIGNAL(itemChanged(QTableWidgetItem*)), this, SLOT(on_tableScoreboards_itemChanged(QTableWidgetItem*)));
+}
+
+// Get updates from table & update to datafile
+void MainWindow::on_tableScoreboards_itemChanged(QTableWidgetItem *item)
+{
+    // Restrict the user from changing the IDs and student name
+    if (item->column() >= 0 && item->column() <= 3) {
+        QMessageBox::warning(this, "Invalid Change", "You cannot change this column!", QMessageBox::Ok);
+        loadScoreboardTable();
+        return;
+    }
+
+    // Get changed scores information
+    if (item->column() == 4) {
+        db->scoreboardList[item->row()].setTotalMark(item->text().toFloat());
+    }
+    else if (item->column() == 5) {
+        db->scoreboardList[item->row()].setFinalMark(item->text().toFloat());
+    }
+    else if (item->column() == 6) {
+        db->scoreboardList[item->row()].setMidtermMark(item->text().toFloat());
+    }
+    else if (item->column() == 7) {
+        db->scoreboardList[item->row()].setOtherMark(item->text().toFloat());
+    }
+
+    // Immediately save to datafile
+    db->exportScoreboardList(SCOREBOARD_FILE_PATH, db->scoreboardList);
+
+    // Pop up a message to inform the user
+    QMessageBox::information(this, "Update Scoreboard", "Scoreboard has been updated!", QMessageBox::Ok);
+}
+
 
 // Go to Course's Scoreboard page using stack widget
 void MainWindow::on_btnScoreboardOfCourse_clicked()
@@ -615,7 +663,7 @@ void MainWindow::on_tableCourses_itemChanged(QTableWidgetItem *item)
     // Restrict the user from changing the course ID
     if (item->column() == 0) {
         QMessageBox::warning(this, "Invalid Change", "You cannot change the course ID!", QMessageBox::Ok);
-        item->setText(QString::number(db->courseList[item->row()].getCourseID()));
+        loadCourseTable();
         return;
     }
 
@@ -1653,6 +1701,8 @@ void MainWindow::on_btnOthers_clicked()
 {
     QMessageBox::information(this, "Coming Soon", "New feature coming soon!", QMessageBox::Ok);
 }
+
+
 
 
 

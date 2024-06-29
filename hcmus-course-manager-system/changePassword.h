@@ -1,7 +1,7 @@
 #ifndef CHANGEPASSWORD_H
 #define CHANGEPASSWORD_H
-
 #include <QDialog>
+#include <QMessageBox>
 
 namespace Ui {
 class ChangePassword;

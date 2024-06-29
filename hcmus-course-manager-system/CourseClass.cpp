@@ -1,5 +1,4 @@
 #include "CourseClass.h"
-#include "qmessagebox.h"
 
 // Convert Session to string
 std::string sessionToString(Session session) {
