@@ -25,7 +25,6 @@ SOURCES += \
 
 HEADERS += \
     AccountClass.h \
-    AccountManagerClass.h \
     ClassClass.h \
     CourseClass.h \
     Database.h \

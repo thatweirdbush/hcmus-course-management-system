@@ -384,7 +384,7 @@ void Database::exportStudentList(QString filename, Set<Student>& studentList) {
 // Export Staff list to file
 void Database::exportStaffList(QString filename, Set<Staff>& staffList) {
     std::ofstream ofs(filename.toStdString());
-    ofs << "Staff ID, Full Name, Gender, Date of Birth, Phone, Email, Facility Address" << std::endl;
+    ofs << "Staff ID, Full Name, Gender, Date of Birth, Phone Number, Email, Facility Address" << std::endl;
     for (int i = 0; i < staffList.size(); i++) {
         ofs << staffList[i];
     }
