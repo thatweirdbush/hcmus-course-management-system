@@ -33,9 +33,9 @@ enum class Page
     StartSemester = 16,
     StartSemester_Next = 18,
     StartSemester_Next_2 = 17,
-    Others = 19,
-    Course_Student = 20,
-    Scoreboard_Student = 21
+    Course_Student = 19,
+    Scoreboard_Student = 20,
+    Others = 21
 };
 
 
