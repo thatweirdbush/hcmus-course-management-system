@@ -820,6 +820,38 @@ void MainWindow::on_btnStudentsInClass_clicked()
     // Load the student list of the class
     db->loadStudentList(ui->tableStudentInClass, studentsInClass);
 
+    // Create new Set of Scoreboard filter by class ID
+    Set<Scoreboard> scoreboardOfClass;
+
+    // Filter the scoreboard by class ID
+    for (int i = 0; i < db->scoreboardList.size(); i++) {
+        Scoreboard sb = db->scoreboardList[i];
+        if (sb.getClassName() == selectClassName)
+            scoreboardOfClass.insert(sb);
+    }
+
+    // Get statistics of the class
+    float avgGPA = 0.0f;
+    float highestGPA = 0.0f;
+    std::string achievedByStudent = "";
+
+    for (int i = 0; i < scoreboardOfClass.size(); i++) {
+        Scoreboard sb = scoreboardOfClass[i];
+        avgGPA += sb.getFinalMark();
+        if (sb.getFinalMark() > highestGPA) {
+            highestGPA = sb.getFinalMark();
+            achievedByStudent = sb.getFullName();
+        }
+    }
+
+    // Calculate average GPA
+    avgGPA /= scoreboardOfClass.size();
+
+    // Display statistics
+    ui->labelAvgGPA_Binding_3->setText(QString::number(avgGPA));
+    ui->labelHighestScore_Binding_3->setText(QString::number(highestGPA));
+    ui->labelAchievedBy_Binding_3->setText(QString::fromStdString(achievedByStudent));
+
     // Load page's components
     ui->labelStudentInClass_Binding->setText(QString::fromStdString(selectClassName));
 
