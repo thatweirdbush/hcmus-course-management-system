@@ -1,110 +1,89 @@
-/**************************************************************
-* Implement Student class
-* Define Student class - StudentClass.h
-***************************************************************/
-#ifndef _STUDENT_CLASS_H_
-#define _STUDENT_CLASS_H_
+#include "StaffClass.h"
 
-#include "DateClass.h"
+/*****************************************
+// Implementation Class: Staff
+******************************************/
+// Default Constructor
+Staff::Staff() {
+    staffID = -1;
+    fullName = "";
+    gender = "";
+    dateOfBirth = Date();
+    phone = "";
+    email = "";
+    facilityAddress = "";
+}
 
-class Student {
-private:
-    int classID;
-    int studentID;
-    std::string firstName;
-    std::string lastName;
-    std::string gender;
-    Date dateOfBirth;
-    std::string socialID;
+// Constructor
+Staff::Staff(int staffID, std::string fullName, std::string gender, Date dateOfBirth,
+        std::string phone, std::string email, std::string facilityAddress)
 
-public:
-    // Constructor
-    Student(int classID = 0, int studentID = 0,
-            std::string firstName = "", std::string lastName = "", std::string gender = "",
-            Date dateOfBirth = Date(), std::string socialID = "")
+    : staffID(staffID), fullName(fullName), gender(gender), dateOfBirth(dateOfBirth),
+    phone(phone), email(email), facilityAddress(facilityAddress) {}
 
-        : classID(classID), studentID(studentID),
-        firstName(firstName), lastName(lastName), gender(gender),
-        dateOfBirth(dateOfBirth), socialID(socialID) {}
+// Copy constructor
+Staff::Staff(const Staff& staff) {
+    staffID = staff.staffID;
+    fullName = staff.fullName;
+    gender = staff.gender;
+    dateOfBirth = staff.dateOfBirth;
+    phone = staff.phone;
+    email = staff.email;
+    facilityAddress = staff.facilityAddress;
+}
 
-    // Destructor, nothing from now on
-    ~Student() {}
+// Assignment operator
+Staff& Staff::operator=(const Staff& staff) {
+    staffID = staff.staffID;
+    fullName = staff.fullName;
+    gender = staff.gender;
+    dateOfBirth = staff.dateOfBirth;
+    phone = staff.phone;
+    email = staff.email;
+    facilityAddress = staff.facilityAddress;
+    return *this;
+}
 
-    // Copy constructor
-    Student(const Student& student) {
-        classID = student.classID;
-        studentID = student.studentID;
-        firstName = student.firstName;
-        lastName = student.lastName;
-    }
+// Input Operator Method
+std::istream& operator>>(std::istream& is, Staff& staff) {
+    std::string line;
+    std::getline(is, line);
 
-    // Assignment operator
-    Student& operator=(const Student& student) {
-        classID = student.classID;
-        studentID = student.studentID;
-        firstName = student.firstName;
-        lastName = student.lastName;
-        return *this;
-    }
+    if (line.empty()) return is;
 
-public:
-    // Setters
-    void setClassID(int classID) { this->classID = classID; }
-    void setStudentID(int studentID) { this->studentID = studentID; }
-    void setFirstName(std::string firstName) { this->firstName = firstName; }
-    void setLastName(std::string lastName) { this->lastName = lastName; }
-    void setGender(std::string gender) { this->gender = gender; }
-    void setDateOfBirth(Date dateOfBirth) { this->dateOfBirth = dateOfBirth; }
-    void setSocialID(std::string socialID) { this->socialID = socialID; }
+    std::stringstream ss(line);
+    std::string staffID, fullName, gender, dateOfBirth, phone, email, facilityAddress;
 
-    // Getters
-    int getClassID() { return classID; }
-    int getStudentID() { return studentID; }
-    std::string getFirstName() { return firstName; }
-    std::string getLastName() { return lastName; }
-    std::string getGender() { return gender; }
-    Date getDateOfBirth() { return dateOfBirth; }
-    std::string getSocialID() { return socialID; }
-    std::string getFullname() { return firstName + " " + lastName; }
+    std::getline(ss, staffID, CSV_DELIMITER);
+    std::getline(ss, fullName, CSV_DELIMITER);
+    std::getline(ss, gender, CSV_DELIMITER);
+    std::getline(ss, dateOfBirth, CSV_DELIMITER);
+    std::getline(ss, phone, CSV_DELIMITER);
+    std::getline(ss, email, CSV_DELIMITER);
 
-    // Input/Output Operator Methods
-    friend std::istream& operator>>(std::istream& is, Student& student) {
-        std::string line;
-        std::getline(is, line);
+    ss.ignore(); // Ignore the first quotation mark
+    std::getline(ss, facilityAddress, QUOTATION_MARK);
 
-        if (line.empty()) return is;
+    staff.setStaffID(std::stoi(staffID));
+    staff.setFullName(fullName);
+    staff.setGender(gender);
+    staff.setDateOfBirth(Date(dateOfBirth));
+    staff.setPhone(phone);
+    staff.setEmail(email);
+    staff.setFacilityAddress(facilityAddress);
+    return is;
+}
 
-        std::stringstream ss(line);
-        std::string classID, studentID, firstName, lastName, gender, dateOfBirth, socialID;
+// Output Operator Method
+std::ostream& operator<<(std::ostream& os, const Staff& staff) {
+    os << staff.staffID << CSV_DELIMITER << staff.fullName
+       << CSV_DELIMITER << staff.gender << CSV_DELIMITER
+       << staff.dateOfBirth << CSV_DELIMITER << staff.phone
+       << CSV_DELIMITER << staff.email << CSV_DELIMITER
+       << QUOTATION_MARK << staff.facilityAddress << QUOTATION_MARK << std::endl;
+    return os;
+}
 
-        std::getline(ss, classID, CSV_DELIMITER);
-        std::getline(ss, studentID, CSV_DELIMITER);
-        std::getline(ss, firstName, CSV_DELIMITER);
-        std::getline(ss, lastName, CSV_DELIMITER);
-        std::getline(ss, gender, CSV_DELIMITER);
-        std::getline(ss, dateOfBirth, CSV_DELIMITER);
-        std::getline(ss, socialID, CSV_DELIMITER);
 
-        student.setClassID(std::stoi(classID));
-        student.setStudentID(std::stoi(studentID));
-        student.setFirstName(firstName);
-        student.setLastName(lastName);
-        student.setGender(gender);
-        student.setDateOfBirth(Date(dateOfBirth));
-        student.setSocialID(socialID);
 
-        return is;
-    }
 
-    friend std::ostream& operator<<(std::ostream& os, const Student& student) {
-        os << student.classID << CSV_DELIMITER << student.studentID
-           << CSV_DELIMITER << student.firstName << CSV_DELIMITER << student.lastName << CSV_DELIMITER
-           << student.gender << CSV_DELIMITER << student.dateOfBirth << CSV_DELIMITER << student.socialID << "\n";
-    }
-
-public:
-    bool operator==(const Student& student) {
-        return this->studentID == student.studentID;
-    }
-};
-#endif // !_STUDENT_CLASS_H_

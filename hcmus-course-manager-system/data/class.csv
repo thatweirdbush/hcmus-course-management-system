@@ -1,50 +1,51 @@
-CS101,High Quality,Introduction to Computer Science
-MATH201,Talented,Calculus I
-ENG301,Standard,Shakespearean Literature
-BIO150,High Quality,General Biology
-PHYS110,Talented,Physics I
-HIST220,Standard,World History
-CHEM105,High Quality,Organic Chemistry
-ART210,Talented,Modern Art
-MUSIC101,Standard,Introduction to Music
-PSYCH101,High Quality,Introduction to Psychology
-SOC101,Standard,Introduction to Sociology
-PHIL101,Talented,Introduction to Philosophy
-ECON101,High Quality,Principles of Economics
-BUS101,Standard,Introduction to Business
-LAW101,Talented,Business Law
-STAT101,High Quality,Statistics
-ENV101,Standard,Environmental Science
-CS201,Talented,Data Structures
-MATH301,High Quality,Linear Algebra
-ENG401,Standard,Creative Writing
-BIO250,Talented,Genetics
-PHYS210,High Quality,Electricity and Magnetism
-HIST330,Standard,Modern European History
-CHEM210,Talented,Biochemistry
-ART310,High Quality,Art History
-MUSIC201,Standard,Music Theory
-PSYCH201,Talented,Cognitive Psychology
-SOC201,High Quality,Sociological Theory
-PHIL201,Standard,Ethics
-ECON201,Talented,Microeconomics
-BUS201,High Quality,Marketing
-LAW201,Standard,Contract Law
-STAT201,Talented,Probability
-ENV201,High Quality,Environmental Policy
-CS301,Standard,Algorithms
-MATH401,Talented,Differential Equations
-ENG501,High Quality,Literary Analysis
-BIO350,Standard,Cell Biology
-PHYS310,Talented,Quantum Mechanics
-HIST440,High Quality,History of Science
-CHEM310,Standard,Physical Chemistry
-ART410,Talented,Sculpture
-MUSIC301,High Quality,Music Composition
-PSYCH301,Standard,Developmental Psychology
-SOC301,Talented,Social Research Methods
-PHIL301,High Quality,Philosophy of Science
-ECON301,Standard,Macroeconomics
-BUS301,Talented,Financial Accounting
-LAW301,High Quality,Intellectual Property
-STAT301,Standard,Regression Analysis
+Class ID, Class Name, Started School Year
+1,20APCS1,2020
+2,20APCS2,2020
+3,20APCS3,2020
+4,20APCS4,2020
+5,21APCS1,2021
+6,21APCS2,2021
+7,21APCS3,2021
+8,21APCS4,2021
+9,22APCS1,2022
+10,22APCS2,2022
+11,22APCS3,2022
+12,22APCS4,2022
+13,23APCS1,2023
+14,23APCS2,2023
+15,23APCS3,2023
+16,23APCS4,2023
+17,20CLC1,2020
+18,20CLC2,2023
+19,20CLC3,2023
+20,20CLC4,2023
+21,21CLC1,2021
+22,21CLC2,2021
+23,21CLC3,2021
+24,21CLC4,2021
+25,22CLC1,2022
+26,22CLC2,2022
+27,22CLC3,2022
+28,22CLC4,2022
+29,23CLC1,2023
+30,23CLC2,2023
+31,23CLC3,2023
+32,23CLC4,2023
+33,20VP,2020
+34,21VP,2021
+35,22VP,2022
+36,23VP,2023
+37,21CQ1,2021
+38,21CQ2,2021
+39,21CQ3,2021
+40,21CQ4,2021
+41,22CQ1,2022
+42,22CQ2,2022
+43,22CQ3,2022
+44,22CQ4,2022
+45,23CQ1,2023
+46,23CQ2,2023
+47,23CQ3,2023
+48,23CQ4,2023
+49,23CQ5,2023
+50,23CQ6,2023

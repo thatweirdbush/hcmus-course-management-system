@@ -1,7 +1,7 @@
 #ifndef CHANGEPASSWORD_H
 #define CHANGEPASSWORD_H
-
 #include <QDialog>
+#include <QMessageBox>
 
 namespace Ui {
 class ChangePassword;
@@ -15,7 +15,8 @@ signals:
     void passwordChanged(const QString &newPassword);
 
 public:
-    explicit ChangePassword(QWidget *parent = nullptr);
+    explicit ChangePassword(QWidget *parent = nullptr, const std::string &currentPassword = "");
+
     ~ChangePassword();
 
 private slots:
@@ -25,6 +26,8 @@ private slots:
 
 private:
     Ui::ChangePassword *ui;
+
+    QString currentPassword;
 };
 
 #endif // CHANGEPASSWORD_H
