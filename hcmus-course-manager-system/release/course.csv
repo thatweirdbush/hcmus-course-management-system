@@ -1,9 +1,9 @@
 Course ID, Course Name, Class Name, Instructor Name, Credit, Max Students, Day, Session
-1001,Programming,20APCS1,Mr. Smith,3,50,MON,S2
-1002,Mathematics,20APCS1,Mrs. Johnson,4,50,WED,S3
-1003,Physics,20APCS1,Mr. Brown,3,50,FRI,S4
-1004,English,20APCS1,Mrs. Williams,2,52,TUE,S1
-1005,History,20APCS2,Ms. Jones,3,50,THU,S2
+1001,Programming,20APCS1,Mr. Brown,3,50,MON,S2
+1002,Mathematics,20APCS1,Mrs. Anna,4,50,WED,S3
+1003,Physics,20APCS1,Mr. Smith,3,50,FRI,S4
+1004,English,20APCS1,Mrs. Williams,3,52,TUE,S1
+1005,History,20APCS2,Ms. Jones,4,50,THU,S2
 1006,Chemistry,20APCS2,Dr. Taylor,3,50,MON,S3
 1007,Art,20APCS2,Mr. Davis,2,50,WED,S4
 1008,Biology,20APCS2,Mrs. Wilson,3,50,FRI,S1
