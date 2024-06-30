@@ -620,8 +620,11 @@ void MainWindow::on_btnImportScoreboard_clicked()
             return;
         }
 
+        // Immediately save to datafile
+        db->exportScoreboardList(SCOREBOARD_FILE_PATH, db->scoreboardList);
+
         // Reload table widget
-        db->loadScoreboardList(ui->tableScoreboards, db->scoreboardList);
+        loadScoreboardTable();
 
         // Open 'Import Success' message box
         QMessageBox::information(this, "Import Success", "Import scoreboards successfully!", QMessageBox::Ok);
@@ -1684,8 +1687,9 @@ void MainWindow::on_btnEndSemester_clicked()
 
     // Check if user wants to end the semester
     if (reply == QMessageBox::Yes) {
-        // Load page's components
-        db->loadScoreboardList(ui->tableScoreboards, db->scoreboardList);
+        // Load scoreboard table widget
+        loadScoreboardTable();
+
         // Go to Scoreboard page
         ui->stackedWidget->setCurrentIndex(int(Page::Scoreboard_Staff));
     }
