@@ -5,9 +5,7 @@
 #ifndef _SCOREBOARD_CLASS_H_
 #define _SCOREBOARD_CLASS_H_
 
-#include "StudentClass.h"
-#include "CourseClass.h"
-#include "SemesterClass.h"
+#include "DateClass.h"
 
 /*****************************************
 // Define Class: Scoreboard
@@ -23,12 +21,6 @@ private:
     float finalMark;
     float midtermMark;
     float otherMark;
-
-private:
-	// Convert to object
-	Student student;
-	Course course;
-	Semester semester;
 
 public:
     Scoreboard();
