@@ -8,7 +8,7 @@ hcmus-course-manager-system/build/
 *.metagen
 
 # Visual Studio Code files
-.vscode
+.vscode/
 
 # Compiled Object files
 *.slo
