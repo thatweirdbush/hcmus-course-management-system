@@ -24,10 +24,11 @@ const QString STUDENT_FILE_PATH = "student.csv";
 const QString SCOREBOARD_FILE_PATH = "scoreboard.csv";
 const QString SEMESTER_FILE_PATH = "semester.csv";
 const QString STAFF_FILE_PATH = "staff.csv";
-const QString ACCOUNT_FILE_PATH = "account.csv";
-const QString CLASS_FILE_PATH = "class.csv";
 const QString STUDENT_IN_CLASS_FILE_PATH = "student-in-class.csv";
 const QString STUDENT_IN_COURSE_FILE_PATH = "student-in-course.csv";
+const QString ACCOUNT_FILE_PATH = "account.csv";
+const QString CLASS_FILE_PATH = "class.csv";
+
 
 
 class Database {
